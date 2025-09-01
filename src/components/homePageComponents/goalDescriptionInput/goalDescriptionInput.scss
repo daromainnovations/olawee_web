@@ -1,0 +1,173 @@
+
+$text-area-width: 100%;
+$text-area-max-width: 90%;
+$text-area-height: 150px;
+$button-padding: 5px 20px;
+$btn-color: #007bff;
+$right-btn-color: #FFC310;
+$right-btn-hover-color: #1A252A;
+$line-color: #9CA3AF;
+$border-radius: 10px;
+
+// Contenedor principal
+.text-area-container {
+  width: $text-area-width;
+  max-width: $text-area-max-width;
+  margin: 20px auto;
+  background-color: #1A252A;
+  border: 1px solid #45454A;
+  border-radius: 8px;
+  padding: 20px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0px 7px 31px -5px rgba(255,195,16,0.3);
+
+  /* Aplica el box-shadow cuando el contenedor está enfocado */
+  &.focused {
+    border-color: #FFC310;
+    box-shadow: 0px 7px 31px -5px rgba(255,195,16,1);
+  }
+  
+  .textarea-wrapper {
+    background-color: #1A252A;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column; // Asegura que el textarea y los botones estén en columna
+
+    position: relative; // Para el overlay, eliminar cuando habilitemos de nuevo el textarea
+
+    //DESHABILITAR EL TEXTAREA POR EL MOMENTO
+    .textarea-disabled-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: $text-area-height;
+      background: rgba(26, 37, 42, 0.85);
+      color: #ffc310;
+      font-weight: bold;
+      font-size: 1.5rem;
+      z-index: 5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 15px;
+      pointer-events: all;
+      animation: blink 1.8s infinite ease-in-out;
+    }
+    
+
+    // Textarea
+    .text-area {
+      width: 100%;
+      height: $text-area-height;
+      border-radius: 15px;
+      border: none;
+      resize: none;
+      background-color: #1A252A;
+      font-size: 16px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    // Contenedor de los botones
+    .button-container {
+      display: flex;
+      gap: 10px; // Espacio entre botones
+      margin-top: 15px;
+      justify-content: flex-start; // Alinea a la izquierda en pantallas grandes
+      background-color: #1A252A;
+
+      .btn {
+        padding: $button-padding;
+        font-size: 12px;
+        color: #7C838E;
+        border: 1px solid #7C838E;
+        border-radius: $border-radius;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          color: white;
+          border-color: white;
+        }
+
+        &:focus {
+          outline: none;
+          box-shadow: none;
+        }
+      }
+    }
+  }
+  .coming-soon-banner {
+    text-align: center;
+    font-weight: bold;
+    color: #ff9900;
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    animation: blink 1.5s infinite;
+    font-size: 1rem;
+  }
+  
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+  
+
+  // Línea debajo de los botones
+  .line {
+    width: 100%;
+    height: 1px;
+    background-color: $line-color;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    opacity: 0.5;
+  }
+
+  // Contenedor del botón derecho
+  .right-button-container {
+    display: flex;
+    justify-content: flex-end;
+    background-color: #1A252A;
+  }
+}
+
+// 📱 **Media Queries para Responsividad**
+@media (max-width: 768px) {
+  .text-area-container {
+    width: 95%;
+    padding: 15px;
+
+    .textarea-wrapper {
+      .text-area {
+        font-size: 14px; // Reduce el tamaño en móviles
+        height: 120px;
+        &::placeholder{
+            font-size: 14px;
+        }
+      }
+    }
+
+    .button-container {
+      flex-wrap: wrap; // Permite que los botones se acomoden en varias filas
+      justify-content: center !important;
+      .btn{
+        font-size: 9px !important;
+        padding: 5px 10px !important;
+      }
+    }
+
+    .right-button-container {
+      justify-content: center; // Centra el botón en pantallas pequeñas
+      padding: 0px;
+      .right-btn{
+        font-size: 12px;
+      }
+    }
+  }
+}

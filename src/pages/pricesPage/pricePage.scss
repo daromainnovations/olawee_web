@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+.prices{
+    background-color: white !important;
+    height: auto;
+    padding: 0px 0px;
+    margin-top: 150px;
+    .container-title{
+        background-color: transparent;
+        margin-top: 100px;
+        .title-prices{
+            text-align: center;
+            text-transform: uppercase;
+            font-family: "Lato", serif;
+            font-weight: 900;
+            font-size: 2.5rem;
+            background: linear-gradient(to right, #FFC310, #0B1418, #4181A1); // Degradado de izquierda a derecha
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; // Hace que el texto tome el degradado
+            background-clip: text;
+        }
+    }
+    .product-cards-section{
+        padding: 50px 20px;
+    }
+}
+.plans-container{
+    padding: 80px 0px 0px 0px;
+    .plans-table-container{
+        margin-top: 60px;
+    }
+    .title-compare-plans{
+        font-family: "Lato", serif;
+        font-weight: 900;
+        text-transform: uppercase;
+        color: white;
+        margin-left: 57px;
+    }
+}
+
+@media (max-width: 480px){
+    .plans-container{
+        .plans-table-container{
+            margin: 40px auto;
+        }
+    }
+    
+    .prices{
+        .container-title{
+            .title-prices{
+                font-size: 1.5rem;
+            }
+        }
+    }
+    .plans-container{
+        .title-compare-plans{
+            text-transform: uppercase;
+            margin-left: 20px;
+        }
+    }
+    
+}

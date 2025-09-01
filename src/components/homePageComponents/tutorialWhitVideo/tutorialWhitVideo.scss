@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+.container-tutorial {
+    padding: 0 50px;
+    margin-top: 100px;
+    background-color: var(--color-background-page);
+    font-family: "Lato", serif;
+    h4{
+        color: white;
+        font-weight: 300;
+    }
+
+    .accordion-item {
+        border: none;
+
+        .accordion-button {
+            background-color: var(--color-background-page);
+            color: var(--color-font-global);
+            box-shadow: none;
+            font-size: 18px;
+            display: flex;
+            align-items: center; // Asegura alineación de icono y texto
+            
+            // Punto verde de la lista
+            .step-point {
+                display: inline-block;
+                width: 8px;
+                height: 8px;
+                background-color: green;
+                border-radius: 50%;
+                margin-right: 10px;
+            }
+        }
+
+        // Flecha del acordeón con color personalizado
+        .accordion-button::after, 
+        .accordion-button:not(.collapsed)::after {
+            filter: invert(40%) sepia(90%) saturate(500%) hue-rotate(20deg);
+            opacity: 1;
+        }
+
+        .accordion-body {
+            font-size: 14px;
+            font-family: "Lato", serif;
+            opacity: 0.7;
+        }
+    }
+
+    .video-container{
+        margin: auto;
+        width: 80%;
+        height: auto;
+        border-radius: 10px;
+        overflow: hidden;
+        -webkit-box-shadow: 0px 0px 10px 0px rgba(255,255,255,1);
+        -moz-box-shadow: 0px 0px 10px 0px rgba(255,255,255,1);
+        box-shadow: 0px 0px 7px 0px rgba(255,255,255,1);
+        img{
+            margin: auto;
+            background-color: transparent;
+            padding: 10px;
+            width: 300px;
+            height: auto;
+            animation: subtleZoom 6s ease-in-out infinite alternate;
+            filter: brightness(1.1) contrast(1.05);
+        }
+        @keyframes subtleZoom {
+            0% {
+              transform: scale(0.7);
+            }
+            100% {
+              transform: scale(1.1);
+            }
+          }
+    }
+}
+
+@media (max-width: 992px){
+    .container-tutorial h3{
+        font-size: 24px;
+    }
+    .accordion-item .accordion-button{
+        font-size: 14px !important;
+    }
+    .accordion-body{
+        font-size: 12px !important;
+        padding: 0px 30px !important;
+    }
+    
+}
+@media (max-width: 767px){
+    .container-tutorial{
+        margin-top: 50px !important;
+    }
+    .video-container{
+        width: 90%;
+        margin-top: 30px !important;
+        margin: auto;
+    }
+}

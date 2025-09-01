@@ -1,0 +1,136 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+
+.case-study-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--color-background-page);
+    padding: 20px;
+    .case-study-title {
+        font-family: "Lato", serif;
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+        margin-top: 70px;
+        color: #FFC310;;
+    }
+    .case-study-content {
+        width: 100%;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        .case-study-image {
+            width: 90% !important; // Ocupa el 90% del ancho del contenedor
+            height: 500px !important; // Ajusta la altura fija según lo necesites
+            object-fit: fill; // Permite la deformación de la imagen
+            border-radius: 5px;
+            margin-bottom: 25px;
+        }
+
+        
+    }
+    .case-study-container-problem, .case-study-container-solution{
+        margin-top: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px; // Espacio entre el texto y la imagen
+        width: 100%;
+        .container-problem, .container-solution{
+            flex: 1;
+            padding: 0px 20px;
+            .container-title-icon{
+                margin-bottom: 20px;
+                .title-problem, .title-solution{
+                    margin: 0px;
+                    font-family: "Poppins", serif;
+                    color: white;
+                }
+            }
+            .case-study-description {
+                padding: 30px;
+                font-size: 18px;
+                line-height: 1.5;
+                color: #979797;
+            }
+        }
+        .container-problem-graph, .container-solution-graph{
+            flex: 1; // Hace que la imagen ocupe la otra mitad
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+    
+            .case-study-graph {
+                width: 80%;
+                height: 200px !important; // La imagen ocupará todo el ancho del contenedor
+                max-height: 300px; // Ajusta la imagen a la altura disponible
+                object-fit: fill; // Evita deformaciones, la imagen se recorta si es necesario
+                border-radius: 10px; // Bordes redondeados opcionales
+            }
+        }
+    }
+}
+
+@media (max-width: 768px){
+    .case-study-container {
+        
+        .case-study-title {
+            margin-top: 100px;
+            font-size: 1.5rem;
+        }
+        .case-study-content{
+            padding: 0px;
+            .case-study-image{
+                height: 230px !important;
+                width: 90% !important;
+            }
+        }
+        .container-title-icon {
+            display: flex;
+            justify-content: center;
+            .title-problem, .title-solution{
+                font-size: 1.5rem;
+            }
+            svg{
+                height: 30px !important;
+                width: 30px !important;
+            }
+        }
+        p{
+            font-size: 0.9rem;
+        }
+        .case-study-container-problem{
+            margin-top: 0px;
+        }
+        .case-study-container-problem, .case-study-container-solution{
+            flex-direction: column;
+            gap: 10px;
+            .container-problem, .container-solution{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+                margin-top: 30px;
+                padding: 0px;
+                width: 90%;
+                .case-study-description {
+                    padding: 14px !important;
+                }
+            }
+            .container-problem-graph, .container-solution-graph{
+                .case-study-graph {
+                    height: 200px !important;
+                    width: 90%;
+                }
+            }
+        }
+    }
+}

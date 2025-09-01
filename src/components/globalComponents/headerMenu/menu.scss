@@ -1,0 +1,301 @@
+
+
+// Importación fuentes de Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+//variables para los colores y la fuente
+$color-background-page: #0B1418; // Color de fondo general
+$color-font-global: #fff; // Color de texto global
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0); // Transparente al principio
+  opacity: 0;
+  visibility: hidden;
+
+  // Cuando el offcanvas está abierto, se muestra el fondo oscuro
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    background: rgba(0, 0, 0, 0.5); // Fondo oscuro inmediato
+  }
+}
+
+// Estilos generales para el nav
+nav {
+  background-color: $color-background-page;
+  font-family: "Inter", serif;
+  font-weight: 400;
+  height: 65px;
+  width: 100%;
+  transition: top 0.3s ease-in-out;
+  z-index: 1040;
+  
+  .container-fluid{
+    margin-top: 30px;
+    padding: 0px;
+    .logo{
+      align-items: center;
+      background-color: transparent;
+        img{
+          width: 100px !important;
+          height: auto;
+          margin-bottom: 10px;
+          background-color: transparent;
+        } 
+    }
+  }
+  .navbar-nav {
+    margin-right: 10px;
+    a {
+      color: $color-font-global;
+      padding: 0px;
+    }
+    .logo{
+      margin-top: 500px !important;
+    }
+
+    .nav-link {
+      font-size: 0.9rem;
+      color: $color-font-global;
+      transition: transform 0.3s ease-in-out, color 0.3s ease, font-size 0.3s ease;
+
+      &:not(.active):hover {
+        color: #FFC310;
+        transform: scale(1.15);
+      }
+      &.dropdown-toggle {
+        color: $color-font-global;
+        position: relative;
+        &:after {
+          content: ""; /* Agrega el ícono de flecha */
+          margin-left: 0.7rem;
+          border: solid $color-font-global;
+          border-width: 0 2px 2px 0;
+          display: inline-block;
+          padding: 3px;
+          transform: rotate(45deg);
+          transition: transform 0.3s ease;
+        }
+        &[aria-expanded="true"]:after {
+          transform: rotate(-135deg); /* Rota la flecha hacia arriba */
+        }
+      }
+
+      &.active {
+        color: #FFC310;
+        font-size: 1.15rem;
+        margin-top: -4px;
+      }
+    }
+    .dropdown-menu{
+      padding: 5px;
+      margin-top: 1px;
+      
+      li{
+        background-color: white;
+        padding: 5px;
+      }
+      .dropdown-item{
+        margin-top: 5px;
+        background-color: white;
+        color: gray;
+        padding: 5px 10px ;
+        font-size: 0.9rem;
+        &:hover {
+          color: black;
+          background-color: rgb(233, 233, 233);
+          border-radius: 5px;
+        }
+      }
+
+    }
+  }
+}
+
+.spinner {
+  width: 25px;
+  height: 25px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 4px solid #FFC310; /* Color principal */
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.container-buttons{
+  margin-right: 15px;
+  gap: 15px;
+  .btn-signUp, .btn-login{
+    font-size: 0.9rem;
+    color: #fff;
+    border: 1px solid #FFC310;
+    border-radius: 5px;
+    padding: 5px;
+    transition: transform 0.2s ease, background-color 0.3s ease, color 0.3s ease;
+    min-width: 90px;
+  
+    &:hover {
+      transform: scale(1.15);
+    }
+  }
+  .btn-login:hover {
+    font-weight: 500;
+    transform: scaleX(1.2);
+    background-color: #FFC310;
+    color: $color-background-page;
+  }
+  .btn-logOut{
+    font-size: 0.9rem;
+    color: #fff;
+    border: 2px solid #c20600f9;
+    border-radius: 5px;
+    padding: 5px;
+    transition: transform 0.2s ease, background-color 0.3s ease, color 0.3s ease;
+    min-width: 90px;
+    &:hover {
+      transform: scale(1.10);
+    }
+  }
+}
+
+.navbar-toggler {
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    height: auto;
+  
+    /* Estilos para el icono dentro del botón navbar-toggler */
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23FFFFFF' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+      background-size: 40px 50px;
+      width: 40px;
+      height: 50px;
+      border-radius: 2px; 
+      transition: all 0.3s ease;
+    }
+    &:hover .navbar-toggler-icon{
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23FFB100' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+    &:focus {
+      outline: none !important;
+      box-shadow: none !important; 
+  }
+}
+.custom-close-btn{
+  filter: invert(1);
+  box-shadow: none !important;
+}
+
+.container-buttons {
+  gap: 1rem;
+}
+
+.user-greeting {
+  font-weight: 500;
+  color: #333;
+}
+
+
+
+@media (max-width: 991px) {
+  nav{
+    margin-top: 10px;
+    .container-fluid{
+      height: 70px;
+      margin-top: -5px;
+      .logo{
+        a{
+          img{
+            height: auto !important;
+          }
+        }
+      }
+    }
+  }
+  
+  .offcanvas{
+    height: 250px !important;
+  }
+  .offcanvas-header{
+    padding-top: 60px !important;
+    padding-bottom: 0px !important;
+  }
+  .offcanvas-body {
+    flex-direction: column !important;  /* Cambio a columna */
+    align-items: center !important;     /* Centrar elementos */
+    justify-content: center !important; /* Centrar contenido */
+    text-align: center !important;      /* Alinear texto al centro */
+    padding: 0px !important;
+  }
+
+  .navbar-nav {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; /* Centrar enlaces */
+  }
+  .navbar-collapse .navbar-nav a{
+    padding: 2px;
+  }
+  .offcanvas.offcanvas-top {
+    .offcanvas-body{
+      .navbar-nav{
+        .dropdown{
+          .dropdown-menu{
+            position: fixed;
+            margin-top: 1px;
+          }
+        }
+      }
+    }
+  }
+
+  .container-buttons {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 20px 0px;
+  }
+
+  .container-buttons button {
+    margin: 0 5px;
+    padding: 3px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 589px){
+  nav{
+    .container-fluid{
+      margin-top: 0px;
+    }
+  }
+  .offcanvas.offcanvas-top{
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 500px){
+  nav{
+    margin-top: 160px;
+    .container-fluid{
+      height: 70px;
+      margin-top: 20px;
+      .logo{
+        a{
+          img{
+            height: auto !important;
+          }
+        }
+      }
+    }
+  }
+}

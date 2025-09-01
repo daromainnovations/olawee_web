@@ -1,0 +1,28 @@
+
+.user-panel {
+    display: flex;
+    flex-direction: row;
+    .user-panel-content {
+      flex: 1;
+      margin-left: 240px;
+      padding: 30px;
+      background-color: white;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+        
+      @media (max-width: 768px) {
+        margin-left: 0;
+        padding-top: 20px;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .user-panel-content,
+    .dashboard-content,
+    .magic-okapi-container   {
+      padding-top: 60px; // O ajusta según la altura real del botón
+      margin-top: 40px;
+    }
+  }

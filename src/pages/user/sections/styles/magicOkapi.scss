@@ -1,0 +1,239 @@
+
+.magic-okapi-container {
+    background-color: #fff;
+    padding: 30px;
+    padding-bottom: 30px !important;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    height: 90vh;
+    margin-bottom: 30px !important;
+    margin-top: 50px;
+    *{
+        background-color: #fff;
+        box-sizing: border-box;
+    }
+    .magic-okapi-header{
+        .icon-magic-okapi{
+            width: 30px;
+            height: 30px;
+            fill: #ffbf00;
+        }
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #0b1418;
+          }
+    }
+    .intro-text {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 50px;
+    }
+    .magic-okapi-questions {
+      margin-bottom: 30px;
+      padding: 15px;
+      background-color: #ffe7b4;
+      // border-left: 4px solid #ffc310;
+      border-radius: 8px;
+      *{
+        background-color: #ffe7b4;
+      }
+    
+      p {
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #333;
+      }
+      .checkbox-list {
+        margin-bottom: 30px;
+      
+        .select-instruction {
+          font-weight: 600;
+          font-size: 1rem;
+          color: #0b1418;
+          margin-bottom: 15px;
+        }
+      
+        .checkbox-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 10px;
+        }
+      
+        .checkbox-item {
+          background-color: #f9f9f9;
+          border: 2px solid transparent;
+          border-radius: 10px;
+          padding: 5px 10px;
+          font-size: 0.8rem;
+          color: #333;
+          display: flex;
+          align-items: center;
+          transition: all 0.3s ease;
+          cursor: pointer;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      
+          input[type="checkbox"] {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            accent-color: #ffc310;
+            cursor: pointer;
+          }
+      
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          }
+      
+          &.selected {
+            border-color: #ffc310;
+            background-color: #fffbea;
+          }
+        }
+      }
+      
+    }
+  
+    .magic-okapi-form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      textarea {
+        width: 100%;
+        box-sizing: border-box; 
+        padding: 15px;
+        border-radius: 8px;
+        border: 2px solid #ccc;
+        resize: none;
+        font-size: 1rem;
+        margin-bottom: 15px;
+        color: #333;
+        &::placeholder{
+          color: #b2b2b2;
+          font-size: 0.9rem;
+        }
+        &:focus {
+          outline: none;
+          border: 2px solid #dfaa0b;
+        }
+      }
+  
+      .send-btn {
+        width: 100%;
+        max-width: 200px;
+        margin: auto;
+        background-color: #ffc310;
+        color: #0b1418;
+        border: none;
+        padding: 10px 20px;
+        font-weight: bold;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 40px;
+        &:hover {
+          background-color: #ffbf00;
+        }
+      }
+    }
+  
+    .thank-you {
+      text-align: center;
+  
+      p {
+        font-size: 1rem;
+        color: #333;
+      }
+  
+      .send-another {
+        margin-top: 15px;
+        background-color: transparent;
+        border: 1px solid #ffc310;
+        padding: 8px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 500;
+        color: #ffc310;
+  
+        &:hover {
+          background-color: #fff7e0;
+        }
+      }
+    }
+  }
+  
+
+  @media (max-width: 768px) {
+    .magic-okapi-container {
+      padding: 20px;
+      width: 100%;
+      
+      .magic-okapi-header {
+        flex-direction: column;
+        align-items: flex-start;
+  
+        h2 {
+          font-size: 1.5rem;
+        }
+  
+        .icon-magic-okapi {
+          width: 25px;
+          height: 25px;
+          margin-bottom: 5px;
+        }
+      }
+  
+      .intro-text {
+        font-size: 0.85rem;
+        margin-bottom: 30px;
+      }
+  
+      .magic-okapi-questions {
+        padding: 10px;
+        
+        .checkbox-grid {
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+  
+        .checkbox-item {
+          font-size: 0.75rem;
+          padding: 4px 8px;
+          input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            margin-right: 10px;
+          }
+        }
+      }
+  
+      .magic-okapi-form {
+        textarea {
+          font-size: 0.9rem;
+          padding: 12px;
+        }
+  
+        .send-btn {
+          font-size: 0.9rem;
+          padding: 8px 16px;
+        }
+      }
+  
+      .thank-you {
+        p {
+          font-size: 0.9rem;
+        }
+  
+        .send-another {
+          font-size: 0.9rem;
+          padding: 8px 14px;
+        }
+      }
+    }
+  }
+  

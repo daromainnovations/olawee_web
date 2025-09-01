@@ -1,0 +1,104 @@
+
+.container-custom{
+    .container-title-savings-benefits {
+        margin-top: 80px;
+        h1{
+            font-family: "Lato", serif;
+            font-weight: 400;
+            font-size: 32px;
+            color: white;
+        }
+    }
+    .container-benefits-and-savings{
+        margin-top: 70px;
+
+        .custom-image{
+            width: 60%;
+            margin-top: -80px;
+            height: auto;
+        }
+        .container-text-benefits{
+            margin-top: -30px;
+            padding: 0 40px 0 0;
+            margin-left: -30px;
+            .info-section {
+                p{
+                    font-family: "Lato", serif;
+                    font-size: 16px;
+                }
+                h4{
+                    font-family: "Lato", serif;
+                    font-weight: bold;
+                    font-size: 16px;
+                }
+            }
+            .savings h4{
+                color: #FFC310;
+            }
+            .benefits h4{
+                color: #5AD301;
+            }
+            .roi h4{
+                color: #0783FF;
+            }
+    
+            .benefits, .roi{
+                margin-top: 30px;
+            }
+            .container-btn-savings{
+                display: flex;
+                justify-content: center;
+                .btn-savings{
+                    margin-top: 30px;
+                    &:hover{
+                        background-color: #0B1418;
+                    }
+                    
+                }
+            }
+        }
+        
+        
+    }
+}
+
+@media(max-width:992px){
+    .container-custom .container-benefits-and-savings .container-text-benefits .info-section p {
+            font-family: "Lato", serif;
+            font-size: 12px;
+    }
+    .container-custom .container-benefits-and-savings .container-text-benefits .info-section h4{
+            font-family: "Lato", serif;
+            font-weight: bold;
+            font-size: 18px;
+    }
+    .savings h4{
+        color: #FFC310;
+    }
+    .benefits h4{
+        color: #5AD301;
+    }
+    .roi h4{
+        color: #0783FF;
+    }
+}
+@media(max-width: 767px){
+    .container-custom{
+        .container-title-savings-benefits{
+            h1{
+                font-size: 24px;
+            }
+        }
+        .container-benefits-and-savings{
+            .container-img-graph{
+                display: none !important;
+            }
+            .container-text-benefits{
+                padding: 0px 30px;
+                margin-top: -30px;
+                margin-left: 0px;
+            }
+        }
+        
+    }
+}

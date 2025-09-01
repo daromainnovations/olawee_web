@@ -1,0 +1,85 @@
+
+
+
+// Importación de fuentes
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+.pricing-container {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    width: 100%;
+    position: relative;
+    // Botones personalizados fuera del Swiper
+      .swiper-button-prev,
+      .swiper-button-next {
+          width: 40px;
+          height: 40px;
+          background-color: #FFC310;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          border: none;
+          transition: background 0.3s;
+
+          &:hover {
+            transform: scale(1.1);
+          }
+      
+          &.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: scale(1);
+          }
+      }
+      .swiper-buttons-container.hidden {
+        display: none;
+      }
+    
+
+  // Flechas de navegación dentro de los botones
+  .swiper-button-prev::after,
+  .swiper-button-next::after {
+    content: "";
+    width: 25px;
+    height: 25px;
+    display: block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    filter: invert(100%);
+    text-align: center;
+  }
+
+  .swiper-button-prev::after {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpath d='M15.5 19.5L9 12l6.5-7.5'/%3E%3C/svg%3E");
+  }
+
+  .swiper-button-next::after {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpath d='M8.5 19.5L15 12 8.5 4.5'/%3E%3C/svg%3E");
+  }
+
+
+  // Swiper styles
+  .swiper {
+    width: 100%;
+    padding: 20px 0;
+    background-color: white;
+    overflow: visible;
+
+    .swiper-wrapper {
+      display: flex;
+      align-items: center;
+      background-color: white;
+    }
+
+    .swiper-slide {
+      display: flex;
+      justify-content: center;
+      background-color: white;
+    }
+  }
+}

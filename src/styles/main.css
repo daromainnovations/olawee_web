@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+nav {
+  background-color: #0B1418;
+  font-family: "Inter", serif;
+  font-weight: 400;
+}
+nav .navbar-nav a {
+  color: #fff;
+  padding: 0px;
+}
+nav .navbar-nav .nav-link {
+  font-size: 0.9rem;
+  color: #fff;
+  transition: transform 0.3s ease-in-out, color 0.3s ease, font-size 0.3s ease;
+}
+nav .navbar-nav .nav-link:hover {
+  color: #FFC310;
+  transform: scale(1.15);
+}
+nav .navbar-nav .nav-link.active {
+  color: #FFC310;
+  font-size: 1.15rem;
+  margin-top: -4px;
+}
+
+.btn-signUp, .btn-login {
+  font-size: 0.9rem;
+  color: #fff;
+  border: 1px solid #FFC310;
+  border-radius: 5px;
+  padding: 5px;
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  min-width: 90px;
+}
+.btn-signUp:hover, .btn-login:hover {
+  transform: scale(1.15);
+}
+
+.btn-login:hover {
+  font-weight: 500;
+  transform: scaleX(1.2);
+  background-color: #FFC310;
+  color: #0B1418;
+}
+
+/*# sourceMappingURL=main.css.map */

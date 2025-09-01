@@ -1,0 +1,382 @@
+
+// 🌟 Variables de colores para personalización rápida
+$primary-color: #FFC310;
+$secondary-color: #28a745;
+$danger-color: #dc3545;
+$success-color: #198754;
+$text-color: #0B1418;
+$background-modal: rgba(0, 0, 0, 0.7);
+$white: #fff;
+@use "sass:color";
+
+// 🔹 Estilos generales
+.no-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
+
+
+// 🔹 Contenedor principal de autenticación
+.auth-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+// 🔹 Botones de autenticación (Login & Signup)
+.btn-auth {
+  padding: 12px 20px;
+  margin: 5px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  
+  &.login {
+    background-color: $primary-color;
+    color: $white;
+  }
+  
+  &.signup {
+    background-color: $secondary-color;
+    color: $white;
+  }
+
+  &:hover {
+    opacity: 0.85;
+    transform: scale(1.05);
+  }
+}
+
+// 🔹 Modal de autenticación
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  padding: 20px;
+  background: $background-modal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease-in-out;
+  
+  .modal-content {
+    width: 50%;
+    max-width: 50%; 
+    max-height: 80vh; // Limita la altura máxima del modal
+    overflow-y: auto;
+    background: $white;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+    animation: fadeIn 0.3s ease-in-out;
+    .modal-header {
+      position: sticky;
+      top: 0;
+      background: $primary-color;
+      z-index: 10;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      h2 {
+        padding: 15px 0px;
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+        background: $primary-color;
+      }
+      .btn-close {
+        background: none;
+        border: none;
+        font-size: 20px;
+        color: white;
+        cursor: pointer;
+        outline: none;
+    
+        &:hover {
+          transform: scale(1.2);
+        }
+        &:focus {
+          outline: none;
+          box-shadow: none;
+        }
+      }
+    }
+
+    .success-message-only{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 250px;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: $success-color;
+    }
+
+    // 🔹 Mensajes de error y éxito
+    .success-message {
+      font-size: 14px;
+      margin-bottom: 10px;
+      padding: 8px;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    .error-message{
+      background-color: transparent;
+      color: $danger-color;
+      margin-top: 0px;
+      margin-bottom: 30px;
+      font-size: 14px;
+    }
+    .error-message button{
+      background-color: transparent;
+      font-size: 14px;
+      border: none;
+      color: blue;
+    }
+    .error-message div {
+      padding-left: 25px;
+      text-align: left;
+      font-size: 13px;
+      color: $danger-color;
+      background-color: white;
+    }
+
+    .success-message {
+      color: $success-color;
+      background: rgba($success-color, 0.1);
+    }
+
+    // 🔹 Botón de envío
+    .container-btn-submit {
+      background-color: $white;
+      padding: 0px 30px 40px 30px;
+      .btn-submit {
+        background-color: $primary-color;
+        color: white;
+        text-transform: uppercase;
+        padding: 12px;
+        border: none;
+        width: 80%;
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 10px;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: background-color 0.3s ease-in-out;
+  
+        &:hover {
+          background-color: color.adjust($primary-color, $lightness: -10%);
+        }
+      }
+    }
+    
+
+    // 🔹 Botón de cierre (X)
+    .btn-close {
+      position: absolute;
+      top: 8px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+  }
+
+  // 🔹 Campos del formulario
+  .auth-form {
+  background: $white;
+  border-radius: 10px;
+  padding: 20px 20px 0px 20px;
+
+  .form-row{
+    background-color: transparent;
+  }
+
+  .form-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: $primary-color;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .form-group {
+    background-color: transparent;
+    label {
+      font-size: .875rem;
+      display: flex;
+      justify-content: flex-start;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: $text-color;
+      background-color: transparent;
+      span{
+        background-color: transparent;
+        color: red;
+        margin-left: 3px;
+      }
+    }
+    input,
+    select {
+      color: black;
+      width: 100%;
+      padding: 8px 10px;
+      font-size: .875rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      background-color: #f8f9fa;
+      transition: border-color 0.2s;
+
+      &:focus {
+        border: none;
+        outline: none !important;
+        background-color: white;
+        box-shadow: 0px 0px 4px 2px rgba($primary-color, 0.7);
+      }
+    }
+    select.form-control {
+      background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23333' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center;
+      background-size: 8px 10px;
+      padding-right: 2rem;
+    }
+
+    .form-error{
+      background-color: transparent;
+      color: red;
+      font-size: 0.7rem;
+      display: flex;
+      text-align: left ;
+    }
+    .input-error {
+      border: 1px solid #e74c3c !important;
+      outline: none;
+    }
+    .input-wrapper {
+      position: relative;
+      background-color: transparent;
+    
+      input {
+        width: 100%;
+        padding-right: 40px; // espacio para el icono
+      }
+    
+      .toggle-visibility {
+        position: absolute;
+        top: 50%;
+        right: 12px;
+        transform: translateY(-50%);
+        cursor: pointer;
+        font-size: 16px;
+        color: #888;
+        background-color: transparent;
+    
+        &:hover {
+          color: #000;
+        }
+      }
+    }
+    .phone-wrapper{
+      background-color: transparent;
+      .prefix-select {
+        max-width: 80px;
+        border-radius: 8px;
+      }
+      
+      .phone-input {
+        flex: 1;
+        border-radius: 8px;
+      }
+    }
+    
+    
+  }
+  }
+  .btn-link{
+    background-color: transparent;
+    border: none;
+    color: blue;
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+
+}
+
+// 🔹 Animación de entrada del modal
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .modal-overlay {
+    padding: 10px;
+
+    .modal-content {
+      width: 90%;
+      max-width: 100%;
+      max-height: 90vh;
+      border-radius: 10px;
+    }
+
+    .auth-form {
+      padding: 15px;
+
+      .form-row {
+        flex-direction: column;
+      }
+
+      .form-group {
+        margin-bottom: 1rem;
+
+        .phone-wrapper {
+          display: flex;
+          flex-direction: column;
+
+          .prefix-select {
+            max-width: 100%;
+            margin-bottom: 10px;
+          }
+
+          .phone-input {
+            width: 100%;
+          }
+        }
+      }
+
+      .container-btn-submit {
+        .btn-submit {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+

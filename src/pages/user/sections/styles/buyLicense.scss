@@ -1,0 +1,26 @@
+
+.products-title-motivator {
+    text-align: center;
+    margin-top: 5rem;
+  
+    h2 {
+      color: #333;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: .01em;
+    }
+    p {
+      color: #3131517d;
+      font-size: 1.1rem;
+      font-weight: 400;
+      margin: 0;
+    }
+  }
+
+@media (max-width: 768px) {
+    .div-principal-licencias{
+        margin-top: 30px;
+    }
+}
+  

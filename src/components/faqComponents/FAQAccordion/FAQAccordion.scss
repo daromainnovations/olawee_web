@@ -1,0 +1,76 @@
+
+.faq-container {
+    max-width: 100%;
+    margin: 0px auto;
+    padding: 20px 0px 50px 0px;
+    background-color: white;
+    .faq-category{
+        background-color: white;
+    }
+    .category-title {
+        background-color: white;
+        margin: 50px auto;
+        width: 80%;
+        font-size: 28px;
+        color: black;
+        text-align: center;
+        font-weight: bold;
+        color: #222;
+        width: 80%;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ffc310;
+    }
+    .accordion{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: auto;
+        width: 80%;
+        background-color: white;
+        border: none;
+        .accordion-item {
+            background-color: white;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+            overflow: hidden; /* Para evitar parpadeos */
+            transition: all 0.3s ease-in-out;
+            &:last-of-type {
+                border-bottom-right-radius: 0px;
+                border-bottom-left-radius: 0px;
+            }
+            .accordion-question {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border: none;
+                font-size: 18px;
+                width: 100%;
+                text-align: left;
+                padding: 10px;
+                cursor: pointer;
+                transition: color 0.3s;
+                background-color: white !important;
+                &:hover {
+                    color: #007bff;
+                }
+                span{
+                    background-color: white;
+                    color: black;
+                    font-weight: bolder;
+                }
+            }
+            .icon {
+                font-size: 24px;
+                color: black;
+            }
+            .accordion-answer {
+                padding: 10px;
+                color: #555;
+                font-size: 16px;
+                background-color: white;
+            }
+        }
+    }
+  }
+  

@@ -1,0 +1,20 @@
+
+.container-linea-degradada{
+    background-color: #0B1418;
+    height: 50px;
+    .linea-degradada {
+        height: 2px;
+        background: linear-gradient(
+          to right, 
+          #0B1418 0%,  
+          #EEEEEE 10%, 
+          #66CCFF 26%, 
+          #FFC310 42%, 
+          #FA892C 57%, 
+          #FF2929 74%,
+          #98FF29 89%,
+          #0B1418 100%
+        );
+        margin-bottom: 20px;
+    }
+}

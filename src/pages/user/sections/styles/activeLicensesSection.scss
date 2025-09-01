@@ -1,0 +1,81 @@
+
+.active-licenses-section {
+  margin: 0 auto 2rem auto; // Centra y añade espacio abajo
+  max-width: 100%; // o el tamaño que prefieras
+  padding: 0 1rem;
+
+  h3 {
+    color: #333;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.45rem;
+    text-align: start;
+    font-weight: bold;
+    letter-spacing: .03em;
+  }
+
+  .no-licenses {
+    color: #999;
+    text-align: center;
+    font-style: italic;
+    margin: 1.2rem 0;
+  }
+
+  .licenses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 0.9rem; // MENOS espacio entre cards
+    padding: 0.5rem 0;
+    justify-items: center; // Centra los cards si sobra espacio
+  }
+
+  .license-card {
+    width: 100%;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px 0 rgba(66,82,211,0.08);
+    padding: 0.8rem 1.1rem;
+    border: 1px solid #eaeaea;
+    transition: box-shadow 0.15s, transform 0.12s;
+    &:hover {
+      box-shadow: 0 4px 24px 0 rgba(255, 195, 16, 0.12);
+      transform: translateY(-4px) scale(1.03);
+    }
+    .license-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: .7rem;
+    }
+    .license-product {
+      font-weight: 600;
+      font-size: 1.08rem;
+      color: #313151;
+      flex: 1;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .license-status {
+      border-radius: 12px;
+      padding: 3px 10px;
+      font-size: 0.7rem;
+      color: #fff;
+      font-weight: 600;
+      margin-left: 8px;
+      text-shadow: 0 1px 2px rgba(50,50,50,0.07);
+    }
+    .license-body {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .license-expires {
+      margin-top: 30px;
+      font-size: 0.8rem;
+      color: #555;
+      text-align: start;
+      b { color: #FFC310; font-weight: bold; }
+    }
+  }
+}

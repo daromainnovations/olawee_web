@@ -1,0 +1,151 @@
+
+.product-cards-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    padding: 2rem 0;
+    background-color: transparent;
+  
+    .custom-card {
+      box-sizing: border-box;
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 4px 24px 0 rgba(0,0,0,0.12);
+      width: 30%;
+      min-width: 260px;
+      max-width: 350px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.18s cubic-bezier(.2,1,.22,1), box-shadow 0.18s;
+      cursor: pointer;
+      position: relative;
+      min-height: 440px; // un poco más alto para el botón
+      padding: 10px;
+  
+      &:hover {
+        transform: translateY(-8px) scale(1.03);
+        box-shadow: 0 8px 32px 0 rgba(0,0,0,0.18);
+      }
+  
+      .card-badge {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        z-index: 10;
+        background: #aa3034;
+        color: #fff;
+        font-size: 0.7rem;
+        font-weight: bold;
+        padding: 2px 10px;
+        border-radius: 20px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        pointer-events: none;
+      }
+  
+      .card-image-container {
+        margin-top: 18px;
+        margin-bottom: 8px;
+        .card-image {
+          width: 96px;
+          height: 96px;
+          object-fit: cover;
+          border-radius: 1rem;
+        }
+      }
+  
+      .card-content {
+        margin-top: 35px; // Da espacio para el badge
+        width: 100% !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+        justify-content: flex-start;
+        overflow: hidden;
+        text-align: center;
+        height: 90%;
+  
+        .card-label{
+          font-size: 1.2rem;
+          font-weight: 600;
+          color: #22223b;
+          text-align: center !important;
+          display: block;
+          word-break: break-word;
+          margin-top: 30px;
+          padding: 0px 10px;
+          width: 100%;
+    
+        }
+        .card-price{
+          margin-top: 10px;
+          font-size: 1.3rem;
+          color: #aa3034;
+          font-weight: 700;
+        }
+        .card-features {
+          color: #4a4e69;
+          font-size: 1rem;
+          margin: 14px 0 20px 0;
+          min-height: 36px;
+          text-align: start;
+        }
+        .container-btn-get-started{
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          margin-top: auto; // Empuja el botón al final
+  
+          .custom-card-button {
+            background: linear-gradient(90deg, #aa3034 0%, #FFC310 100%);
+            color: #fff;
+            font-size: 1rem;
+            padding: 0.7rem 1.6rem;
+            border: none;
+            border-radius: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: background 0.3s;
+            box-shadow: 0 2px 8px rgba(157, 2, 8, 0.08);
+            &:hover{
+              background: linear-gradient(90deg, #FFC310 0%, #aa3034 100%);
+            }
+          }
+        }
+      }
+    }
+  
+    .skeleton {
+      background: #f3f5fa;
+      min-height: 330px;
+      width: 320px;
+      border-radius: 1.5rem;
+      animation: skeleton-loading 1s infinite linear alternate;
+    }
+    @keyframes skeleton-loading {
+      0% { background-color: #e6eaf5; }
+      100% { background-color: #f9fafc; }
+    }
+  
+    // TABLET: 2 columnas
+    @media (max-width: 990px) {
+      .custom-card {
+        width: 45%;
+        max-width: 100%;
+      }
+    }
+  
+    // MÓVIL: 1 columna
+    @media (max-width: 600px) {
+      gap: 1.2rem;
+      padding: 1rem 0;
+      .custom-card {
+        width: 92% !important;
+        min-width: 0;
+        max-width: 100vw;
+        padding: 2rem 0.6rem 1.4rem 0.6rem;
+      }
+    }
+  }
+  

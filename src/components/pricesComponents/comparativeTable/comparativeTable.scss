@@ -1,0 +1,163 @@
+
+// .plans-table-container {
+//     width: 100%;
+//     overflow-x: auto;
+//     padding: 20px;
+//     background-color: #343B4A !important;
+//     border: none;
+  
+//     .plans-table {
+//       width: 100%;
+//       border: none;
+//       border-collapse: collapse;
+//       text-align: left;
+//       font-size: 16px;
+//       background-color: #343B4A;
+  
+//       th, td {
+//         padding: 12px;
+//         text-align: center;
+//       }
+  
+//       th {
+//         background-color: #343B4A;
+//         color: white;
+//         font-weight: bold;
+//       }
+  
+//       td {
+//         background-color: #fff;
+//       }
+//     // Colores alternos para filas
+//         tr:nth-child(odd) {
+//         background-color: #192133 !important; // Color para filas impares
+//         }
+
+//         tr:nth-child(even) {
+//         background-color: #11192A !important; // Color para filas pares
+//         }
+  
+//       .feature {
+//         text-align: left;
+//         font-weight: bold;
+//       }
+  
+//       // Asegurar que las celdas tengan el mismo tamaño
+//       td, th {
+//         min-width: 120px;
+//       }
+//     }
+//   }
+  
+//   // Responsividad
+//   @media (max-width: 768px) {
+//     .plans-table-container {
+//       padding: 10px;
+  
+//       .plans-table {
+//         font-size: 14px;
+  
+//         th, td {
+//           padding: 8px;
+//           min-width: 100px;
+//         }
+//       }
+//     }
+//   }
+  
+//   @media (max-width: 480px) {
+//     .plans-table-container {
+//       padding: 5px;
+  
+//       .plans-table {
+//         font-size: 12px;
+  
+//         th, td {
+//           padding: 5px;
+//           min-width: 80px;
+//         }
+//       }
+//     }
+//   }
+  
+
+.plans-table-container {
+    width: 90%;
+    margin: 100px auto;
+    overflow-x: auto;
+    border: none;
+    border-radius: 30px;
+  
+    .plans-table {
+      width: 100%;
+      border: none;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 16px;
+  
+      th, td {
+        padding: 12px;
+        text-align: center;
+      }
+  
+      th {
+        background-color: #11192A;
+        color: white;
+        font-weight: bold;
+      }
+  
+      td {
+        background-color: transparent !important;
+      }
+
+      // Colores alternos para filas SIN afectar los TH
+      tbody tr:nth-child(odd) {
+        background-color: #192133 !important; /* Color para filas impares */
+      }
+
+      tbody tr:nth-child(even) {
+        background-color: #11192A !important; /* Color para filas pares */
+      }
+  
+      .feature {
+        text-align: left;
+        font-weight: bold;
+      }
+  
+      // Asegurar que las celdas tengan el mismo tamaño
+      td, th {
+        min-width: 120px;
+      }
+    }
+  }
+  
+  // Responsividad
+  @media (max-width: 768px) {
+    .plans-table-container {
+      padding: 10px;
+  
+      .plans-table {
+        font-size: 14px;
+  
+        th, td {
+          padding: 8px;
+          min-width: 100px;
+        }
+      }
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .plans-table-container {
+      padding: 5px;
+  
+      .plans-table {
+        font-size: 12px;
+  
+        th, td {
+          padding: 5px;
+          min-width: 80px;
+        }
+      }
+    }
+  }

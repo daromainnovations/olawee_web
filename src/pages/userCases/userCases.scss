@@ -1,0 +1,22 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+.title{
+    font-family: "Montserrat", serif;
+    font-weight: 800;
+    font-size: 40px;
+    margin-top: 130px;
+    text-transform: uppercase;
+    background: linear-gradient(0deg, rgba(255,195,16,1) 50%, rgba(255,153,0,1) 70%, rgb(255, 127, 23) 95%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+
+@media (max-width: 588px) {
+    .title{
+        font-size: 30px;
+    }
+}

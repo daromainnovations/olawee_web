@@ -1,0 +1,119 @@
+
+.footer {
+    padding: 20px 20px;
+    
+    .footer-columns {
+        display: flex;
+        flex-wrap: wrap; // Esto permite que las columnas se acomoden en filas cuando sea necesario
+        gap: 20px; // Espacio entre las columnas
+        justify-content: space-between; // Distribuye las columnas con espacio entre ellas
+
+        .footer-column {
+            flex: 1 1 23%; // Por defecto, 4 columnas por fila en pantallas grandes
+            min-width: 200px; // Asegura que las columnas no se reduzcan demasiado
+            margin-bottom: 20px;
+
+            .footer-logo {
+                width: auto; // La imagen se adapta al tamaño del contenedor
+                max-width: 100px;
+                height: auto;
+                margin-top: 10px;
+                margin-left: 70px;
+            }
+
+            .footer-title {
+                font-family: 'Lato', sans-serif;
+                font-size: 1.1em;
+                font-weight: bold;
+                color: rgba(255, 255, 255, 0.5);
+                margin-bottom: 10px;
+            }
+
+            .footer-links {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                display: flex;
+                flex-direction: column; /* Los enlaces se apilan de manera vertical por defecto */
+                gap: 5px; /* Espacio entre los enlaces */
+
+                li {
+                    a {
+                        font-family: 'Lato', sans-serif;
+                        text-decoration: none;
+                        color: white;
+                        font-size: 0.9em;
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .footer-bottom {
+        text-align: center;
+        color: #666;
+        font-size: 0.9em;
+        margin-top: 50px;
+    }
+
+    /* Media Queries para hacer que el footer sea responsivo */
+
+    @media (max-width: 899px) {
+        footer{
+            padding: 10px !important;
+        }
+            .footer-columns{
+                align-items: flex-start;
+                flex-direction: row !important;
+                .container-logo-footer{
+                    display: none;
+                }
+                .footer-column {
+                    flex: 1 1 30%;
+                    flex-direction: column;
+                    .footer-title{
+                        font-size: 14px;
+                    }
+                    .footer-links {
+                        flex-direction: row !important;
+                        gap: 10px !important;
+                        justify-content: flex-start;
+                        white-space: nowrap;
+                        font-size: 12px;
+                    }
+                }
+            
+        }
+    }
+    @media (max-width: 540px){
+        footer{
+            padding: 10px !important;
+        }
+            .footer-columns{
+                align-items: flex-start;
+                flex-direction: row !important;
+                .container-logo-footer{
+                    display: none;
+                }
+                .footer-column {
+                    flex: 1 1 100%;
+                    flex-direction: column;
+                    .footer-title{
+                        font-size: 14px;
+                    }
+                    .footer-links {
+                        flex-direction: row !important;
+                        gap: 20px !important;
+                        justify-content: flex-start;
+                        white-space: nowrap;
+                        font-size: 12px;
+                    }
+                }
+            
+        }
+    }
+}

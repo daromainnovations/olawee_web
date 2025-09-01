@@ -1,0 +1,93 @@
+
+
+.sidebar-modal {
+    border-radius: 50% !important;
+    position: fixed;
+    top: 3px;
+    margin-top: 48px;
+    right: -300px;
+    height: auto;
+    width: 250px;
+    background: white;
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
+  
+    &.open {
+        top: 3px;
+        right: 5px;
+        border-radius: 200px !important;
+        box-shadow: -4px 0 12px rgba(0, 0, 0, 0.2);
+    }
+  
+    .sidebar-content {
+        border-radius: 3%;
+        padding: 10px 15px;
+        background-color: white;
+        .top-bar, span{
+            background-color: white;
+            color: black;
+            font-weight: bold;
+        }
+        
+      .close-btn {
+            padding: 0px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            float: right;
+            cursor: pointer;
+        i{
+            background-color: transparent;
+            color: black;
+            font-size: 1.4rem;
+            
+        }
+      }
+  
+      .sidebar-links {
+        list-style: none;
+        padding: 0;
+        margin-top: 30px;
+        background-color: white;
+  
+        li {
+            padding: 8px 12px 8px 5px;
+            margin-bottom: 10px;
+            background-color: white;
+            border-radius: 6px;
+            transition: background-color 0.2s ease;
+            &:hover {
+                background-color: #e3e3e36d;
+              }
+          a,
+          button {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0px;
+            
+          }
+  
+          button.logout-btn {
+            color: red;
+            text-align: left;
+          }
+        }
+      }
+    }
+  
+    .backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: calc(100vw - 300px);
+      height: 100vh;
+      background: rgba(0, 0, 0, 0);
+      z-index: -1;
+    }
+  }
+  
+  

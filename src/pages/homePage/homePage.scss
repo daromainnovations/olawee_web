@@ -1,0 +1,321 @@
+// @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+
+// *{
+//     background-color: var(--color-background-page);
+//     color: var(--color-font-global);
+// }
+// .page-content{
+//     padding: 0px;
+//     transition: margin-top 0.5s ease-in-out;
+//     .product-cards-section{
+//         background-color: #fff;
+//         padding: 50px;
+//     }
+// }
+// .title-OKAPI{
+//     font-family: "Lato", serif;
+//     font-weight: 900;
+//     font-size: 48px;
+//     color: var(--color-font-title);
+//     margin-top: 30px !important;
+// }
+// .secondary-title{
+//     font-size: 18px;
+//     color: white;
+//     font-family: "Poppins", serif;
+//     font-weight: 600;
+// }
+// .text{
+//     padding: 0 80px;
+//     opacity: 0.7;
+// }
+// .second-text{
+//     padding: 0 150px !important;
+// }
+// .container-second-text{
+//     margin: 20px 0px;
+// }
+// .container-subtitle{
+//     margin-top: 80px;
+//     .subtitle{
+//         font-family: "Lato", serif;
+//         font-weight: 400;
+//         font-size: 32px;
+//         margin-bottom: 0px;
+//         color: white;
+//     }
+// }
+// .gradient-background{
+//     position: relative;
+//     background: linear-gradient(
+//     to bottom,
+//     #0B1418 0%,
+//     #806616 10%,
+//     #BC9419 20%,
+//     #D8B344 30%,
+//     #FFE8A3 50%, /* Se expande el amarillo */
+//     #FFFFFF 60%
+//   );
+//     min-height: 40vh; /* Hace el fondo más largo */
+//     width: 100%;
+//     background-size: 100% 40vh; /* Extiende el degradado */
+
+//     .text-gradient{
+//         position: absolute;
+//         font-family: "Lato", serif;
+//         font-weight: 800;
+//         font-size: 36px;
+//         color: white;
+//         background-color: transparent;
+//         margin-top: -150px;
+//         padding: 0px 30px;
+//     }
+// }
+// .gradient-background-end{
+//     background: linear-gradient(
+//     to bottom,
+//     #FFFFFF 0%,
+//     #FFE8A3 10%,
+//     #D8B344 20%,
+//     #BC9419 30%,
+//     #806616 40%,
+//     #0B1418 50%
+//   );
+//     min-height: 20vh;
+//     width: 100%;
+//     background-size: 100% 20vh;
+// }
+ 
+
+// @media (max-width: 992px){
+//     .second-text{
+//         padding: 0px 50px !important;
+//     }
+//     .subtitle{
+//         font-size: 24px !important;
+//     }
+//     .gradient-background .text-gradient{
+//         font-size: 30px;
+//     }
+// }
+
+// @media (max-width: 767px){
+//     .title-OKAPI{
+//         font-size: 30px;
+//         margin-top: 15px;
+//     }
+//     .secondary-title{
+//         font-size: 16px;
+//     }
+//     .text{
+//         font-size: 12px;
+//         padding: 0px 10px;
+//     }
+// }
+
+
+// @media (max-width: 588px){
+//     .page-content{
+//         margin-top: 20px;
+//         transition: none;
+//     }
+//     .gradient-background .text-gradient{
+//         font-size: 24px;
+//     }
+// }
+
+// @media (max-width: 559px){
+//     .custom-navbar-style{
+//         margin-top: 15px;
+//     }
+// }
+// @media (max-width: 287px){
+//     .custom-navbar-style{
+//         margin-top: 45px;
+//     }
+// }
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* ==============================
+   LAYOUT PRINCIPAL - HOMEPAGE CON FOOTER CORRECTO
+   ============================== */
+
+// Asegurar que html y body tengan altura completa
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+// Wrapper principal de toda la página
+.homepage-wrapper {
+  min-height: 100vh; // Altura mínima de toda la ventana
+  position: relative;  // Para el banner absoluto
+}
+
+// Contenido principal de la página actualizado
+.page-content {
+  padding: 0px;
+  transition: margin-top 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; // Altura mínima de toda la ventana
+  
+  // El contenido principal ocupa todo el espacio disponible
+  .main-content {
+    flex: 1; // Ocupa todo el espacio disponible
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .product-cards-section{
+    background-color: #fff;
+    padding: 50px;
+  }
+}
+
+// Asegurar que el footer esté en el flujo normal
+.footer {
+  margin-top: auto; // Empuja el footer al final
+  position: static; // Asegura que esté en el flujo normal
+  width: 100%;
+}
+
+/* ==============================
+   TUS ESTILOS EXISTENTES
+   ============================== */
+
+*{
+    background-color: var(--color-background-page);
+    color: var(--color-font-global);
+}
+
+.title-OKAPI{
+    font-family: "Lato", serif;
+    font-weight: 900;
+    font-size: 48px;
+    color: var(--color-font-title);
+    margin-top: 30px !important;
+}
+.secondary-title{
+    font-size: 18px;
+    color: white;
+    font-family: "Poppins", serif;
+    font-weight: 600;
+}
+.text{
+    padding: 0 80px;
+    opacity: 0.7;
+}
+.second-text{
+    padding: 0 150px !important;
+}
+.container-second-text{
+    margin: 20px 0px;
+}
+.container-subtitle{
+    margin-top: 80px;
+    .subtitle{
+        font-family: "Lato", serif;
+        font-weight: 400;
+        font-size: 32px;
+        margin-bottom: 0px;
+        color: white;
+    }
+}
+.gradient-background{
+    position: relative;
+    background: linear-gradient(
+    to bottom,
+    #0B1418 0%,
+    #806616 10%,
+    #BC9419 20%,
+    #D8B344 30%,
+    #FFE8A3 50%, /* Se expande el amarillo */
+    #FFFFFF 60%
+  );
+    min-height: 40vh; /* Hace el fondo más largo */
+    width: 100%;
+    background-size: 100% 40vh; /* Extiende el degradado */
+
+    .text-gradient{
+        position: absolute;
+        font-family: "Lato", serif;
+        font-weight: 800;
+        font-size: 36px;
+        color: white;
+        background-color: transparent;
+        margin-top: -150px;
+        padding: 0px 30px;
+    }
+}
+.gradient-background-end{
+    background: linear-gradient(
+    to bottom,
+    #FFFFFF 0%,
+    #FFE8A3 10%,
+    #D8B344 20%,
+    #BC9419 30%,
+    #806616 40%,
+    #0B1418 50%
+  );
+    min-height: 20vh;
+    width: 100%;
+    background-size: 100% 20vh;
+}
+ 
+
+@media (max-width: 992px){
+    .second-text{
+        padding: 0px 50px !important;
+    }
+    .subtitle{
+        font-size: 24px !important;
+    }
+    .gradient-background .text-gradient{
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 767px){
+    .title-OKAPI{
+        font-size: 30px;
+        margin-top: 15px;
+    }
+    .secondary-title{
+        font-size: 16px;
+    }
+    .text{
+        font-size: 12px;
+        padding: 0px 10px;
+    }
+}
+
+
+@media (max-width: 588px){
+    .page-content{
+        margin-top: 20px;
+        transition: none;
+    }
+    .gradient-background .text-gradient{
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 559px){
+    .custom-navbar-style{
+        margin-top: 15px;
+    }
+}
+@media (max-width: 287px){
+    .custom-navbar-style{
+        margin-top: 45px;
+    }
+}

@@ -1,0 +1,32 @@
+
+/* Button.scss */
+
+/* Estilos generales para el botón */
+.btn-custom {
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+    padding: 5px 20px;
+    font-size: 16px;
+    font-weight: 700;
+    background-color: #FFC310;
+    color: #1A252A;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.1s ease;
+    margin-right: 20px;
+
+    &:hover {
+        background-color: #1A252A;
+        color: white;
+        border: 1px solid #FFC310;
+      }
+    &:disabled {
+      background-color: #ccc;
+      color: #888;
+      cursor: not-allowed;
+      border: 1px solid #bbb;
+    }
+}
+  
