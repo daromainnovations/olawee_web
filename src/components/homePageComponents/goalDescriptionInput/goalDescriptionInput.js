@@ -50,7 +50,7 @@ const GoalDescriptionInput = () => {
 
       {/* Textarea con placeholder */}
       <div className="textarea-wrapper">
-      <div className="textarea-disabled-overlay">🚧 Under Construction</div>
+      <div className="textarea-disabled-overlay">🚧 En Construcción</div>
         <textarea
           className="text-area"
           placeholder={isPlaceholderVisible ? "Write about what you want to save for..." : ""}

@@ -5,7 +5,7 @@ const SwitchButton = ({ selected, onChange }) => {
   return (
     <div className="switch-container">
       <div className="switch-button">
-        {["monthly", "yearly", "payone"].map((option) => (
+        {["Mensual", "Anual", "Perpetuo"].map((option) => (
           <button
             key={option}
             className={selected === option ? "active" : ""}

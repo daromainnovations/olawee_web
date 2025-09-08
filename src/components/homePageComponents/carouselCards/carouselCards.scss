@@ -159,7 +159,7 @@
         top: 50%;
         transform: translateY(-50%);
         z-index: 1000; /* Asegura que las flechas estén sobre los elementos */
-        background-color: #FFC310;
+        background-color: #336BB3;
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -170,7 +170,7 @@
     .swiper-button-prev.disabled,
     .swiper-button-next.disabled {
         opacity: 0.7; /* Reduce la opacidad */
-        background-color: #FFC310; /* Color gris para indicar que está deshabilitado */
+        background-color: #336BB3; /* Color gris para indicar que está deshabilitado */
     }
 
     .swiper-button-prev {

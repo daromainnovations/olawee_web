@@ -23,7 +23,7 @@ const BackArrow = () => {
         <button className="back-arrow">
             <FaArrowLeftLong size={18} />
         </button>
-        <p className="back">Back</p>
+        <p className="back">Volver</p>
     </div>
     
   );

@@ -89,7 +89,7 @@ const Menu = ({ bannerHeight, customClass = "" }) => {
           {/* Menú de navegación */}
           <div className="offcanvas offcanvas-top" id="navbarContent" ref={offcanvasRef}>
             <div className="offcanvas-header">
-              <h5 className="offcanvas-title">OKAPI</h5>
+              <h5 className="offcanvas-title">OLAWEE</h5>
               <button
                 type="button"
                 className="btn-close text-reset custom-close-btn"
@@ -100,11 +100,11 @@ const Menu = ({ bannerHeight, customClass = "" }) => {
             <div className="offcanvas-body">
               <div className="d-flex flex-column flex-lg-row align-items-lg-center w-100 justify-content-end">
                 <div className="navbar-nav d-flex flex-column flex-lg-row align-items-lg-center gap-3">
-                  <a className={`nav-link ${location.pathname === "/" ? "active" : ""}`} href="/">Home</a>
-                  <a className={`nav-link ${location.pathname === "/Prices" ? "active" : ""}`} href="/Prices">Prices</a>
-                  <a className={`nav-link ${location.pathname === "/customize" ? "active" : ""}`} href="/customize">Customize Roi</a>
-                  <a className={`nav-link hiddenProvisional ${location.pathname === "/user-cases" ? "active" : ""}`} href="/user-cases">User Cases</a>
-                  <a className={`nav-link hiddenProvisional ${location.pathname === "/integrate" ? "active" : ""}`} href="/integrate">Integrate</a>
+                  <a className={`nav-link ${location.pathname === "/" ? "active" : ""}`} href="/">Inicio</a>
+                  <a className={`nav-link ${location.pathname === "/Prices" ? "active" : ""}`} href="/Prices">Precios</a>
+                  <a className={`nav-link ${location.pathname === "/customize" ? "active" : ""}`} href="/customize">Personalizar Roi</a>
+                  <a className={`nav-link hiddenProvisional ${location.pathname === "/user-cases" ? "active" : ""}`} href="/user-cases">Casos de usuario</a>
+                  <a className={`nav-link hiddenProvisional ${location.pathname === "/integrate" ? "active" : ""}`} href="/integrate">Privacidad</a>
                   <li
                     className={`nav-item hiddenProvisional dropdown ${location.pathname.startsWith("/customize") ? "active" : ""}`}
                     onMouseEnter={() => setIsDropdownOpen(true)}
@@ -152,10 +152,10 @@ const Menu = ({ bannerHeight, customClass = "" }) => {
                   {!user ? (
                     <>
                       <button className="btn-login" onClick={() => setModalType("login")}>
-                        Log In
+                        Iniciar Sesión
                       </button>
                       <button className="btn-signUp" onClick={() => setModalType("signup")}>
-                        Sign Up
+                        Registrarse
                       </button>
                     </>
                   ) : (

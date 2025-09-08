@@ -98,7 +98,7 @@
           margin-top: auto; // Empuja el botón al final
   
           .custom-card-button {
-            background: linear-gradient(90deg, #aa3034 0%, #FFC310 100%);
+            background: linear-gradient(90deg, #6C51A6 0%, #336BB3 100%);
             color: #fff;
             font-size: 1rem;
             padding: 0.7rem 1.6rem;
@@ -109,7 +109,7 @@
             transition: background 0.3s;
             box-shadow: 0 2px 8px rgba(157, 2, 8, 0.08);
             &:hover{
-              background: linear-gradient(90deg, #FFC310 0%, #aa3034 100%);
+              background: linear-gradient(90deg, #336BB3 0%, #6C51A6 100%);
             }
           }
         }

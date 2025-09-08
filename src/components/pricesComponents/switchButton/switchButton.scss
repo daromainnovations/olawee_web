@@ -32,12 +32,12 @@
         min-width: 120px; // Se asegura de que los botones tengan el mismo ancho
   
         &.active {
-          background: #ffc310;
+          background: #336BB3;
           color: white;
         }
   
         &:hover {
-          background: rgba(255, 195, 16, 0.7);
+          background: #336BB3;
           color: white;
         }
       }

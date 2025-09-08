@@ -19,7 +19,7 @@ const BannerOferta = ({setBannerHeight}) => {
     
       return (
         <div ref={bannerRef} className={`d-flex justify-content-center text-center banner-oferta ${visible ? "visible" : ""}`}>
-          🎉 ¡Limited Time Offer: Save Up to 25% on OKAPI today! 🚀
+          🎉 ¡Oferta por tiempo limitado: ahorra hasta un 25% en OLAWEE hoy! 🚀
         </div>
       );
 }
