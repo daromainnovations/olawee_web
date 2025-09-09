@@ -2,7 +2,7 @@
 :root{
   --color-background-page: rgba(11, 20, 24,1);  /* #0B1418 */
   --color-font-global: rgba(193, 198, 199,1);   /* #C1C6C7 */
-  --color-font-title: rgba(255, 195, 16,1);     /* #FFC310 */
+  --color-font-title: #4B61A6;     /* #FFC310 */
 }
 body{
   background-color: var(--color-background-page);

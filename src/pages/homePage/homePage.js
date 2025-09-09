@@ -78,6 +78,7 @@ import SocialIcons from "../../components/globalComponents/socialIcons/socialIco
 import GradientLine from "../../components/globalComponents/gradientLine/gradientLine";
 import Footer from "../../components/globalComponents/footer/footer";
 import ProductsSection from "../../components/pricesComponents/productsSection/productsSection";
+import myImgI from "../../../src/media/img/letraImagen.png";
 
 const HomePage = () => {
     const [bannerHeight, setBannerHeight] = useState(0);
@@ -95,7 +96,7 @@ const HomePage = () => {
                     <Menu bannerHeight={bannerHeight -20} customClass="custom-navbar-style"/>
                     
                     <div className="d-flex justify-content-center text-center">
-                        <h1 className="title-OKAPI"> OLAWEE</h1>
+                        <img src={myImgI} alt="logo-okapi"></img>
                     </div>
                     <div className="d-flex justify-content-center text-center">
                         <p className="mt-2 secondary-title">EQUIPOS INTELIGENTES, GRAN PRODUCTIVIDAD</p>
