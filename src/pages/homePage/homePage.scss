@@ -236,11 +236,11 @@ html, body {
     to bottom,
     #0B1418 0%,
     #2E2640 10%,
-    #5A58A6 20%,
-    #6C51A6 30%,
-    #4B61A6 50%, /* Se expande el amarillo */
+    #674aa4 20%,
+    #5A58A6 30%,
+    #336BB3 40%, /* Se expande el azul */
     #FFFFFF 60%
-    
+
   );
     min-height: 40vh; /* Hace el fondo más largo */
     width: 100%;
@@ -261,11 +261,11 @@ html, body {
     background: linear-gradient(
     to bottom,
     #FFFFFF 0%,
-    #4B61A6 10%,
-    #6C51A6 20%,
-    #5A58A6 30%,
+    #336BB3 10%,
+    #5A58A6 20%,
+    #674aa4 30%,
     #2E2640 40%,
-    #0B1418 50%
+    #0B1418 60%
   );
     min-height: 20vh;
     width: 100%;
