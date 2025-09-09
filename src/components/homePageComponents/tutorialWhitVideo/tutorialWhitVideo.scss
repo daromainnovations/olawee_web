@@ -35,7 +35,7 @@
         // Flecha del acordeón con color personalizado
         .accordion-button::after, 
         .accordion-button:not(.collapsed)::after {
-            filter: invert(40%) sepia(90%) saturate(500%) hue-rotate(20deg);
+            filter: invert(40%) sepia(80%) saturate(800%) hue-rotate(200deg);
             opacity: 1;
         }
 

@@ -9,7 +9,7 @@
     width: 50px !important;
     height: 50px !important;
     background-color: #0B1418 !important;
-    box-shadow: 0px 0px 8px #4B61A6;
+    box-shadow: 0px 0px 8px #336BB3;
     cursor: pointer;
     .span,
     .toggle-text {
@@ -20,7 +20,7 @@
       height: 30px;
       transition: transform 0.3s ease;
       path {
-        fill: #4B61A6;
+        fill: #336BB3;
       }
     }
     &:hover {
