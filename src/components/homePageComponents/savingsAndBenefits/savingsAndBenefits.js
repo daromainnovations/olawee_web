@@ -1,6 +1,6 @@
 
 import "./savingsAndBenefits.scss"
-import graphImage from "../../../media/img/graph.png";
+import graphImage from "../../../media/img/userCases/img_beneficios.png";
 import PrincipalButton from "../../globalComponents/principalButton/principalButton";
 
 const SavingsAndBenefits = () => {
@@ -13,7 +13,7 @@ const SavingsAndBenefits = () => {
             <div className="row container-benefits-and-savings">
                 {/* Columna izquierda con la imagen */}
                 <div className="container-img-graph col-md-6 d-flex justify-content-center align-items-center">
-                    <img src={graphImage} alt="Graph of savings and benefits" className="img-fluid custom-image" />
+                    <img src={graphImage} alt="Graph of savings and benefits" className="img-fluid custom-image img_beneficios" />
                 </div>
 
                 {/* Columna derecha con los tres divs y el botón */}
