@@ -10,16 +10,16 @@ import { FaArrowsRotate } from "react-icons/fa6";
 
 const BenefitsSection = () => {
   const items = [
-    { icon: <TfiAlarmClock />, title: "TIME-SAVING", text: "Analyze investments in minutes, without the need for complex manual calculations." },
-    { icon: <MdAttachMoney />, title: "COST-SAVINGS", text: "Identify opportunities to reduce costs and maximize your savings." },
-    { icon: <GiArtificialIntelligence />, title: "SMART DECISIONS", text: "Receive AI-powered recommendations to optimize your investments." },
-    { icon: <PiNotePencilDuotone />, title: "CUSTOMIZED RESULTS", text: "Set specific variables to receive tailored analysis and get detailed reports with a clear breakdown of ROI, benefits, and savings." },
-    { icon: <FaArrowsRotate />, title: "ONGOING PROGRESS", text: "Receive AI-based recommendations to optimize your investments." },
+    { icon: <TfiAlarmClock />, title: "AHORRO DE TIEMPO", text: "Gestiona tareas en minutos, sin necesidad de conocimientos técnicos." },
+    { icon: <MdAttachMoney />, title: "AHORRO DE COSTES", text: "Reduce la necesidad de formación externa y consultoría gracias a recursos de IA integrados." },
+    { icon: <GiArtificialIntelligence />, title: "DECISIONES INTELIGENTES", text: "Recibe recomendaciones impulsadas por IA adaptadas a cada departamento." },
+    { icon: <PiNotePencilDuotone />, title: "RESULTADOS PERSONALIZADOS", text: "Crea tus propios agentes y prompts ajustados a tus flujos de trabajo." },
+    { icon: <FaArrowsRotate />, title: "PROGRESO CONTINUO", text: "Accede a una biblioteca compartida que crece con tu organización." },
   ];
 
   return (
     <div className="container-fluid">
-      <h2 className="main-title">BENEFITS OF USING OKAPI</h2>
+      <h2 className="main-title">BENEFICIOS DE USAR OLAWEE</h2>
       
       <div className="items-container">
         {items.map((item, index) => (
@@ -33,7 +33,7 @@ const BenefitsSection = () => {
 
       <hr className="divider" />
 
-      <h2 className="secondary-title">Choose the perfect plan for you</h2>
+      <h2 className="secondary-title">Elige el plan perfecto para ti</h2>
     </div>
   );
 };

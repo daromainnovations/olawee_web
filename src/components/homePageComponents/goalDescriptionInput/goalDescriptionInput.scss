@@ -4,7 +4,7 @@ $text-area-max-width: 90%;
 $text-area-height: 150px;
 $button-padding: 5px 20px;
 $btn-color: #007bff;
-$right-btn-color: #FFC310;
+$right-btn-color: #336BB3;
 $right-btn-hover-color: #1A252A;
 $line-color: #9CA3AF;
 $border-radius: 10px;
@@ -23,8 +23,8 @@ $border-radius: 10px;
 
   /* Aplica el box-shadow cuando el contenedor está enfocado */
   &.focused {
-    border-color: #FFC310;
-    box-shadow: 0px 7px 31px -5px rgba(255,195,16,1);
+    border-color: #336BB3;
+    box-shadow: 0px 7px 31px -5px #336BB3;
   }
   
   .textarea-wrapper {
@@ -43,7 +43,7 @@ $border-radius: 10px;
       width: 100%;
       height: $text-area-height;
       background: rgba(26, 37, 42, 0.85);
-      color: #ffc310;
+      color: #336BB3;
       font-weight: bold;
       font-size: 1.5rem;
       z-index: 5;

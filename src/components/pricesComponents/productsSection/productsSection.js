@@ -7,9 +7,9 @@ import "./productsSection.scss";
 const CACHE_KEY = "products_cache_v1";
 const ORDERED_IDS = ["84", "86", "87"];
 const BADGES = {
-  "84": "Monthly",
-  "86": "Yearly",
-  "87": "Perpetual"
+  "84": "Mensual",
+  "86": "Anual",
+  "87": "Perpetuo"
 };
 
 const ProductsSection = () => {
@@ -75,8 +75,8 @@ const ProductsSection = () => {
           ]}
           buttonText={
             !product.price || product.price === "0.00"
-              ? "Contact Us"
-              : "Get Started"
+              ? "Contactar"
+              : "Empezar"
           }
           onButtonClick={() => window.open(product.permalink, "_blank")}
           //esta sería la imagen si queremos ponerla

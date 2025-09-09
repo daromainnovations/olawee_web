@@ -19,7 +19,7 @@ const TutorialWhitVideo = () => {
           <div className="row">
             {/* Columna izquierda con el título y el acordeón */}
             <div className="col-md-6 mt-1">
-              <h4 className="mb-4 d-flex align-items-center justify-content-center m-auto text-center">Discover How OKAPI Functions</h4>
+              <h4 className="mb-4 d-flex align-items-center justify-content-center m-auto text-center">Descubre cómo funciona OLAWEE</h4>
     
               <div className="accordion" id="accordionExample">
                 <div className="accordion-item">
@@ -32,7 +32,7 @@ const TutorialWhitVideo = () => {
                       aria-controls="collapseOne"
                       
                     >
-                      <span className="step-point"></span>Step 1: Start with a prompt
+                      <span className="step-point"></span>Paso 1: Comienza con un prompt
                     </button>
                   </h2>
                   <div
@@ -42,7 +42,7 @@ const TutorialWhitVideo = () => {
                     data-bs-parent="#accordionExample"
                   >
                     <div className="accordion-body">
-                    Describe your investment or project to OKAPI. OKAPI's AI can help you refine your input to provide the best results.
+                    Describe tu tarea o proyecto OLAWEE. La IA te ayuda a refinar tu entrada para obtener los mejores resultados.
                     </div>
                   </div>
                 </div>
@@ -57,7 +57,7 @@ const TutorialWhitVideo = () => {
                       aria-expanded="false"
                       aria-controls="collapseTwo"
                     >
-                      <span className="step-point"></span>Step 2: Get a Detailed ROI Analysis
+                      <span className="step-point"></span>Paso 2: Obtén un flujo de trabajo detallado con IA
                     </button>
                   </h2>
                   <div
@@ -67,7 +67,7 @@ const TutorialWhitVideo = () => {
                     data-bs-parent="#accordionExample"
                   >
                     <div className="accordion-body">
-                    Our AI will analyze your input and generate a detailed ROI (Return on Investment) report. You’ll receive key financial insights, cost breakdowns, and potential savings.
+                    Crea y guarda tus prompts más efectivos, organiza tus agentes personales y reutilízalos siempre que lo necesites. Lleva tus flujos de trabajo a otro nivel con IA adaptada a ti..
                     </div>
                   </div>
                 </div>
@@ -82,7 +82,7 @@ const TutorialWhitVideo = () => {
                       aria-expanded="false"
                       aria-controls="collapseThree"
                     >
-                      <span className="step-point"></span>Step 3: Adjust Parameters for Better Accuracy
+                      <span className="step-point"></span>Paso 3: Ajusta parámetros para mayor precisión
                     </button>
                   </h2>
                   <div
@@ -92,7 +92,7 @@ const TutorialWhitVideo = () => {
                     data-bs-parent="#accordionExample"
                   >
                     <div className="accordion-body">
-                    Fine-tune the calculations by adjusting different parameters, such as investment amount, time frame, and expected benefits. This helps you get a personalized and precise analysis.
+                    Publica tus mejores prompts y agentes, descubre ideas de otros usuarios y colabora en la construcción de una comunidad donde la inteligencia artificial se convierte en un recurso compartido.
                     </div>
                   </div>
                 </div>
@@ -107,7 +107,7 @@ const TutorialWhitVideo = () => {
                       aria-expanded="false"
                       aria-controls="collapseFour"
                     >
-                      <span className="step-point"></span>Step 4: Make Smarter Decisions
+                      <span className="step-point"></span>Paso 4: Trabaja de forma más inteligente, en equipo
                     </button>
                   </h2>
                   <div
@@ -117,7 +117,7 @@ const TutorialWhitVideo = () => {
                     data-bs-parent="#accordionExample"
                   >
                     <div className="accordion-body">
-                    Use the insights provided by OKAPI to optimize your investments, reduce unnecessary costs, and maximize profitability. Start implementing data-driven decisions today!
+                    Nuestro agente especializado en auditorías analiza cómo aplicas la IA en tu empresa y detecta oportunidades de mejora, optimización y seguridad. Una mirada profesional que te ayuda a tomar decisiones estratégicas basadas en datos.
                     </div>
                   </div>
                 </div>

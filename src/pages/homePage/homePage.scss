@@ -235,11 +235,12 @@ html, body {
     background: linear-gradient(
     to bottom,
     #0B1418 0%,
-    #806616 10%,
-    #BC9419 20%,
-    #D8B344 30%,
-    #FFE8A3 50%, /* Se expande el amarillo */
+    #2E2640 10%,
+    #5A58A6 20%,
+    #6C51A6 30%,
+    #4B61A6 50%, /* Se expande el amarillo */
     #FFFFFF 60%
+    
   );
     min-height: 40vh; /* Hace el fondo más largo */
     width: 100%;
@@ -260,10 +261,10 @@ html, body {
     background: linear-gradient(
     to bottom,
     #FFFFFF 0%,
-    #FFE8A3 10%,
-    #D8B344 20%,
-    #BC9419 30%,
-    #806616 40%,
+    #4B61A6 10%,
+    #6C51A6 20%,
+    #5A58A6 30%,
+    #2E2640 40%,
     #0B1418 50%
   );
     min-height: 20vh;

@@ -12,12 +12,12 @@ const Footer = () => {
 
         {/* Columna 2: Título y 4 enlaces */}
         <div className="footer-column">
-          <h4 className="footer-title">OKAPI</h4>
+          <h4 className="footer-title">OLAWEE</h4>
           <ul className="footer-links">
-            <li><a href="#servicio1">Home</a></li>
-            <li><a href="#servicio2">Prices</a></li>
-            <li><a href="#servicio3">User Cases</a></li>
-            <li><a href="#servicio4">Customize RoI</a></li>
+            <li><a href="#servicio1">Inicio</a></li>
+            <li><a href="#servicio2">Precios</a></li>
+            <li><a href="#servicio3">Casos de uso</a></li>
+            <li><a href="#servicio4">Personalizar Agentes</a></li>
           </ul>
         </div>
 
@@ -25,16 +25,16 @@ const Footer = () => {
         <div className="footer-column">
           <h4 className="footer-title">GENERAL</h4>
           <ul className="footer-links">
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="#terms">Terms of Service</a></li>
-            <li><a href="#agreement">Teams agreement</a></li>
-            <li><a href="#privacy">Privacy</a></li>
+            <li><a href="#contact">Contacto</a></li>
+            <li><a href="#terms">Términos de servicio</a></li>
+            <li><a href="#agreement">Acuerdo para equipos</a></li>
+            <li><a href="#privacy">Privacidad</a></li>
           </ul>
         </div>
 
         {/* Columna 4: Título y 3 enlaces */}
         <div className="footer-column">
-          <h4 className="footer-title">CONNECT</h4>
+          <h4 className="footer-title">CONECTA</h4>
           <ul className="footer-links">
             <li><a href="#linkedin">LinkedIn</a></li>
             <li><a href="#twitter">X / Twitter</a></li>
