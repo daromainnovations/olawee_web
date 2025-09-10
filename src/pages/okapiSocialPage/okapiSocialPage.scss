@@ -6,7 +6,7 @@
 :root {
   --color-background-page: rgba(11, 20, 24, 1);
   --color-font-global: rgba(193, 198, 199, 1);
-  --color-font-title: rgba(255, 195, 16, 1);
+  --color-font-title: rgba(51, 107, 179);
   --font-heading: 'Poppins', sans-serif;
   --font-body: 'Lato', serif;
 }
@@ -746,7 +746,7 @@ section {
 
     &:hover { 
       transform: translateY(-8px) scale(1.02); 
-      box-shadow: 0 8px 20px rgba(255, 195, 16, 0.527); 
+      box-shadow: 0 8px 20px rgba(51, 107, 179); 
     }
   }
 
@@ -896,7 +896,7 @@ section {
         background: conic-gradient(
           from 0deg,
           rgba(11, 20, 24, 1),
-          rgba(255, 195, 16, 1),
+          rgba(51, 107, 179),
           #fb8509,
           rgba(11, 20, 24, 1)
         );

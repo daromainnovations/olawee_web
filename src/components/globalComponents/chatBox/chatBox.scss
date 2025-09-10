@@ -9,7 +9,7 @@
     width: 50px !important;
     height: 50px !important;
     background-color: #0B1418 !important;
-    box-shadow: 0px 0px 8px #4B61A6;
+    box-shadow: 0px 0px 8px #336BB3;
     cursor: pointer;
     .span,
     .toggle-text {
@@ -20,13 +20,13 @@
       height: 30px;
       transition: transform 0.3s ease;
       path {
-        fill: #4B61A6;
+        fill: #336BB3;
       }
     }
     &:hover {
       transform: scale(1.15);
       transition: transform 0.3s ease;
-      box-shadow: 0px 0px 15px 2px #4B61A6;
+      box-shadow: 0px 0px 15px 2px #336BB3;
     }
   }
   
@@ -126,12 +126,12 @@
             }
   
             .chat-message-from-user {
-              background-color: #4B61A6;
+              background-color: #336BB3;
               border-radius: 15px 15px 0px 15px;
               box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   
               .chat-message-markdown p {
-                background-color: #4B61A6;
+                background-color: #336BB3;
               }
             }
   
@@ -140,7 +140,7 @@
             }
   
             .chat-input-send-button {
-              background-color: #4B61A6 !important;
+              background-color: #336BB3 !important;
               color: black !important;
               border-radius: 5px;
               padding: 8px 15px;

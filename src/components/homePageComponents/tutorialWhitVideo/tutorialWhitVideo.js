@@ -1,18 +1,18 @@
 
-import { useState } from "react";
+//import { useState } from "react";
 import "./tutorialWhitVideo.scss"
 import myImg from "../../../../src/media/img/Imagotipo_Okapi_cabeza.png"
 const TutorialWhitVideo = () => {
   // Estado para controlar los elementos abiertos del acordeón
-  const [activeAccordion, setActiveAccordion] = useState("collapseOne");
+  //const [activeAccordion, setActiveAccordion] = useState("collapseOne");
 
-  const handleAccordionToggle = (id) => {
+  /*const handleAccordionToggle = (id) => {
     if (activeAccordion === id) {
       setActiveAccordion(""); // Si el elemento ya está abierto, lo cerramos
     } else {
       setActiveAccordion(id); // Abrir el acordeón correspondiente
     }
-  };
+  };*/
 
     return (
         <div className="mb-5 container-tutorial">
@@ -25,12 +25,13 @@ const TutorialWhitVideo = () => {
                 <div className="accordion-item">
                   <h2 className="accordion-header" id="headingOne">
                     <button
-                      className={`accordion-button ${ activeAccordion === "collapseOne" ? "" : "collapsed"}`}
+                      className="accordion-button"
                       type="button"
-                      onClick={() => handleAccordionToggle("collapseOne")}
-                      aria-expanded={activeAccordion === "collapseOne" ? "true" : "false"}
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseOne"
+                      aria-expanded= "false"
                       aria-controls="collapseOne"
-                      
+
                     >
                       <span className="step-point"></span>Paso 1: Comienza con un prompt
                     </button>
