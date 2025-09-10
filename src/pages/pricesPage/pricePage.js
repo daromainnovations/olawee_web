@@ -25,7 +25,7 @@ const PricePage = () => {
                 {/* <PricingCards planType={selectedPlan} /> Cambia dinámicamente */}
                 <ProductsSection />
                 <div className="plans-container">
-                    <h1 className="title-compare-plans">Compare Plans</h1>
+                    <h1 className="title-compare-plans">COMPARAR PLANES</h1>
                     <PlansTable />
                 </div>
             </div>
