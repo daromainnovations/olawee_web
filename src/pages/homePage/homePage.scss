@@ -1,144 +1,3 @@
-// @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
-// @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-
-
-// *{
-//     background-color: var(--color-background-page);
-//     color: var(--color-font-global);
-// }
-// .page-content{
-//     padding: 0px;
-//     transition: margin-top 0.5s ease-in-out;
-//     .product-cards-section{
-//         background-color: #fff;
-//         padding: 50px;
-//     }
-// }
-// .title-OKAPI{
-//     font-family: "Lato", serif;
-//     font-weight: 900;
-//     font-size: 48px;
-//     color: var(--color-font-title);
-//     margin-top: 30px !important;
-// }
-// .secondary-title{
-//     font-size: 18px;
-//     color: white;
-//     font-family: "Poppins", serif;
-//     font-weight: 600;
-// }
-// .text{
-//     padding: 0 80px;
-//     opacity: 0.7;
-// }
-// .second-text{
-//     padding: 0 150px !important;
-// }
-// .container-second-text{
-//     margin: 20px 0px;
-// }
-// .container-subtitle{
-//     margin-top: 80px;
-//     .subtitle{
-//         font-family: "Lato", serif;
-//         font-weight: 400;
-//         font-size: 32px;
-//         margin-bottom: 0px;
-//         color: white;
-//     }
-// }
-// .gradient-background{
-//     position: relative;
-//     background: linear-gradient(
-//     to bottom,
-//     #0B1418 0%,
-//     #806616 10%,
-//     #BC9419 20%,
-//     #D8B344 30%,
-//     #FFE8A3 50%, /* Se expande el amarillo */
-//     #FFFFFF 60%
-//   );
-//     min-height: 40vh; /* Hace el fondo más largo */
-//     width: 100%;
-//     background-size: 100% 40vh; /* Extiende el degradado */
-
-//     .text-gradient{
-//         position: absolute;
-//         font-family: "Lato", serif;
-//         font-weight: 800;
-//         font-size: 36px;
-//         color: white;
-//         background-color: transparent;
-//         margin-top: -150px;
-//         padding: 0px 30px;
-//     }
-// }
-// .gradient-background-end{
-//     background: linear-gradient(
-//     to bottom,
-//     #FFFFFF 0%,
-//     #FFE8A3 10%,
-//     #D8B344 20%,
-//     #BC9419 30%,
-//     #806616 40%,
-//     #0B1418 50%
-//   );
-//     min-height: 20vh;
-//     width: 100%;
-//     background-size: 100% 20vh;
-// }
- 
-
-// @media (max-width: 992px){
-//     .second-text{
-//         padding: 0px 50px !important;
-//     }
-//     .subtitle{
-//         font-size: 24px !important;
-//     }
-//     .gradient-background .text-gradient{
-//         font-size: 30px;
-//     }
-// }
-
-// @media (max-width: 767px){
-//     .title-OKAPI{
-//         font-size: 30px;
-//         margin-top: 15px;
-//     }
-//     .secondary-title{
-//         font-size: 16px;
-//     }
-//     .text{
-//         font-size: 12px;
-//         padding: 0px 10px;
-//     }
-// }
-
-
-// @media (max-width: 588px){
-//     .page-content{
-//         margin-top: 20px;
-//         transition: none;
-//     }
-//     .gradient-background .text-gradient{
-//         font-size: 24px;
-//     }
-// }
-
-// @media (max-width: 559px){
-//     .custom-navbar-style{
-//         margin-top: 15px;
-//     }
-// }
-// @media (max-width: 287px){
-//     .custom-navbar-style{
-//         margin-top: 45px;
-//     }
-// }
-
-
 
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
@@ -232,19 +91,20 @@ html, body {
 }
 .gradient-background{
     position: relative;
-    background: linear-gradient(
-    to bottom,
-    #0B1418 0%,
-    #2E2640 10%,
-    #674aa4 20%,
-    #5A58A6 30%,
-    #336BB3 40%, /* Se expande el azul */
-    #FFFFFF 60%
-
-  );
     min-height: 40vh; /* Hace el fondo más largo */
     width: 100%;
-    background-size: 100% 40vh; /* Extiende el degradado */
+    background: linear-gradient(
+        to bottom,
+        #0B1418 0%,     /* oscuro */
+        #2e2640 24%,    /* transición lenta al morado */
+        #5530a6dc 50%,    /* morado */
+        #7aabece1 78%,    /* azul, dale aire */
+        #eff4ff 92%,   
+        #ffffff 100%    /* blanco puro al final (junto al carrusel) */
+      );
+    
+    background-size: 100% 28vh; /* Extiende el degradado */
+    background-color:#FFFFFF;
 
     .text-gradient{
         position: absolute;
@@ -253,20 +113,22 @@ html, body {
         font-size: 36px;
         color: white;
         background-color: transparent;
-        margin-top: -150px;
+        margin-top: -100px;
         padding: 0px 30px;
     }
 }
 .gradient-background-end{
     background: linear-gradient(
-    to bottom,
-    #FFFFFF 0%,
-    #336BB3 10%,
-    #5A58A6 20%,
-    #674aa4 30%,
-    #2E2640 40%,
-    #0B1418 60%
-  );
+        to bottom,
+        #FFFFFF 0%,     /* blanco puro al empezar (junto al carrusel) */
+        #eff4ff 8%,     /* casi blanco para desvanecer suave */
+        #7aabec 22%,    /* azul */
+        #5530a6d8 50%,    /* morado */
+        #2E2640 76%,
+        #150e1e 85%,     /* transición al oscuro */
+        #0B1418 100%  /* oscuro */
+      );
+    background-color:#FFFFFF; 
     min-height: 20vh;
     width: 100%;
     background-size: 100% 20vh;
