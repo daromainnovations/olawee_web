@@ -68,7 +68,7 @@ const TutorialWhitVideo = () => {
                     data-bs-parent="#accordionExample"
                   >
                     <div className="accordion-body">
-                    Diseña prompts o asistentes personalizados, guárdaloS y úsalos siempre que lo necesites
+                    Diseña prompts o asistentes personalizados, guárdalos y úsalos siempre que lo necesites
                     </div>
                   </div>
                 </div>

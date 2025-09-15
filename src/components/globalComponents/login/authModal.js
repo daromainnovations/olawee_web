@@ -375,8 +375,8 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
                 {forgotPassword
                   ? "Restablecer Contraseña"
                   : modalType === "login"
-                  ? "Log In to OKAPI"
-                  : "Sign UP to OKAPI"}
+                  ? "Iniciar sesión con OLAWEE"
+                  : "Regístrate en OLAWEE"}
               </h2>
               <button className="btn-close" onClick={() => setModalType(null)}>❌</button>
             </div>
@@ -460,7 +460,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
               <form className="auth-form p-4">
                 <div className="form-row row">
                   <div className="form-group col-md-6 mb-4">
-                    <label>First Name <span>*</span></label>
+                    <label>Nombre <span>*</span></label>
                     <input
                       type="text"
                       className={fieldErrors.firstName ? "input-error" : ""}
@@ -476,7 +476,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
                     {fieldErrors.firstName && <div className="form-error">{fieldErrors.firstName}</div>}
                   </div>
                   <div className="form-group col-md-6 mb-4">
-                    <label>Last Name <span className="text-muted">(Opcional)</span></label>
+                    <label>Apellido <span className="text-muted">(Opcional)</span></label>
                     <input
                       type="text"
                       value={lastName}
@@ -488,7 +488,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
 
                 <div className="form-row row">
                   <div className="form-group col-md-6 mb-4">
-                    <label>Username <span>*</span></label>
+                    <label>Nombre de Usuario <span>*</span></label>
                     <input
                       type="text"
                       className={fieldErrors.username ? "input-error" : ""}
@@ -505,7 +505,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
                   </div>
 
                   <div className="form-group col-md-6 mb-4">
-                    <label htmlFor="phonePrefix">Phone <span className="text-muted">(Optional)</span></label>
+                    <label htmlFor="phonePrefix">Teléfono <span className="text-muted">(Optional)</span></label>
                     <div className="phone-wrapper" style={{ display: 'flex', gap: '10px' }}>
                       <select
                         className="form-control prefix-select"
@@ -535,7 +535,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
 
                 <div className="form-row row">
                   <div className="form-group col-md-6 mb-4">
-                    <label>Company <span>*</span></label>
+                    <label>Empresa <span>*</span></label>
                     <input
                       type="text"
                       className={fieldErrors.company ? "input-error" : ""}
@@ -551,7 +551,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
                     {fieldErrors.company && <div className="form-error">{fieldErrors.company}</div>}
                   </div>
                   <div className="form-group col-md-6 mb-4">
-                    <label>Job Title <span>*</span></label>
+                    <label>Nombre profesional <span>*</span></label>
                     <input
                       type="text"
                       className={fieldErrors.job ? "input-error" : ""}
@@ -570,7 +570,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
 
                 <div className="form-row row">
                   <div className="form-group col-md-4 mb-4">
-                    <label>Country <span>*</span></label>
+                    <label>País <span>*</span></label>
                     <select
                       className={`form-control ${fieldErrors.country ? "input-error" : ""}`}
                       value={selectedCountry}
@@ -581,7 +581,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
                         }
                       }}
                     >
-                      <option value="">Select Country</option>
+                      <option value="">Selecciona país</option>
                       {countriesList.map((c) => (
                         <option key={c.isoCode} value={c.isoCode}>{c.name}</option>
                       ))}
@@ -589,7 +589,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
                     {fieldErrors.country && <div className="form-error">{fieldErrors.country}</div>}
                   </div>
                   <div className="form-group col-md-4 mb-4">
-                    <label>Province<span>*</span></label>
+                    <label>Provincia<span>*</span></label>
                     <select
                       className={`form-control ${fieldErrors.state ? "input-error" : ""}`}
                       value={selectedState}
@@ -601,7 +601,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
                       }}
                       disabled={!statesList.length}
                     >
-                      <option value="">Select State</option>
+                      <option value="">Selecciona estado</option>
                       {statesList.map((s) => (
                         <option key={s.isoCode} value={s.isoCode}>{s.name}</option>
                       ))}
@@ -609,7 +609,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
                     {fieldErrors.state && <div className="form-error">{fieldErrors.state}</div>}
                   </div>
                   <div className="form-group col-md-4 mb-4">
-                    <label>City <span className="text-muted">(Opcional)</span></label>
+                    <label>Ciudad <span className="text-muted">(Opcional)</span></label>
                     <select
                       className="form-control"
                       value={selectedCity}
@@ -643,7 +643,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
 
                 <div className="form-row row d-flex">
                   <div className="form-group col-md-6 mb-4">
-                    <label>Password <span>*</span></label>
+                    <label>Contraseña <span>*</span></label>
                     <div className="input-wrapper">
                       <input
                         type={showPassword ? "text" : "password"}
@@ -666,7 +666,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
                     {fieldErrors.password && <div className="form-error">{fieldErrors.password}</div>}
                   </div>
                   <div className="form-group col-md-6 mb-4">
-                    <label>Repeat Password <span>*</span></label>
+                    <label>Repite contraseña <span>*</span></label>
                     <div className="input-wrapper">
                       <input
                         type={showRepeatPassword ? "text" : "password"}
@@ -710,7 +710,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
                     {fieldErrors.email && <div className="form-error">{fieldErrors.email}</div>}
                   </div>
                   <div className="form-group p-3">
-                    <label>Password <span>*</span></label>
+                    <label>Contraseña <span>*</span></label>
                     <div className="input-wrapper">
                       <input
                         type={showPassword ? "text" : "password"}
@@ -740,14 +740,14 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
                     setError(null);
                   }}
                 >
-                  Forgot your password?
+                  ¿Has olvidado tú contraseña?
                 </button>
               </>
             ) : null}
 
             {userExists && (
               <p className="error-message">
-                ⚠️ The account already exists.{" "}
+                ⚠️ La cuenta ya existe.{" "}
                 <button
                   onClick={() => {
                     setModalType("login");
