@@ -1,28 +1,114 @@
 
-import { createContext, useContext, useEffect, useState } from "react";
-import axios from "axios";
-import { AuthError } from "../utils/AuthError";
+// import { createContext, useContext, useEffect, useState } from "react";
+// import axios from "axios";
+// import { AuthError } from "../utils/AuthError";
 
-const api = axios.create({
-  baseURL: "https://okapi-woocommerc-wr9i20lbrp.live-website.com/wp-json",
-});
+// const api = axios.create({
+//   baseURL: "https://okapi-woocommerc-wr9i20lbrp.live-website.com/wp-json",
+// });
 
-api.interceptors.request.use((config) => {
-  const token = sessionStorage.getItem("jwt_token");
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
+// api.interceptors.request.use((config) => {
+//   const token = sessionStorage.getItem("jwt_token");
+//   if (token) {
+//     config.headers.Authorization = `Bearer ${token}`;
+//   }
+//   return config;
+// });
 
-const AuthContext = createContext();
+// const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  // const hasVerifiedToken = useRef(false);
+// export const AuthProvider = ({ children }) => {
+//   const [user, setUser] = useState(null);
+//   const [loading, setLoading] = useState(true);
+  
+// // Funciones para persistencia de token que mantienen la sesión al recargar
+// const saveAuthToken = (token, remember = true) => {
+//   // Siempre guardamos en sessionStorage (para la sesión actual)
+//   sessionStorage.setItem("jwt_token", token);
+  
+//   // Opcionalmente guardamos en localStorage si el usuario marca "recordar"
+//   if (remember) {
+//     // Guardar token con fecha de expiración en localStorage
+//     try {
+//       // Fecha de expiración: 7 días desde ahora
+//       const expiry = Date.now() + (7 * 24 * 60 * 60 * 1000);
+      
+//       // Objeto con token y expiración
+//       const tokenData = {
+//         token: token,
+//         expires: expiry
+//       };
+      
+//       // Guardar en localStorage
+//       localStorage.setItem("auth_token", JSON.stringify(tokenData));
+//       localStorage.setItem("token_saved_at", Date.now().toString());
+      
+//       console.log("🔒 Token guardado con persistencia");
+//     } catch (error) {
+//       console.warn("⚠️ No se pudo guardar el token con persistencia:", error.message);
+//     }
+//   }
+  
+//   // Añadir al objeto api
+//   if (api && api.defaults && api.defaults.headers) {
+//     api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+//   }
+// };
 
-//   // Función para diagnóstico de red - agregar al inicio del archivo o donde sea apropiado
+// // Función para recuperar el token persistente
+// const getAuthToken = () => {
+//   // Primero intentamos obtener de sessionStorage (prioridad)
+//   let token = sessionStorage.getItem("jwt_token");
+  
+//   // Si no hay token en sessionStorage, intentamos recuperar de localStorage
+//   if (!token) {
+//     try {
+//       const savedTokenData = localStorage.getItem("auth_token");
+      
+//       if (savedTokenData) {
+//         const tokenData = JSON.parse(savedTokenData);
+        
+//         // Verificar que el token no haya expirado
+//         if (tokenData.expires > Date.now()) {
+//           token = tokenData.token;
+          
+//           // Restaurar en sessionStorage también
+//           sessionStorage.setItem("jwt_token", token);
+          
+//           // Añadir al objeto api
+//           if (api && api.defaults && api.defaults.headers) {
+//             api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+//           }
+          
+//           console.log("🔓 Token recuperado del almacenamiento persistente");
+//         } else {
+//           console.log("⚠️ Token persistente expirado, eliminando");
+//           localStorage.removeItem("auth_token");
+//         }
+//       }
+//     } catch (error) {
+//       console.warn("⚠️ Error al recuperar token persistente:", error.message);
+//     }
+//   }
+  
+//   return token;
+// };
+
+// // Función para limpiar tokens al cerrar sesión
+// const clearAuthTokens = () => {
+//   sessionStorage.removeItem("jwt_token");
+//   localStorage.removeItem("auth_token");
+//   localStorage.removeItem("token_saved_at");
+  
+//   // Limpiar headers de autorización
+//   if (api && api.defaults && api.defaults.headers) {
+//     delete api.defaults.headers.common['Authorization'];
+//   }
+  
+//   console.log("🧹 Tokens de autenticación eliminados");
+// };
+
+// // Función existente para verificar la calidad de red
 // const checkNetworkQuality = async (baseUrl) => {
 //   const startTime = performance.now();
 //   let status = "unknown";
@@ -65,8 +151,44 @@ export const AuthProvider = ({ children }) => {
 //     };
 //   }
 // };
-// // Versión optimizada de login con mejor manejo de red
-// const login = async (emailOrUsername, password) => {
+
+// // ESTE USEEFFECT DEBE REEMPLAZAR EL EXISTENTE para usar la persistencia de token
+// useEffect(() => {
+//   const initAuth = async () => {
+//     const storedUser = localStorage.getItem("user_data");
+    
+//     // Usar la nueva función para recuperar el token persistente
+//     const token = getAuthToken();
+    
+//     if (storedUser) {
+//       try {
+//         const parsedUser = JSON.parse(storedUser);
+//         setUser(parsedUser);
+//         setLoading(false);
+
+//         // Si tenemos token, verificar en segundo plano
+//         if (token) {
+//           // Intentar verificar el token sin bloquear la UI
+//           setTimeout(() => {
+//             silentTokenVerification(token).catch(() => {
+//               console.warn("⚠️ Verificación de token silenciosa falló");
+//             });
+//           }, 1000);
+//         }
+//         return;
+//       } catch (error) {
+//         console.error("❌ Error al procesar datos del usuario:", error);
+//       }
+//     }
+
+//     setLoading(false);
+//   };
+
+//   initAuth();
+// }, []);
+
+// // Versión optimizada de login con mejor manejo de red y persistencia de sesión
+// const login = async (emailOrUsername, password, rememberMe = true) => {
 //   const startTime = performance.now();
   
 //   try {
@@ -92,7 +214,8 @@ export const AuthProvider = ({ children }) => {
 //     const cachedUserData = localStorage.getItem("user_data");
 //     const cachedUserEmail = localStorage.getItem("user_email");
 //     const cachedTimestamp = localStorage.getItem("login_timestamp");
-//     const cachedToken = sessionStorage.getItem("jwt_token");
+//     // Usar getAuthToken en lugar de sessionStorage.getItem
+//     const cachedToken = getAuthToken();
 //     const now = Date.now();
     
 //     // Aumentamos caché a 7 días - es mejor tener datos desactualizados que ninguno
@@ -207,9 +330,8 @@ export const AuthProvider = ({ children }) => {
 //       const { token, user: profileData } = data;
 //       if (!token || !profileData?.id) throw new Error("Token inválido o usuario sin ID");
       
-//       // Guardamos el token en sessionStorage
-//       sessionStorage.setItem("jwt_token", token);
-//       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+//       // CAMBIO AQUÍ: Usar saveAuthToken en lugar de sessionStorage
+//       saveAuthToken(token, rememberMe);
       
 //       // Construimos el objeto de usuario
 //       const fullUser = {
@@ -332,6 +454,23 @@ export const AuthProvider = ({ children }) => {
 //   }
 // };
 
+// // Modificar la función logout para usar la nueva función clearAuthTokens
+// const logout = () => {
+//   // Usar la nueva función para limpiar tokens
+//   clearAuthTokens();
+  
+//   // Limpiar resto de datos de usuario
+//   localStorage.removeItem("user_data");
+//   localStorage.removeItem("user_email");
+//   localStorage.removeItem("login_timestamp");
+//   localStorage.removeItem("token_last_verified");
+//   localStorage.removeItem("user_data_timestamp");
+//   localStorage.removeItem("site_config_timestamp");
+//   localStorage.removeItem("user_preferences_timestamp");
+  
+//   setUser(null);
+// };
+
 // // Función para verificar token en segundo plano sin bloquear
 // const silentTokenVerification = async (token) => {
 //   try {
@@ -410,7 +549,7 @@ export const AuthProvider = ({ children }) => {
 //       promises.push(
 //         fetch(`${api.defaults.baseURL}/custom/v1/user-preferences`, {
 //           headers: {
-//             'Authorization': `Bearer ${sessionStorage.getItem("jwt_token")}`
+//             'Authorization': `Bearer ${getAuthToken()}`  // Usar getAuthToken para mayor consistencia
 //           }
 //         })
 //           .then(response => response.json())
@@ -445,6 +584,162 @@ export const AuthProvider = ({ children }) => {
 //   }
 // };
 
+// //     localStorage.removeItem("user_data");
+// //     localStorage.removeItem("user_email");
+// //     sessionStorage.removeItem("jwt_token");
+// //     setUser(null);
+// // };
+
+// const isAuthenticated = () => {
+//     if (!user) return false;
+//     const token = sessionStorage.getItem("jwt_token");
+//     if (!token) return false;
+//     try {
+//       const payload = token.split('.')[1];
+//       const { exp } = JSON.parse(atob(payload));
+//       return !exp || new Date(exp * 1000) > new Date();
+//     } catch {
+//       return false;
+//     }
+// };
+
+//   // Nueva función para actualizar los metadatos del usuario
+// const updateUserMetadata = async (metadata) => {
+//     if (!user || !user.id) {
+//       throw new Error("No hay un usuario autenticado para actualizar metadatos");
+//     }
+    
+//     try {
+//       setLoading(true);
+//       console.log("Actualizando metadatos:", metadata);
+      
+//       // Intentar actualizar a través del endpoint personalizado si existe
+//       try {
+//         const { data } = await api.post("/custom/v1/update-profile", metadata);
+//         console.log("Metadatos actualizados con éxito:", data);
+        
+//         // Actualizar el usuario en el estado local
+//         setUser(prevUser => ({
+//           ...prevUser,
+//           ...metadata,
+//           // Actualizar también el objeto meta para consistencia
+//           meta: {
+//             ...prevUser.meta,
+//             ...Object.fromEntries(Object.entries(metadata).map(([k, v]) => [k, v]))
+//           }
+//         }));
+        
+//         // Actualizar en localStorage
+//         const updatedUser = {
+//           ...user,
+//           ...metadata,
+//           meta: {
+//             ...user.meta,
+//             ...Object.fromEntries(Object.entries(metadata).map(([k, v]) => [k, v]))
+//           }
+//         };
+//         localStorage.setItem("user_data", JSON.stringify(updatedUser));
+        
+//         return data;
+//       } catch (err) {
+//         console.log("Endpoint de actualización no disponible, intentando con la API estándar:", err.message);
+        
+//         // Fallback: actualizar a través de la API estándar de WP
+//         const updatedMetaFields = {};
+        
+//         for (const [key, value] of Object.entries(metadata)) {
+//           try {
+//             await api.post(`/wp/v2/users/${user.id}`, {
+//               meta: { [key]: value }
+//             });
+//             updatedMetaFields[key] = value;
+//           } catch (metaErr) {
+//             console.error(`Error al actualizar campo ${key}:`, metaErr);
+//           }
+//         }
+        
+//         // Actualizar el usuario en el estado local
+//         setUser(prevUser => ({
+//           ...prevUser,
+//           ...updatedMetaFields,
+//           meta: {
+//             ...prevUser.meta,
+//             ...updatedMetaFields
+//           }
+//         }));
+        
+//         // Actualizar en localStorage
+//         const updatedUser = {
+//           ...user,
+//           ...updatedMetaFields,
+//           meta: {
+//             ...user.meta,
+//             ...updatedMetaFields
+//           }
+//         };
+//         localStorage.setItem("user_data", JSON.stringify(updatedUser));
+        
+//         return { success: true, updated_fields: updatedMetaFields };
+//       }
+//     } catch (err) {
+//       console.error("❌ Error al actualizar metadatos:", err);
+//       throw err;
+//     } finally {
+//       setLoading(false);
+//     }
+// };
+
+//   return (
+//     <AuthContext.Provider value={{ 
+//       user, 
+//       setUser, 
+//       login, 
+//       logout, 
+//       loading, 
+//       isAuthenticated,
+//       updateUserMetadata // Exportamos la nueva función
+//     }}>
+//       {children}
+//     </AuthContext.Provider>
+//   );
+// };
+
+// export const useAuth = () => useContext(AuthContext);
+
+
+
+
+
+
+
+
+
+
+
+
+import { createContext, useContext, useEffect, useState } from "react";
+import axios from "axios";
+import { AuthError } from "../utils/AuthError";
+
+// ✅ CORREGIDO: URL de Olawee
+const api = axios.create({
+  baseURL: "https://api.olawee.com/wp-json",
+});
+
+api.interceptors.request.use((config) => {
+  const token = sessionStorage.getItem("jwt_token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+const AuthContext = createContext();
+
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  
 // Funciones para persistencia de token que mantienen la sesión al recargar
 const saveAuthToken = (token, remember = true) => {
   // Siempre guardamos en sessionStorage (para la sesión actual)
@@ -701,9 +996,9 @@ const login = async (emailOrUsername, password, rememberMe = true) => {
     console.log(`⏱️ Timeout configurado: ${timeout}ms basado en calidad de red`);
     
     try {
-      // Usar un objeto URL explícito para evitar problemas de resolución DNS
+      // ✅ CORREGIDO: Usar endpoint correcto de Olawee
       const baseUrl = api.defaults.baseURL.replace('/wp-json', '');
-      const endpoint = "/wp-json/custom/v1/login";
+      const endpoint = "/wp-json/custom-api/login"; // ✅ CORREGIDO: custom-api en lugar de custom/v1
       const fullUrl = `${baseUrl}${endpoint}`;
       
       console.log(`🔄 Iniciando solicitud a: ${fullUrl}`);
@@ -718,7 +1013,7 @@ const login = async (emailOrUsername, password, rememberMe = true) => {
           'Connection': 'keep-alive' // Forzar keep-alive para conexión más rápida
         },
         body: JSON.stringify({
-          username: cleanEmailOrUsername,
+          email: cleanEmailOrUsername,  // ✅ CORREGIDO: usar 'email' en lugar de 'username'
           password: cleanPassword,
           include_profile: true
         }),
@@ -751,28 +1046,28 @@ const login = async (emailOrUsername, password, rememberMe = true) => {
           - Tiempo red/cliente: ${Math.round(totalTime - data.execution_time)}ms`);
       }
       
-      const { token, user: profileData } = data;
-      if (!token || !profileData?.id) throw new Error("Token inválido o usuario sin ID");
+      // ✅ CORREGIDO: Manejar respuesta del plugin de Olawee
+      const { success, token, user: profileData } = data;
+      if (!success || !token || !profileData?.id) {
+        throw new Error("Token inválido o usuario sin ID");
+      }
       
       // CAMBIO AQUÍ: Usar saveAuthToken en lugar de sessionStorage
       saveAuthToken(token, rememberMe);
       
-      // Construimos el objeto de usuario
+      // ✅ CORREGIDO: Construir objeto de usuario según respuesta del plugin
       const fullUser = {
         id: profileData.id,
-        username: profileData.username,
-        email: profileData.email || localStorage.getItem("user_email"),
-        displayName: `${profileData.first_name} ${profileData.last_name}`.trim(),
+        username: profileData.name || profileData.email,
+        email: profileData.email,
+        displayName: profileData.name || `${profileData.first_name || ''} ${profileData.last_name || ''}`.trim(),
         
         // Campos personalizados
         firstName: profileData.first_name || "",
         lastName: profileData.last_name || "",
         phone: profileData.phone || "",
-        company: profileData.company || "",
-        country: profileData.country || "",
-        state: profileData.state || "",
-        city: profileData.city || "",
-        job: profileData.job || "",
+        company: profileData.empresa || "", // ✅ CORREGIDO: usar 'empresa' del plugin
+        roles: profileData.roles || [],
         
         avatarUrl: null,
         meta: {}
@@ -899,7 +1194,8 @@ const logout = () => {
 const silentTokenVerification = async (token) => {
   try {
     console.log("🔄 Verificando token en segundo plano...");
-    const response = await fetch(`${api.defaults.baseURL}/custom/v1/verify-token-fast`, {
+    // ✅ CORREGIDO: Usar endpoint correcto de validación
+    const response = await fetch(`${api.defaults.baseURL}/custom-api/validate`, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Accept': 'application/json'
@@ -923,9 +1219,15 @@ const silentTokenVerification = async (token) => {
   }
 };
 
+// ✅ COMENTADO: Funciones de endpoints que no existen en el plugin
 // Versión mejorada de preloadCommonData
 const preloadCommonData = async () => {
   try {
+    console.log("⚠️ Función preloadCommonData deshabilitada - endpoints no disponibles en el plugin actual");
+    return { skipped: true, reason: "endpoints_not_available" };
+    
+    // TODO: Cuando se implementen estos endpoints en el plugin, descomentar:
+    /*
     // Verificar si ya tenemos datos en caché recientes
     const configTimestamp = localStorage.getItem('site_config_timestamp');
     const prefsTimestamp = localStorage.getItem('user_preferences_timestamp');
@@ -955,7 +1257,7 @@ const preloadCommonData = async () => {
     
     if (needConfig) {
       promises.push(
-        fetch(`${api.defaults.baseURL}/custom/v1/site-config`)
+        fetch(`${api.defaults.baseURL}/custom-api/site-config`)
           .then(response => response.json())
           .then(data => {
             if (data && data.success) {
@@ -971,7 +1273,7 @@ const preloadCommonData = async () => {
     
     if (needPrefs) {
       promises.push(
-        fetch(`${api.defaults.baseURL}/custom/v1/user-preferences`, {
+        fetch(`${api.defaults.baseURL}/custom-api/user-preferences`, {
           headers: {
             'Authorization': `Bearer ${getAuthToken()}`  // Usar getAuthToken para mayor consistencia
           }
@@ -1002,17 +1304,12 @@ const preloadCommonData = async () => {
     }
     
     return { fromCache: true, noUpdatesNeeded: true };
+    */
   } catch (error) {
     console.warn("⚠️ Error en precarga de datos:", error.message);
     return { error: error.message };
   }
 };
-
-//     localStorage.removeItem("user_data");
-//     localStorage.removeItem("user_email");
-//     sessionStorage.removeItem("jwt_token");
-//     setUser(null);
-// };
 
 const isAuthenticated = () => {
     if (!user) return false;
@@ -1027,8 +1324,14 @@ const isAuthenticated = () => {
     }
 };
 
-  // Nueva función para actualizar los metadatos del usuario
+// ✅ COMENTADO: Función que usa endpoint que no existe
+// Nueva función para actualizar los metadatos del usuario
 const updateUserMetadata = async (metadata) => {
+  console.log("⚠️ updateUserMetadata deshabilitada - endpoint no disponible en el plugin actual");
+  throw new Error("Función no disponible - endpoint /custom-api/update-profile no implementado");
+  
+  // TODO: Cuando se implemente el endpoint en el plugin, descomentar:
+  /*
     if (!user || !user.id) {
       throw new Error("No hay un usuario autenticado para actualizar metadatos");
     }
@@ -1039,7 +1342,7 @@ const updateUserMetadata = async (metadata) => {
       
       // Intentar actualizar a través del endpoint personalizado si existe
       try {
-        const { data } = await api.post("/custom/v1/update-profile", metadata);
+        const { data } = await api.post("/custom-api/update-profile", metadata);
         console.log("Metadatos actualizados con éxito:", data);
         
         // Actualizar el usuario en el estado local
@@ -1111,6 +1414,7 @@ const updateUserMetadata = async (metadata) => {
     } finally {
       setLoading(false);
     }
+  */
 };
 
   return (

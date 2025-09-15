@@ -34,7 +34,7 @@ const ResetPasswordForm = () => {
       setLoading(true); // 🔥 empieza loader
 
       const response = await fetch(
-        "https://okapi-woocommerc-wr9i20lbrp.live-website.com/wp-json/custom/v1/set-password",
+        "https://api.olawee.com/wp-json/api/reset-password",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
