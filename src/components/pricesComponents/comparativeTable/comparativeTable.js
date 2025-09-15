@@ -3,108 +3,74 @@ import "./comparativeTable.scss"; // Estilos CSS
 
 const comparativeTable = [
   {
-    feature: "Acceso a IA avanzada",
-    free: false,
-    basicMonthly: true,
-    premiumMonthly: true,
-    basicYearly: true,
-    premiumYearly: true,
+    feature: "Acceso a asistentes y prompts",
+    free: "✅  Ilimitado (15 días)",
+    olawee1: true,
+    olawee_entidad: true,
+    olawee_colectivos: true,
   },
   {
-    feature: "Análisis de ROI ilimitados",
-    free: false,
-    basicMonthly: false,
-    premiumMonthly: true,
-    basicYearly: false,
-    premiumYearly: true,
+    feature: "Compartir en Olawee Community",
+    free: "✅ (15 días)",
+    olawee1: "✅",
+    olawee_entidad: "✅",
+    olawee_colectivos: "✅",
   },
   {
-    feature: "Proyectos personalizados",
-    free: "3 Proyectos",
-    basicMonthly: "Ilimitado",
-    premiumMonthly: "Ilimitado",
-    basicYearly: "Ilimitado",
-    premiumYearly: "Ilimitado",
+    feature: "Gestión de usuarios",
+    free: "✅ (15 días)",
+    olawee1: false,
+    olawee_entidad: "✅ Avanza (roles, permisos)",
+    olawee_colectivos: "✅ Grupos y roles colectivos",
   },
   {
-    feature: "Variables avanzadas",
-    free: false,
-    basicMonthly: true,
-    premiumMonthly: true,
-    basicYearly: true,
-    premiumYearly: true,
+    feature: "Integraciones externas (API, SSO, Webhooks)",
+    free: "✅ (15 días)",
+    olawee1: false,
+    olawee_entidad: "✅",
+    olawee_colectivos: "Opcional",
   },
   {
-    feature: "Soporte prioritario",
-    free: false,
-    basicMonthly: false,
-    premiumMonthly: true,
-    basicYearly: false,
-    premiumYearly: true,
+    feature: "Seguridad y auditoría",
+    free: "✅ (15 días)",
+    olawee1: "Básica",
+    olawee_entidad: "✅ Completa",
+    olawee_colectivos: "✅ Adaptada a colectivos",
   },
   {
-    feature: "Informes descargables",
-    free: false,
-    basicMonthly: true,
-    premiumMonthly: true,
-    basicYearly: true,
-    premiumYearly: true,
-  },
-  {
-    feature: "Acceso multiplataforma",
-    free: true,
-    basicMonthly: true,
-    premiumMonthly: true,
-    basicYearly: true,
-    premiumYearly: true,
-  },
-  {
-    feature: "Cálculos rápidos (IA)",
-    free: false,
-    basicMonthly: true,
-    premiumMonthly: true,
-    basicYearly: true,
-    premiumYearly: true,
-  },
-  {
-    feature: "Acceso prioritario a funciones nuevas",
-    free: false,
-    basicMonthly: false,
-    premiumMonthly: true,
-    basicYearly: false,
-    premiumYearly: true,
-  },
-  {
-    feature: "Comparación de escenarios",
-    free: false,
-    basicMonthly: true,
-    premiumMonthly: true,
-    basicYearly: true,
-    premiumYearly: true,
-  },
-  {
-    feature: "Memoria ampliada de cálculos",
-    free: false,
-    basicMonthly: true,
-    premiumMonthly: true,
-    basicYearly: true,
-    premiumYearly: true,
+    feature: "Asistentes personalizados",
+    free: "✅ (15 días)",
+    olawee1: true,
+    olawee_entidad: true,
+    olawee_colectivos: true,
   },
   {
     feature: "Colaboración en equipo",
-    free: false,
-    basicMonthly: false,
-    premiumMonthly: true,
-    basicYearly: false,
-    premiumYearly: true,
+    free: "✅ (15 días)",
+    olawee1: "Básica",
+    olawee_entidad: "✅ Completa",
+    olawee_colectivos: "✅ Compartida entre miembros",
   },
   {
-    feature: "Descuentos en renovaciones",
-    free: false,
-    basicMonthly: false,
-    premiumMonthly: true,
-    basicYearly: false,
-    premiumYearly: true,
+    feature: "Soporte",
+    free: "✅ (15 días, estándar)",
+    olawee1: "Estándar",
+    olawee_entidad: "✅ Prioritario",
+    olawee_colectivos: "✅ Dedicado al colectivo",
+  },
+  {
+    feature: "Informes y reporting",
+    free: "✅ (15 días)",
+    olawee1: "Básico",
+    olawee_entidad: "✅ Avanzado",
+    olawee_colectivos: "✅ Colectivo",
+  },
+  {
+    feature: "Espacios compartidos",
+    free: "✅ (15 días)",
+    olawee1: false,
+    olawee_entidad: "✅",
+    olawee_colectivos: "✅ (para asociaciones/comunidades)",
   },
 ];
 
@@ -115,22 +81,20 @@ const PlansTable = () => {
         <thead>
           <tr>
             <th>Funciones</th>
-            <th>Free</th>
-            <th>Basic <br /> Mensual</th>
-            <th>Premium <br /> Mensual</th>
-            <th>Basic <br /> Anual</th>
-            <th>Premium <br /> Anual</th>
+            <th>Free <br />(Prueba 15 días)</th>
+            <th>OLAWEE</th>
+            <th>OLAWEE - ENTIDAD</th>
+            <th>OLAWEE - COLECTIVOS</th>
           </tr>
         </thead>
         <tbody>
           {comparativeTable.map((row, index) => (
             <tr key={index}>
               <td className="feature">{row.feature}</td>
-              <td>{row.free === true ? "✅" : row.free === false ? "X" : row.free}</td>
-              <td>{row.basicMonthly === true ? "✅" : row.basicMonthly === false ? "X" : row.basicMonthly}</td>
-              <td>{row.premiumMonthly === true ? "✅" : row.premiumMonthly === false ? "X" : row.premiumMonthly}</td>
-              <td>{row.basicYearly === true ? "✅" : row.basicYearly === false ? "X" : row.basicYearly}</td>
-              <td>{row.premiumYearly === true ? "✅" : row.premiumYearly === false ? "X" : row.premiumYearly}</td>
+              <td>{row.free === true ? "✅ Ilimitado" : row.free === false ? "❌" : row.free}</td>
+              <td>{row.olawee1 === true ? "✅ Ilimitado" : row.olawee1 === false ? "❌" : row.olawee1}</td>
+              <td>{row.olawee_entidad === true ? "✅ Ilimitado" : row.olawee_entidad === false ? "❌" : row.olawee_entidad}</td>
+              <td>{row.olawee_colectivos === true ? "✅ Ilimitado" : row.olawee_colectivos === false ? "❌" : row.olawee_colectivos}</td>
             </tr>
           ))}
         </tbody>

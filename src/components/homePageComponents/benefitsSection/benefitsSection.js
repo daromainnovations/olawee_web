@@ -19,7 +19,7 @@ const BenefitsSection = () => {
 
   return (
     <div className="container-fluid">
-      <h2 className="main-title">BENEFICIOS DE USAR OLAWEE</h2>
+      <h2 className="main-title">BENEFICIOS DE USAR OLAWEE EN COLECTIVOS</h2>
       
       <div className="items-container">
         {items.map((item, index) => (

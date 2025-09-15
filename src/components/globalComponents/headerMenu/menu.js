@@ -23,6 +23,8 @@ const Menu = ({ bannerHeight, customClass = "" }) => {
 
   const [modalType, setModalType] = useState(null);
 
+  const ocultarPersonalizarRoi=false; //ocultar provisional 
+  const ocultarFAQ=false; //ocultar provisional
 
   // Actualizar la posición del menú cuando cambia el bannerHeight
   useEffect(() => {
@@ -69,7 +71,7 @@ const Menu = ({ bannerHeight, customClass = "" }) => {
             {location.pathname.startsWith('/case-study/') || location.pathname === '/faq' ? (
                 <BackArrow/>  // Si estamos en la página 'caseStudyPage', mostramos el nuevo componente
               ) : (
-                <img src={logo} alt="Logo" style={{ width: "1300px", height: "auto" }} />  // Si no, mostramos el logo original
+                <img src={logo} alt="Logo" style={{ width: "100px", height: "auto" }} />  // Si no, mostramos el logo original
               )}
           </div>
 
@@ -102,7 +104,11 @@ const Menu = ({ bannerHeight, customClass = "" }) => {
                 <div className="navbar-nav d-flex flex-column flex-lg-row align-items-lg-center gap-3">
                   <a className={`nav-link ${location.pathname === "/" ? "active" : ""}`} href="/">Inicio</a>
                   <a className={`nav-link ${location.pathname === "/Prices" ? "active" : ""}`} href="/Prices">Precios</a>
-                  <a className={`nav-link ${location.pathname === "/customize" ? "active" : ""}`} href="/customize">Personalizar Roi</a>
+                  
+                  {ocultarPersonalizarRoi && ( //ocultación provisional
+                    <a className={`nav-link ${location.pathname === "/customize" ? "active" : ""}`} href="/customize">Personalizar Roi</a>
+                  )}
+
                   <a className={`nav-link hiddenProvisional ${location.pathname === "/user-cases" ? "active" : ""}`} href="/user-cases">Casos de usuario</a>
                   <a className={`nav-link hiddenProvisional ${location.pathname === "/integrate" ? "active" : ""}`} href="/integrate">Privacidad</a>
                   <li
@@ -145,7 +151,9 @@ const Menu = ({ bannerHeight, customClass = "" }) => {
                       </li>
                     </ul>
                   </li>
-                  <a className={`nav-link ${location.pathname === "/faq" ? "active" : ""}`} href="/faq">FAQ</a>
+                  {ocultarFAQ && ( //ocultación provisional
+                    <a className={`nav-link ${location.pathname === "/faq" ? "active" : ""}`} href="/faq">FAQ</a>
+                  )}
                 </div>
 
                 <div className="container-buttons d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3 mt-3 mt-lg-0">

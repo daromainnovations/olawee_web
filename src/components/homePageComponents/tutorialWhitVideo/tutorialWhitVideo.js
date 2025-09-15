@@ -19,7 +19,7 @@ const TutorialWhitVideo = () => {
           <div className="row">
             {/* Columna izquierda con el título y el acordeón */}
             <div className="col-md-6 mt-1">
-              <h4 className="mb-4 d-flex align-items-center justify-content-center m-auto text-center">Descubre cómo funciona OLAWEE</h4>
+              <h4 className="mb-4 d-flex align-items-center justify-content-center m-auto text-center">Cómo funciona OLAWEE</h4>
     
               <div className="accordion" id="accordionExample">
                 <div className="accordion-item">
@@ -33,7 +33,7 @@ const TutorialWhitVideo = () => {
                       aria-controls="collapseOne"
 
                     >
-                      <span className="step-point"></span>Paso 1: Comienza con un prompt
+                      <span className="step-point"></span>PASO 1. ELIGE TÚ IA
                     </button>
                   </h2>
                   <div
@@ -43,7 +43,7 @@ const TutorialWhitVideo = () => {
                     data-bs-parent="#accordionExample"
                   >
                     <div className="accordion-body">
-                    Describe tu tarea o proyecto OLAWEE. La IA te ayuda a refinar tu entrada para obtener los mejores resultados.
+                    Describe tu tarea o proyecto y obtén respuestas ajustadas a tus necesidades
                     </div>
                   </div>
                 </div>
@@ -58,7 +58,7 @@ const TutorialWhitVideo = () => {
                       aria-expanded="false"
                       aria-controls="collapseTwo"
                     >
-                      <span className="step-point"></span>Paso 2: Obtén un flujo de trabajo detallado con IA
+                      <span className="step-point"></span>PASO 2. CREA Y REUTILIZA
                     </button>
                   </h2>
                   <div
@@ -68,7 +68,7 @@ const TutorialWhitVideo = () => {
                     data-bs-parent="#accordionExample"
                   >
                     <div className="accordion-body">
-                    Crea y guarda tus prompts más efectivos, organiza tus agentes personales y reutilízalos siempre que lo necesites. Lleva tus flujos de trabajo a otro nivel con IA adaptada a ti..
+                    Diseña prompts o asistentes personalizados, guárdalos y úsalos siempre que lo necesites
                     </div>
                   </div>
                 </div>
@@ -83,7 +83,7 @@ const TutorialWhitVideo = () => {
                       aria-expanded="false"
                       aria-controls="collapseThree"
                     >
-                      <span className="step-point"></span>Paso 3: Ajusta parámetros para mayor precisión
+                      <span className="step-point"></span>PASO 3. COMPARTE Y COLABORA
                     </button>
                   </h2>
                   <div
@@ -93,7 +93,7 @@ const TutorialWhitVideo = () => {
                     data-bs-parent="#accordionExample"
                   >
                     <div className="accordion-body">
-                    Publica tus mejores prompts y agentes, descubre ideas de otros usuarios y colabora en la construcción de una comunidad donde la inteligencia artificial se convierte en un recurso compartido.
+                    Publica tus mejores creaciones, descubre las de otros y participa en una comunidad que multiplica el conocimiento
                     </div>
                   </div>
                 </div>
@@ -108,7 +108,7 @@ const TutorialWhitVideo = () => {
                       aria-expanded="false"
                       aria-controls="collapseFour"
                     >
-                      <span className="step-point"></span>Paso 4: Trabaja de forma más inteligente, en equipo
+                      <span className="step-point"></span>PASO 4. MEJORA TUS DATOS
                     </button>
                   </h2>
                   <div
@@ -118,7 +118,7 @@ const TutorialWhitVideo = () => {
                     data-bs-parent="#accordionExample"
                   >
                     <div className="accordion-body">
-                    Nuestro agente especializado en auditorías analiza cómo aplicas la IA en tu empresa y detecta oportunidades de mejora, optimización y seguridad. Una mirada profesional que te ayuda a tomar decisiones estratégicas basadas en datos.
+                    Nuestro agente especializado analiza el uso de la IA de tu empresa, detecta oportunidades de optimización y te ayuda a tomar decisiones estratégicas
                     </div>
                   </div>
                 </div>
