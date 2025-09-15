@@ -55,7 +55,7 @@
 //                 <SocialIcons />
 //                 <GradientLine />
 //                 <Footer />
-                
+
 //             </div>
 //         </>
 //     )
@@ -79,38 +79,39 @@ import GradientLine from "../../components/globalComponents/gradientLine/gradien
 import Footer from "../../components/globalComponents/footer/footer";
 import ProductsSection from "../../components/pricesComponents/productsSection/productsSection";
 import myImgI from "../../../src/media/img/letraImagen.png";
+import FreeTrialButton from "../../components/globalComponents/principalButton/principalButton";
 
 const HomePage = () => {
     const [bannerHeight, setBannerHeight] = useState(0);
-    return(
+    return (
         <div className="homepage-wrapper">
             <BannerOferta setBannerHeight={setBannerHeight} />
-            
-            <div className="page-content" 
-                style={{  paddingTop: `${bannerHeight + 60}px`, 
+
+            <div className="page-content"
+                style={{
+                    paddingTop: `${bannerHeight + 60}px`,
                     transition: "padding-top 0.4s ease-in-out"
-                }} 
+                }}
             >
                 {/* Wrapper para el contenido principal */}
                 <main className="main-content">
-                    <Menu bannerHeight={bannerHeight -20} customClass="custom-navbar-style"/>
-                    
+                    <Menu bannerHeight={bannerHeight - 20} customClass="custom-navbar-style" />
+
                     <div className="d-flex justify-content-center text-center">
                         <img src={myImgI} alt="logo-okapi"></img>
                     </div>
                     <div className="d-flex justify-content-center text-center">
-                        <p className="mt-2 secondary-title">EQUIPOS INTELIGENTES, GRAN PRODUCTIVIDAD</p>
+                        <p className="mt-2 secondary-title">LA IA COLABORATIVA QUE IMPULSA TU PRODUCTIVIDAD</p>
                     </div>
                     <div className="d-flex justify-content-center text-center">
-                        <p className="text">Describe tus retos diarios y OLAWEE te mostrará cuánto tiempo puedes ahorrar, la eficiencia que puedes ganar y la colaboración que puedes lograr. Maximiza tu productividad y reduce la carga de trabajo innecesaria</p>
-                    </div>
+                        <p className="text">Elige, crea y comparte asistentes de IA que se adepten a tu forma de tarbajar. Ahorra tiempo, mejora la eficiencia y colabora de manera más inteligente con tu equipo</p>
+                    </div><br></br>
                     <GoalDescriptionInput />
-                    <div className="d-flex justify-content-center text-center container-subtitle">
-                        <p className="subtitle">Tu propio asistente de IA automatizado para el trabajo</p>
+
+                    <div className="d-flex justify-content-center text-center">
+                        <FreeTrialButton text="PRUEBA GRATIS DURANTE 15 DIAS" className="btn-custom btn-savings" containerClass="container-btn-savings" />
                     </div>
-                    <div className="container-second-text d-flex justify-content-center text-center">
-                        <p className="text second-text">Conoce OLAWEE, una plataforma SaaS avanzada que hace que la inteligencia artificial sea accesible para todas las PYMEs. Crea, entrena y comparte tus propios agentes de IA, adáptalos a tus tareas diarias y colabora con tu equipo en minutos.</p>
-                    </div>
+
                     <TutorialWhitVideo />
                     <SavingsAndBenefits />
                     <div className="gradient-background d-flex justify-content-center align-items-center text-center">

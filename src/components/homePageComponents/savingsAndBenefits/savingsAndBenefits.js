@@ -7,7 +7,7 @@ const SavingsAndBenefits = () => {
     return (
         <div className="mb-5 container-custom">
             <div className="container-title-savings-benefits d-flex justify-content-center">
-                <h1 className="text-center">Descubre tu productividad y beneficios</h1>
+                <h1 className="text-center">DESCUBRE LOS BENEFICIOS</h1>
             </div>
             
             <div className="row container-benefits-and-savings">
@@ -20,19 +20,22 @@ const SavingsAndBenefits = () => {
                 <div className="col-md-6 container-text-benefits">
                     <div className="info-section savings">
                         <h4>AHORRO DE TIEMPO</h4>
-                        <p><span className="highlight">Automatiza tareas repetitivas.</span> OLAWEE identifica oportunidades para simplificar procesos y reducir la carga operativa, ayudándote a ahorrar horas cada semana.</p>
+                        <p><span className="highlight">Reutiliza conocimiento, automatiza tareas y reduce la carga operativa cada semana</span></p>
                     </div>
                     <div className="info-section benefits">
-                        <h4>BENEFICIOS</h4>
-                        <p><span className="highlight">Impulsa el rendimiento de tu equipo.</span> Descubre el verdadero potencial de tus empleados gracias a agentes de IA personalizados y bibliotecas compartidas de conocimiento.</p>
+                        <h4>EFICIENCIA</h4>
+                        <p><span className="highlight">Impulsa el rendimiento de tu equipo con agentes de IA personalizados y bibliotecas compartidas</span></p>
                     </div>
                     <div className="info-section roi">
                         <h4>COLABORACIÓN</h4>
-                        <p><span className="highlight">Potencia a los equipos con IA.</span> OLAWEE fomenta la cooperación entre departamentos, permitiendo que cada persona innove sin barrera técnicas.</p>
+                        <p><span className="highlight">Conecta equipos y departamentos para innovar sin barreras técnicas</span></p>
                     </div>
+                     <div className="info-section impacto">
+                        <h4>IMPACTO COMPARTIDO</h4>
+                        <p><span className="highlight">Multiplica los beneficios cuando compartes IA dentro de tu organización</span></p>
+                    </div>
+                    
                     <PrincipalButton text="EMPEZAR YA" className="btn-custom btn-savings" containerClass="container-btn-savings"/>
-                    
-                    
                 </div>
             </div>
         </div>
