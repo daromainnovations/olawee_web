@@ -4,7 +4,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import './components/globalComponents/login/styles/resetPassword.scss';
 
 
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import HomePage from './pages/homePage/homePage';
 import { ChatProvider } from './context/chatContext';
 import PricePage from './pages/pricesPage/pricePage';
@@ -30,10 +30,29 @@ import OkapiSocialPage from './pages/okapiSocialPage/okapiSocialPage';
 
 const App = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+
   const [modalType, setModalType] = useState(null);
+
+  
   const [preloadedEmail, setPreloadedEmail] = useState("");
 
   // ESCUCHAR el evento para abrir el login modal
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get("openLogin") === "true") {
+      const email = localStorage.getItem("reset_email") || "";
+      if (email) {
+        setPreloadedEmail(email);
+        localStorage.removeItem("reset_email");
+      }
+      setModalType("login");
+      // Limpia la query de la URL sin recargar
+      navigate(location.pathname, { replace: true });
+    }
+  }, [location, navigate]);
+  
+
   useEffect(() => {
     if (location.state?.openLoginModal) {
       const email = localStorage.getItem("reset_email") || "";
@@ -42,8 +61,10 @@ const App = () => {
         localStorage.removeItem("reset_email");
       }
       setModalType("login");
+      // Limpia el state para que no se reabra al navegar atrás
+      navigate(location.pathname, { replace: true });
     }
-  }, [location]);
+  }, [location, navigate]);
   
   return (
     <AuthProvider>

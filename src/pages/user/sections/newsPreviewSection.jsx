@@ -16,7 +16,7 @@ const NewsPreviewSection = () => {
       const fetchNews = async () => {
         try {
           const response = await axios.get(
-            "https://okapi-woocommerc-wr9i20lbrp.live-website.com/wp-json/wp/v2/posts?_embed&per_page=3"
+            "https://api.olawee.com/wp-json/wp/v2/posts?_embed&per_page=3"
           );
           setPosts(response.data);
           sessionStorage.setItem("okapiNews", JSON.stringify(response.data));

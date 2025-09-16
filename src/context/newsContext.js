@@ -12,7 +12,7 @@ export const NewsProvider = ({ children }) => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const res = await axios.get('https://okapi-woocommerc-wr9i20lbrp.live-website.com/wp-json/wp/v2/posts?_embed&per_page=3');
+        const res = await axios.get('https://api.olawee.com/wp-json/wp/v2/posts?_embed&per_page=3');
         setNews(res.data);
       } catch (err) {
         console.error('Error loading news:', err);

@@ -2,8 +2,8 @@ import React, { createContext, useContext, useEffect, useState, useCallback } fr
 import axios from "axios";
 import { useAuth } from "./authProviderContext";
 
-const LICENSES_URL = "https://okapi-woocommerc-wr9i20lbrp.live-website.com/wp-json/okapi/v1/user-licenses";
-const PRODUCTS_URL = "https://okapi-woocommerc-wr9i20lbrp.live-website.com/wp-json/okapi/v1/all-product-names";
+const LICENSES_URL = "https://api.olawee.com/wp-json/okapi/v1/user-licenses";
+const PRODUCTS_URL = "https://api.olawee.com/wp-json/okapi/v1/all-product-names";
 
 const LicensesContext = createContext();
 
