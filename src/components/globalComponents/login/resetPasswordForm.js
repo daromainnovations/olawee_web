@@ -21,12 +21,12 @@ const ResetPasswordForm = () => {
     e.preventDefault();
 
     if (!newPassword || !confirmPassword) {
-      setError("All fields are required.");
+      setError("Todos los campos son obligatorios.");
       return;
     }
 
     if (newPassword !== confirmPassword) {
-      setError("Passwords do not match.");
+      setError("Las contraseñas no coinciden.");
       return;
     }
 
@@ -34,7 +34,7 @@ const ResetPasswordForm = () => {
       setLoading(true); // 🔥 empieza loader
 
       const response = await fetch(
-        "https://okapi-woocommerc-wr9i20lbrp.live-website.com/wp-json/custom/v1/set-password",
+        "https://api.olawee.com/wp-json/custom-api/reset-password",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -51,11 +51,11 @@ const ResetPasswordForm = () => {
       }
 
       if (!response.ok) {
-        throw new Error(data.message || "Failed to update the password.");
+        throw new Error(data.message || "No se pudo actualizar la contraseña.");
       }
 
       localStorage.setItem("reset_email", login);
-      setMessage("✅ Password updated. Redirecting to login...");
+      setMessage("✅ Contraseña actualizada. Redireccionando al inicio de sesión...");
       setError("");
 
       setTimeout(() => {
@@ -65,7 +65,7 @@ const ResetPasswordForm = () => {
         }, 300);
       }, 500);
     } catch (err) {
-      setError(err.message || "Failed to update the password.");
+      setError(err.message || "No se pudo actualizar la contraseña.");
     } finally {
       setLoading(false); // 🔥 termina loader
     }
@@ -130,16 +130,16 @@ const ResetPasswordForm = () => {
             ❌
           </button>
 
-          <h2>Reset Password</h2>
+          <h2>Restablecer contraseña</h2>
 
           <div className="form-group">
-            <label>New Password</label>
+            <label>Nueva Contraseña</label>
             <div className="input-wrapper">
               <input
                 type={showPassword ? "text" : "password"}
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                placeholder="Enter your new password"
+                placeholder="Ingresa tu nueva contraseña"
               />
               <i
                 className={`bi ${showPassword ? "bi-eye-slash" : "bi-eye"} eye-icon`}
@@ -149,13 +149,13 @@ const ResetPasswordForm = () => {
           </div>
 
           <div className="form-group">
-            <label>Confirm Password</label>
+            <label>Confirmar Contraseña</label>
             <div className="input-wrapper">
               <input
                 type={showConfirmPassword ? "text" : "password"}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="Confirm your new password"
+                placeholder="Confirma tu nueva contraseña"
               />
               <i
                 className={`bi ${showConfirmPassword ? "bi-eye-slash" : "bi-eye"} eye-icon`}
@@ -169,7 +169,7 @@ const ResetPasswordForm = () => {
 
           <div className="container-btn-update-password">
             <button type="submit" className="btn-reset" disabled={loading}>
-              Update Password
+              Actualizar contraseña
             </button>
           </div>
         </form>

@@ -28,7 +28,7 @@ const buildUserFromRegister = (responseUser = {}, extraFields = {}, email, usern
 export const registerUser = async (email, username, password, extraFields = {}) => {
   try {
     const response = await axios.post(
-      "https://okapi-woocommerc-wr9i20lbrp.live-website.com/wp-json/custom/v1/register",
+      "https://api.olawee.com/wp-json/custom-api/register",
       {
         email,
         username,
@@ -77,7 +77,7 @@ export const getCurrentUser = async (identifier) => {
 
 export const getProducts = async () => {
   try {
-    const response = await axios.get("https://okapi-woocommerc-wr9i20lbrp.live-website.com/wp-json/okapi/v1/public-products");
+    const response = await axios.get("https://api.olawee.com/wp-json/olawee/v1/public-products");
     return response.data;
   } catch (error) {
     console.error("🚨 Error obteniendo productos:", error.message);
