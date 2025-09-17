@@ -243,7 +243,7 @@ import SmartInput from "../../../components/globalComponents/smartInput/smartInp
 
 // Instancia de axios
 const api = axios.create({
-  baseURL: "https://okapi-woocommerc-wr9i20lbrp.live-website.com/wp-json"
+  baseURL: "https://api.olawee.com/wp-json"
 });
 api.interceptors.request.use(config => {
   const token = sessionStorage.getItem("jwt_token");

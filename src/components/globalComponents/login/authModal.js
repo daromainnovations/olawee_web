@@ -147,23 +147,23 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
       const loginErrors = {};
 
       if (!email) {
-        loginErrors.email = "Please complete this required field.";
+        loginErrors.email = "Por favor, complete éste campo obligatorio.";
       } else if (!/\S+@\S+\.\S+/.test(email)) {
-        loginErrors.email = "Invalid email address.";
+        loginErrors.email = "Dirección de correo electrónico no válida.";
       }
       if (!password) {
-        loginErrors.password = "Please complete this required field.";
+        loginErrors.password = "Por favor, complete éste campo obligatorio.";
       }
       if (Object.keys(loginErrors).length > 0) {
         setFieldErrors(loginErrors);
-        setError("Please fill all required fields.");
+        setError("Por favor, rellene todos los campos obligatorios.");
         setLoading(false);
         return;
       }
       try {
         await login(email.trim(), password.trim());
 
-        setMessage("✅ Logged in successfully.");
+        setMessage("✅ Logado exitosamente.");
         setFieldErrors({});
         setError(null);
         setTimeout(() => setModalType(null), 2000);
@@ -174,7 +174,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
         } else if (typeof err.message === "string") {
           setError(`${err.message}`);
         } else {
-          setError("An unexpected error occurred. Please try again.");
+          setError("Se produjo un error inesperado. Inténtalo de nuevo.");
         }
       } finally {
         setLoading(false);
@@ -186,39 +186,39 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
     const newErrors = {};
     const generalErrors = [];
 
-    if (!firstName) newErrors.firstName = "Please complete this required field.";
-    if (!username) newErrors.username = "Please complete this required field.";
-    if (!company) newErrors.company = "Please complete this required field.";
-    if (!job) newErrors.job = "Please complete this required field.";
+    if (!firstName) newErrors.firstName = "Por favor complete este campo obligatorio.";
+    if (!username) newErrors.username = "Por favor complete este campo obligatorio.";
+    if (!company) newErrors.company = "Por favor complete este campo obligatorio.";
+    if (!job) newErrors.job = "Por favor complete este campo obligatorio.";
 
     if (!email) {
-      newErrors.email = "Please complete this required field.";
+      newErrors.email = "Por favor complete este campo obligatorio.";
     } else if (!/\S+@\S+\.\S+/.test(email)) {
-      generalErrors.push(" Invalid email format.");
+      generalErrors.push(" Formato de correo electrónico no válido.");
     }
     if (!password) {
-      newErrors.password = "Please complete this required field.";
+      newErrors.password = "Por favor complete este campo obligatorio.";
     } else if (!isStrongPassword(password)) {
       generalErrors.push(
-        "Password must be at least 8 characters and include at least one uppercase letter, one lowercase letter, one number, and one special character."
+        "La contraseña debe tener al menos 8 caracteres e incluir al menos una letra mayúscula, una letra minúscula, un número y un carácter especial."
       );
     }
     
     if (!repeatPassword) {
-      newErrors.repeatPassword = "Please complete this required field.";
+      newErrors.repeatPassword = "Por favor complete este campo obligatorio.";
     }
     
     if (password && repeatPassword && password !== repeatPassword) {
-      generalErrors.push("Passwords do not match.");
+      generalErrors.push("Las contraseñas no coinciden.");
     }
-    if (!selectedCountry) newErrors.country = "Please complete this required field.";
-    if (!selectedState) newErrors.state = "Please complete this required field.";
+    if (!selectedCountry) newErrors.country = "Por favor complete este campo obligatorio.";
+    if (!selectedState) newErrors.state = "Por favor complete este campo obligatorio.";
 
     if (Object.keys(newErrors).length > 0 || generalErrors.length > 0) {
       setFieldErrors(newErrors);
       const errorsToShow = [];
       if (Object.keys(newErrors).length > 0) {
-        errorsToShow.push("Please fill all required fields.");
+        errorsToShow.push("Por favor, rellene todos los campos obligatorios.");
       }
       if (generalErrors.length > 0) {
         errorsToShow.push(...generalErrors);
@@ -241,7 +241,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
         job: job,
       });
 
-      await login(username, password);
+      await login(email, password);  //-----cambio por login---------
 
       setMessage("✅ Usuario registrado y logueado con éxito.");
       setSuccess(true);
@@ -275,24 +275,24 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
 
     // Validaciones
     if (!newPassword || !repeatNewPassword) {
-      setError("Please complete all fields.");
+      setError("Por favor, rellene todos los campos obligatorios.");
       setLoading(false);
       return;
     }
     if (newPassword !== repeatNewPassword) {
-      setError("Passwords do not match.");
+      setError("Las contraseñas no coinciden.");
       setLoading(false);
       return;
     }
     if (newPassword.length < 6) {
-      setError("Password must be at least 6 characters.");
+      setError("La contraseña debe tener al menos 6 caracteres.");
       setLoading(false);
       return;
     }
 
     try {
       const res = await fetch(
-        "https://okapi-woocommerc-wr9i20lbrp.live-website.com/wp-json/custom/v1/set-password",
+        "https://api.olawee.com/wp-json/custom-api/reset-password",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -305,7 +305,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
       );
       const data = await res.json();
       if (res.ok) {
-        setMessage("✅ Password updated. You can now log in.");
+        setMessage("✅ Contraseña actualizada. Ya puede iniciar sesión.");
         setTimeout(() => {
           setModalType("login");
           setIsSetPasswordMode(false);
@@ -313,10 +313,10 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
           setRepeatNewPassword("");
         }, 2000);
       } else {
-        setError(data.message || "Error resetting password.");
+        setError(data.message || "Error al restablecer la contraseña.");
       }
     } catch (err) {
-      setError("Error connecting to server.");
+      setError("Error al conectarse con el servidor.");
     } finally {
       setLoading(false);
     }
@@ -331,11 +331,11 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
         {modalType === "set-new-password" && (
           <form className="auth-form p-2">
             <div className="modal-header d-flex justify-content-center">
-              <h2>Set New Password</h2>
+              <h2>Establecer nueva contraseña</h2>
               <button className="btn-close" onClick={() => setModalType(null)}>❌</button>
             </div>
             <div className="form-group p-3">
-              <label>New Password</label>
+              <label>Nueva contraseña</label>
               <input
                 type="password"
                 value={newPassword}
@@ -344,7 +344,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
               />
             </div>
             <div className="form-group p-3">
-              <label>Repeat New Password</label>
+              <label>Repetir nueva contraseña</label>
               <input
                 type="password"
                 value={repeatNewPassword}
@@ -358,7 +358,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
                 onClick={handleSetNewPassword}
                 disabled={loading}
               >
-                Set New Password
+                Establecer nueva contraseña
               </button>
             </div>
             {error && <div className="error-message">{error}</div>}
@@ -418,7 +418,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
 
                       try {
                         const response = await fetch(
-                          "https://okapi-woocommerc-wr9i20lbrp.live-website.com/wp-json/custom/v1/reset-password",
+                          "https://api.olawee.com/wp-json/custom-api/reset-password",
                           {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
@@ -523,7 +523,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
                         type="text"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        placeholder="Phone number"
+                        placeholder="Número de teléfono"
                         className="form-control phone-input"
                       />
                     </div>
@@ -616,7 +616,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
                       onChange={(e) => setSelectedCity(e.target.value)}
                       disabled={!citiesList.length}
                     >
-                      <option value="">Select City</option>
+                      <option value="">Selecciona ciudad</option>
                       {citiesList.map((c) => (
                         <option key={c.name} value={c.name}>{c.name}</option>
                       ))}
@@ -758,7 +758,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
                   }}
                   className="btn-link"
                 >
-                  Login here
+                  Inicia sesión aquí
                 </button>
               </p>
             )}
