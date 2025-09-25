@@ -4,7 +4,7 @@ import axios from "axios";
 import { AuthError } from "../utils/AuthError";
 
 const api = axios.create({
-  baseURL: "https://okapi-woocommerc-wr9i20lbrp.live-website.com/wp-json",
+  baseURL: "https://api.olawee.com/wp-json",
 });
 
 api.interceptors.request.use((config) => {

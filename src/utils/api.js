@@ -21,7 +21,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://okapi-woocommerc-wr9i20lbrp.live-website.com/wp-json',
+  baseURL: 'https://api.olawee.com/wp-json',
   timeout: 15000, // Timeout global de 15 segundos
   headers: {
     'Content-Type': 'application/json',
