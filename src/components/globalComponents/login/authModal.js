@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import "../login/styles/authModal.scss";
 import { registerUser } from "../../../services/wooCommerceService";
@@ -6,6 +5,7 @@ import { useAuth } from "../../../context/authProviderContext";
 import { AuthError } from "../../../utils/AuthError";
 import Loader from "../loader/loader";
 import { Country, State, City } from "country-state-city";
+import { getApiUrl } from "../../../config/api"; // Importar configuración
 
 const prefixOptions = [
   { value: '+34', label: '+34 (Spain)' },
@@ -58,10 +58,10 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
   const [prefix, setPrefix] = useState('+34');
   const fullPhoneNumber = `${prefix}${phone}`;
 
-  // --------- ESTADOS PARA RESET POR LINK ---------
-  const [isSetPasswordMode, setIsSetPasswordMode] = useState(false);
-  const [resetKey, setResetKey] = useState("");
-  const [resetLogin, setResetLogin] = useState("");
+  // --------- ESTADOS PARA RESET POR LINK (ACTUALIZADO PARA EL PLUGIN) ---------
+  const [isResetPasswordMode, setIsResetPasswordMode] = useState(false);
+  const [resetToken, setResetToken] = useState("");
+  const [resetEmailFromUrl, setResetEmailFromUrl] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [repeatNewPassword, setRepeatNewPassword] = useState("");
 
@@ -114,16 +114,42 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
     }
   }, [selectedCountry, selectedState]);
 
-  // --------- DETECTAR SI HAY RESET POR ENLACE (key/login en URL) ---------
+  // --------- DETECTAR SI HAY RESET POR ENLACE (ACTUALIZADO PARA PLUGIN) ---------
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const key = params.get("key");
-    const login = params.get("login");
-    if (key && login) {
-      setIsSetPasswordMode(true);
-      setResetKey(key);
-      setResetLogin(login);
-      setModalType("set-new-password");
+    const token = params.get("token");
+    const email = params.get("email");
+    
+    if (token && email) {
+      setIsResetPasswordMode(true);
+      setResetToken(token);
+      setResetEmailFromUrl(email);
+      setModalType("reset-password");
+      
+      // Verificar que el token sea válido directamente aquí
+      const verifyToken = async () => {
+        try {
+          const response = await fetch(getApiUrl('VERIFY_RESET_TOKEN'), {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token, email }),
+          });
+
+          const data = await response.json();
+          
+          if (!response.ok) {
+            setError(data.message || 'Token inválido o expirado');
+            setIsResetPasswordMode(false);
+            setModalType("login");
+          }
+        } catch (err) {
+          setError('Error verificando el token');
+          setIsResetPasswordMode(false);
+          setModalType("login");
+        }
+      };
+      
+      verifyToken();
     }
   }, [setModalType]);
 
@@ -230,6 +256,26 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
 
     // REGISTRO y LOGIN AUTOMÁTICO
     try {
+      console.log("🔍 FRONTEND - Datos que se envían:", {
+        email,
+        username, 
+        password: "***",
+        selectedCountry,    // ✅ Verifica que tenga valor
+        selectedState,      // ✅ Verifica que tenga valor  
+        selectedCity,       // ✅ Verifica que tenga valor
+        job,               // ✅ Verifica que tenga valor
+        extraFields: {
+          first_name: firstName,
+          last_name: lastName,
+          phone: fullPhoneNumber,
+          company: company,
+          country: selectedCountry,
+          state: selectedState,
+          city: selectedCity,
+          job: job,
+        }
+      });
+
       await registerUser(email, username, password, {
         first_name: firstName,
         last_name: lastName,
@@ -241,7 +287,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
         job: job,
       });
 
-      await login(username, password);
+      await login(email, password);  // ✅ CORREGIDO: usar email en lugar de username
 
       setMessage("✅ Usuario registrado y logueado con éxito.");
       setSuccess(true);
@@ -266,8 +312,8 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
     }
   };
 
-  // --------- FUNCIÓN PARA RESET PASSWORD DESDE ENLACE (SET-NEW-PASSWORD) ---------
-  const handleSetNewPassword = async (e) => {
+  // --------- FUNCIÓN PARA RESET PASSWORD (ACTUALIZADA PARA PLUGIN) ---------
+  const handleResetPassword = async (e) => {
     e.preventDefault();
     setError(null);
     setMessage("");
@@ -284,33 +330,35 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
       setLoading(false);
       return;
     }
-    if (newPassword.length < 6) {
-      setError("Password must be at least 6 characters.");
+    if (!isStrongPassword(newPassword)) {
+      setError("Password must be at least 8 characters and include at least one uppercase letter, one lowercase letter, one number, and one special character.");
       setLoading(false);
       return;
     }
 
     try {
-      const res = await fetch(
-        "https://okapi-woocommerc-wr9i20lbrp.live-website.com/wp-json/custom/v1/set-password",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            key: resetKey,
-            login: resetLogin,
-            password: newPassword,
-          }),
-        }
-      );
-      const data = await res.json();
-      if (res.ok) {
-        setMessage("✅ Password updated. You can now log in.");
+      // ✅ USANDO ENDPOINT CORRECTO DEL PLUGIN
+      const response = await fetch(getApiUrl('RESET_PASSWORD'), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          token: resetToken,
+          email: resetEmailFromUrl,
+          password: newPassword,
+        }),
+      });
+      
+      const data = await response.json();
+      
+      if (response.ok) {
+        setMessage("✅ Password updated successfully. You can now log in.");
         setTimeout(() => {
           setModalType("login");
-          setIsSetPasswordMode(false);
+          setIsResetPasswordMode(false);
           setNewPassword("");
           setRepeatNewPassword("");
+          // Limpiar URL parameters
+          window.history.replaceState({}, document.title, window.location.pathname);
         }, 2000);
       } else {
         setError(data.message || "Error resetting password.");
@@ -320,45 +368,96 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
     } finally {
       setLoading(false);
     }
-    
+  };
+
+  // --------- FUNCIÓN PARA SOLICITAR RESET (ACTUALIZADA PARA PLUGIN) ---------
+  const handleRequestPasswordReset = async (e) => {
+    e.preventDefault();
+    setError(null);
+    setMessage("");
+    setLoading(true);
+    setLoadingMessage("Enviando correo...");
+
+    if (!resetEmail) {
+      setError("Por favor ingresa tu correo.");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      // ✅ USANDO ENDPOINT CORRECTO DEL PLUGIN
+      const response = await fetch(getApiUrl('REQUEST_PASSWORD_RESET'), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: resetEmail, origin: 'web' }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setMessage("✅ Si tu email existe, recibirás instrucciones para resetear tu contraseña.");
+        setResetEmail("");
+      } else {
+        setError(result.message || "🚨 Hubo un error.");
+      }
+    } catch (err) {
+      setError("🚨 Error al conectar con el servidor.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   // --------- RENDER ---------
   return (
     <div className="modal-overlay" onClick={() => setModalType(null)}>
       <div className={`modal-content ${loading ? "blurred" : ""}`} onClick={(e) => e.stopPropagation()}>
-        {/* ----------- FORMULARIO DE SET-NEW-PASSWORD ----------- */}
-        {modalType === "set-new-password" && (
+        {/* ----------- FORMULARIO DE RESET-PASSWORD ----------- */}
+        {modalType === "reset-password" && isResetPasswordMode && (
           <form className="auth-form p-2">
             <div className="modal-header d-flex justify-content-center">
-              <h2>Set New Password</h2>
-              <button className="btn-close" onClick={() => setModalType(null)}>❌</button>
+              <h2>Crear nueva contraseña</h2>
+              <button className="btn-close" onClick={() => {
+                setModalType(null);
+                window.history.replaceState({}, document.title, window.location.pathname);
+              }}>❌</button>
             </div>
             <div className="form-group p-3">
-              <label>New Password</label>
-              <input
-                type="password"
-                value={newPassword}
-                onChange={e => setNewPassword(e.target.value)}
-                autoComplete="new-password"
-              />
+              <label>Nueva contraseña</label>
+              <div className="input-wrapper">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={newPassword}
+                  onChange={e => setNewPassword(e.target.value)}
+                  autoComplete="new-password"
+                />
+                <i
+                  className={`bi ${showPassword ? "bi-eye-slash" : "bi-eye"} toggle-visibility`}
+                  onClick={() => setShowPassword((prev) => !prev)}
+                ></i>
+              </div>
             </div>
             <div className="form-group p-3">
-              <label>Repeat New Password</label>
-              <input
-                type="password"
-                value={repeatNewPassword}
-                onChange={e => setRepeatNewPassword(e.target.value)}
-                autoComplete="new-password"
-              />
+              <label>Repetir nueva contraseña</label>
+              <div className="input-wrapper">
+                <input
+                  type={showRepeatPassword ? "text" : "password"}
+                  value={repeatNewPassword}
+                  onChange={e => setRepeatNewPassword(e.target.value)}
+                  autoComplete="new-password"
+                />
+                <i
+                  className={`bi ${showRepeatPassword ? "bi-eye-slash" : "bi-eye"} toggle-visibility`}
+                  onClick={() => setShowRepeatPassword((prev) => !prev)}
+                ></i>
+              </div>
             </div>
             <div className="container-btn-submit">
               <button
                 className="btn-submit"
-                onClick={handleSetNewPassword}
+                onClick={handleResetPassword}
                 disabled={loading}
               >
-                Set New Password
+                Cambiar contraseña
               </button>
             </div>
             {error && <div className="error-message">{error}</div>}
@@ -368,7 +467,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
         )}
 
         {/* ----------- FLUJO NORMAL: LOGIN, SIGNUP, FORGOT ----------- */}
-        {!isSetPasswordMode && modalType !== "set-new-password" && (
+        {!isResetPasswordMode && modalType !== "reset-password" && (
           <>
             <div className="modal-header d-flex justify-content-center">
               <h2>
@@ -403,43 +502,8 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
                 <div className="container-btn-submit">
                   <button
                     className="btn-submit"
-                    onClick={async (e) => {
-                      e.preventDefault();
-                      setError(null);
-                      setMessage("");
-                      setLoading(true);
-                      setLoadingMessage("Enviando correo...");
-
-                      if (!resetEmail) {
-                        setError("Por favor ingresa tu correo.");
-                        setLoading(false);
-                        return;
-                      }
-
-                      try {
-                        const response = await fetch(
-                          "https://okapi-woocommerc-wr9i20lbrp.live-website.com/wp-json/custom/v1/reset-password",
-                          {
-                            method: "POST",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ email: resetEmail }),
-                          }
-                        );
-
-                        const result = await response.json();
-
-                        if (response.ok) {
-                          setMessage("✅ Revisa tu correo para restablecer tu contraseña.");
-                          setResetEmail("");
-                        } else {
-                          setError(result.message || "🚨 Hubo un error.");
-                        }
-                      } catch (err) {
-                        setError("🚨 Error al conectar con el servidor.");
-                      } finally {
-                        setLoading(false);
-                      }
-                    }}
+                    onClick={handleRequestPasswordReset}
+                    disabled={loading}
                   >
                     Enviar enlace
                   </button>
@@ -455,6 +519,9 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
                     ← Volver al inicio de sesión
                   </button>
                 </div>
+                {error && <div className="error-message">{error}</div>}
+                {message && <div className="success-message">{message}</div>}
+                {loading && <Loader message={loadingMessage} />}
               </form>
             ) : modalType === "signup" ? (
               <form className="auth-form p-4">
@@ -528,9 +595,6 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
                       />
                     </div>
                   </div>
-
-
-                  
                 </div>
 
                 <div className="form-row row">
@@ -771,7 +835,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
             )}
             {!forgotPassword && (
               <div className="container-btn-submit">
-                <button className="btn-submit" onClick={handleAuth}>
+                <button className="btn-submit" onClick={handleAuth} disabled={loading}>
                   {modalType === "login" ? "Entrar" : "Registrarse"}
                 </button>
               </div>

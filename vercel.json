@@ -2,12 +2,28 @@
 {
   "rewrites": [
     {
-      "source": "/api/set-password",
-      "destination": "https://okapi-woocommerc-wr9i20lbrp.live-website.com/wp-json/custom/v1/set-password"
+      "source": "/api/request-password-reset",
+      "destination": "https://api.olawee.com/wp-json/custom-api/request-password-reset"
+    },
+    {
+      "source": "/api/verify-reset-token",
+      "destination": "https://api.olawee.com/wp-json/custom-api/verify-reset-token"
     },
     {
       "source": "/api/reset-password",
-      "destination": "https://okapi-woocommerc-wr9i20lbrp.live-website.com/wp-json/custom/v1/reset-password"
+      "destination": "https://api.olawee.com/wp-json/custom-api/reset-password"
+    },
+    {
+      "source": "/api/login",
+      "destination": "https://api.olawee.com/wp-json/custom-api/login"
+    },
+    {
+      "source": "/api/register",
+      "destination": "https://api.olawee.com/wp-json/custom-api/register"
+    },
+    {
+      "source": "/api/validate",
+      "destination": "https://api.olawee.com/wp-json/custom-api/validate"
     },
     {
       "source": "/(.*)",
