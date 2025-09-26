@@ -543,7 +543,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
                     {fieldErrors.firstName && <div className="form-error">{fieldErrors.firstName}</div>}
                   </div>
                   <div className="form-group col-md-6 mb-4">
-                    <label>Apellido <span className="text-muted">(Opcional)</span></label>
+                    <label>Apellido <span>*</span></label>
                     <input
                       type="text"
                       value={lastName}
@@ -572,7 +572,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
                   </div>
 
                   <div className="form-group col-md-6 mb-4">
-                    <label htmlFor="phonePrefix">Teléfono <span className="text-muted">(Optional)</span></label>
+                    <label htmlFor="phonePrefix">Teléfono <span>*</span></label>
                     <div className="phone-wrapper" style={{ display: 'flex', gap: '10px' }}>
                       <select
                         className="form-control prefix-select"
@@ -673,7 +673,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
                     {fieldErrors.state && <div className="form-error">{fieldErrors.state}</div>}
                   </div>
                   <div className="form-group col-md-4 mb-4">
-                    <label>Ciudad <span className="text-muted">(Opcional)</span></label>
+                    <label>Ciudad <span>*</span></label>
                     <select
                       className="form-control"
                       value={selectedCity}

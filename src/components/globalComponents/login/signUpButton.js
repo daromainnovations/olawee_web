@@ -213,7 +213,7 @@ const SignUpButton = () => {
       <input type="password" placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)} />
       <input type="text" placeholder="Empresa" value={company} onChange={(e) => setCompany(e.target.value)} />
       <input type="text" placeholder="País" value={country} onChange={(e) => setCountry(e.target.value)} />
-      <input type="text" placeholder="Teléfono (Opcional)" value={phone} onChange={(e) => setPhone(e.target.value)} />
+      <input type="text" placeholder="Teléfono" value={phone} onChange={(e) => setPhone(e.target.value)} />
       <input type="text" placeholder="Puesto de trabajo" value={job} onChange={(e) => setJob(e.target.value)} />
 
       <button onClick={handleSignUp}>Registrarse</button>
