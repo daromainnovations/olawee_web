@@ -1,0 +1,93 @@
+$form-bg: #0B1418;
+$primary: #336BB3;
+$text-light: #EAEAEA;
+$border: #1F2A30;
+
+.formulario-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  min-height: 100vh;
+  padding: 40px;
+}
+
+.formulario-container {
+  background-color: $form-bg;
+  border: 1px solid $border;
+  box-shadow: 0 0 15px rgba($primary, 0.4);
+  border-radius: 15px;
+  padding: 40px;
+  width: 100%;
+  max-width: 500px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 0 25px rgba($primary, 0.6);
+    transform: scale(1.01);
+  }
+
+  h2 {
+    text-align: center;
+    color: $primary;
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      color: $text-light;
+      font-weight: 500;
+      margin-bottom: 6px;
+      margin-top: 15px;
+    }
+
+    input,
+    textarea {
+      background-color: #121C21;
+      border: 1px solid $border;
+      color: $text-light;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+      &:focus {
+        border-color: $primary;
+        box-shadow: 0 0 10px rgba($primary, 0.4);
+      }
+    }
+
+    textarea {
+      resize: none;
+    }
+
+    button {
+      margin-top: 25px;
+      background-color: $primary;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 0 8px rgba($primary, 0.5);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+
+      &:hover {
+        background-color: lighten($primary, 5%);
+        box-shadow: 0 0 15px rgba($primary, 0.8);
+        transform: scale(1.05);
+      }
+
+      &:active {
+        transform: scale(0.98);
+      }
+    }
+  }
+}
