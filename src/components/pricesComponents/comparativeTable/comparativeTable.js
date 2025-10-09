@@ -3,74 +3,95 @@ import "./comparativeTable.scss"; // Estilos CSS
 
 const comparativeTable = [
   {
-    feature: "Acceso a asistentes y prompts",
-    free: "✅  Ilimitado (15 días)",
-    olawee1: true,
-    olawee_entidad: true,
+    feature: "Chat Base e Historial",
+    olawee_explora: "✅  SI (14 días)",
+    olawee_impulsa: true,
+    olawee_equipo: true,
     olawee_colectivos: true,
   },
   {
-    feature: "Compartir en Olawee Community",
-    free: "✅ (15 días)",
-    olawee1: "✅",
-    olawee_entidad: "✅",
+    feature: "Selección de modelos de IA",
+    olawee_explora: "✅ SI (14 días)",
+    olawee_impulsa: "✅",
+    olawee_equipo: "✅",
     olawee_colectivos: "✅",
   },
   {
-    feature: "Gestión de usuarios",
-    free: "✅ (15 días)",
-    olawee1: false,
-    olawee_entidad: "✅ Avanza (roles, permisos)",
-    olawee_colectivos: "✅ Grupos y roles colectivos",
+    feature: "Acceso a Compartición de Asistentes",
+    olawee_explora: "✅ SI (14 días)",
+    olawee_impulsa: true,
+    olawee_equipo: "✅ SI",
+    olawee_colectivos: "✅ SI",
   },
   {
-    feature: "Integraciones externas (API, SSO, Webhooks)",
-    free: "✅ (15 días)",
-    olawee1: false,
-    olawee_entidad: "✅",
-    olawee_colectivos: "Opcional",
+    feature: "Acceso a Compartición de Prompts",
+    olawee_explora: "✅ (14 días)",
+    olawee_impulsa: true,
+    olawee_equipo: "✅ SI",
+    olawee_colectivos: "✅ SI",
   },
   {
-    feature: "Seguridad y auditoría",
-    free: "✅ (15 días)",
-    olawee1: "Básica",
-    olawee_entidad: "✅ Completa",
-    olawee_colectivos: "✅ Adaptada a colectivos",
+    feature: "Acceso a OLAWEE community",
+    olawee_explora: "✅ (14 días)",
+    olawee_impulsa: "✅ SI",
+    olawee_equipo: "✅ SI",
+    olawee_colectivos: "✅ SI",
   },
   {
-    feature: "Asistentes personalizados",
-    free: "✅ (15 días)",
-    olawee1: true,
-    olawee_entidad: true,
+    feature: "Auditorías",
+    olawee_explora: false,
+    olawee_impulsa: true,
+    olawee_equipo: true,
     olawee_colectivos: true,
   },
   {
-    feature: "Colaboración en equipo",
-    free: "✅ (15 días)",
-    olawee1: "Básica",
-    olawee_entidad: "✅ Completa",
-    olawee_colectivos: "✅ Compartida entre miembros",
+    feature: "Gestión de usuarios (múltiples licencias)",
+    olawee_explora: false,
+    olawee_impulsa: false,
+    olawee_equipo: "✅ SI (3 licencias)",
+    olawee_colectivos: "✅ SI",
   },
   {
-    feature: "Soporte",
-    free: "✅ (15 días, estándar)",
-    olawee1: "Estándar",
-    olawee_entidad: "✅ Prioritario",
-    olawee_colectivos: "✅ Dedicado al colectivo",
+    feature: "Integración con apps externas",
+    olawee_explora: false,
+    olawee_impulsa: false,
+    olawee_equipo: "✅ SI",
+    olawee_colectivos: "✅ SI",
   },
   {
-    feature: "Informes y reporting",
-    free: "✅ (15 días)",
-    olawee1: "Básico",
-    olawee_entidad: "✅ Avanzado",
-    olawee_colectivos: "✅ Colectivo",
+    feature: "Soporte basic",
+    olawee_explora: "✅ SI",
+    olawee_impulsa: "✅ SI",
+    olawee_equipo: "✅ SI",
+    olawee_colectivos: "✅ SI",
   },
   {
-    feature: "Espacios compartidos",
-    free: "✅ (15 días)",
-    olawee1: false,
-    olawee_entidad: "✅",
-    olawee_colectivos: "✅ (para asociaciones/comunidades)",
+    feature: "Soporte avanzado",
+    olawee_explora: false,
+    olawee_impulsa: false,
+    olawee_equipo: "✅ SI",
+    olawee_colectivos: "✅ SI",
+  },
+  {
+    feature: "Formación Personalizada",
+    olawee_explora: false,
+    olawee_impulsa: false,
+    olawee_equipo: "✅ SI",
+    olawee_colectivos: "✅ SI",
+  },
+  {
+    feature: "Asistentes Personalizados",
+    olawee_explora: false,
+    olawee_impulsa: false,
+    olawee_equipo: "✅ SI",
+    olawee_colectivos: "✅ SI",
+  },
+  {
+    feature: "Branding",
+    olawee_explora: false,
+    olawee_impulsa: false,
+    olawee_equipo: false,
+    olawee_colectivos: "✅ SI",
   },
 ];
 
@@ -81,19 +102,19 @@ const PlansTable = () => {
         <thead>
           <tr>
             <th>Funciones</th>
-            <th>Free <br />(Prueba 15 días)</th>
-            <th>OLAWEE</th>
-            <th>OLAWEE - ENTIDAD</th>
-            <th>OLAWEE - COLECTIVOS</th>
+            <th>OLAWEE EXPLORA <br />(Prueba 14 días)</th>
+            <th>OLAWEE IMPULSA 50€</th>
+            <th>OLAWEE EQUIPO 120€</th>
+            <th>OLAWEE COLECTIVOS</th>
           </tr>
         </thead>
         <tbody>
           {comparativeTable.map((row, index) => (
             <tr key={index}>
               <td className="feature">{row.feature}</td>
-              <td>{row.free === true ? "✅ Ilimitado" : row.free === false ? "❌" : row.free}</td>
-              <td>{row.olawee1 === true ? "✅ Ilimitado" : row.olawee1 === false ? "❌" : row.olawee1}</td>
-              <td>{row.olawee_entidad === true ? "✅ Ilimitado" : row.olawee_entidad === false ? "❌" : row.olawee_entidad}</td>
+              <td>{row.olawee_explora === true ? "✅ Ilimitado" : row.olawee_explora === false ? "❌" : row.olawee_explora}</td>
+              <td>{row.olawee_impulsa === true ? "✅ Ilimitado" : row.olawee_impulsa === false ? "❌" : row.olawee_impulsa}</td>
+              <td>{row.olawee_equipo === true ? "✅ Ilimitado" : row.olawee_equipo === false ? "❌" : row.olawee_equipo}</td>
               <td>{row.olawee_colectivos === true ? "✅ Ilimitado" : row.olawee_colectivos === false ? "❌" : row.olawee_colectivos}</td>
             </tr>
           ))}
