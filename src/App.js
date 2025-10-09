@@ -2,6 +2,7 @@
 import './App.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './components/globalComponents/login/styles/resetPassword.scss';
+import './tailwind.css';
 
 
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';

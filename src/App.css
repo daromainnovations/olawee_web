@@ -4,6 +4,7 @@
   --color-font-global: rgba(193, 198, 199,1);   /* #C1C6C7 */
   --color-font-title: #4B61A6;     /* #FFC310 */
 }
+
 body{
   background-color: var(--color-background-page);
   color: var(--color-font-global);

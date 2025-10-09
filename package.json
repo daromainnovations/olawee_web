@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@auth0/auth0-react": "^2.3.0",
+    "@fontsource-variable/inter": "^5.2.8",
     "@n8n/chat": "^0.27.1",
     "@popperjs/core": "^2.11.8",
     "@supabase/supabase-js": "^2.49.4",
@@ -31,6 +32,9 @@
     "web-vitals": "^4.2.4"
   },
   "scripts": {
+    "tw:build": "tailwindcss -c tailwind.config.js -i ./src/tw.input.css -o ./src/tailwind.css -m",
+    "tw:watch": "tailwindcss -c tailwind.config.js -i ./src/tw.input.css -o ./src/tailwind.css -w",
+    "prebuild": "npm run tw:build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest --watchAll",

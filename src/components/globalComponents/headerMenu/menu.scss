@@ -27,13 +27,14 @@ $color-font-global: #fff; // Color de texto global
 
 // Estilos generales para el nav
 nav {
-  background-color: #0b141865;
+  background-color: #0b14182f;
   font-family: "Inter", serif;
   font-weight: 400;
   height: 65px;
   width: 100%;
   transition: top 0.3s ease-in-out;
   z-index: 1040;
+  opacity: 0.85;
   
   .container-fluid{
     margin-top: 30px;

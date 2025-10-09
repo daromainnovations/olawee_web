@@ -63,9 +63,6 @@
 
 // export default HomePage;
 
-
-
-import { useState } from "react";
 import Menu from "../../components/globalComponents/headerMenu/menu"
 import "./homePage.scss"
 import TutorialWhitVideo from "../../components/homePageComponents/tutorialWhitVideo/tutorialWhitVideo";
@@ -81,19 +78,19 @@ import fondoHero from "../../../src/media/img/Img-oceano.jpg";
 import FreeTrialButton from "../../components/globalComponents/principalButton/principalButton";
 
 const HomePage = () => {
-    const [bannerHeight, setBannerHeight] = useState(0);
+    // const [bannerHeight, setBannerHeight] = useState(0);
     return (
         <div className="homepage-wrapper">
 
             <div className="page-content"
                 style={{
-                    paddingTop: `${bannerHeight + 60}px`,
+                    
                     transition: "padding-top 0.4s ease-in-out"
                 }}
             >
                 {/* Wrapper para el contenido principal */}
                 <main className="main-content">
-                    <Menu bannerHeight={bannerHeight - 20} customClass="custom-navbar-style" />
+                    <Menu customClass="custom-navbar-style" />
 
                     <div
                         className="hero-section d-flex justify-content-center text-center position-relative"
@@ -114,17 +111,20 @@ const HomePage = () => {
                                 <img src={myImgI} alt="logo-olawee" className="logo" />
                             </div>
                             <div className="d-flex justify-content-center text-center">
-                                <h1 className="tw-mb-6 tw-text-balance tw-text-4xl tw-font-bold tw-tracking-tight tw-text-red-800 tw-drop-shadow sm:tw-text-5xl lg:tw-text-6xl">LA IA COLABORATIVA QUE IMPULSA TU PRODUCTIVIDAD</h1>
+                                <h1 className="mb-6 text-balance text-4xl font-bold tracking-tight text-blue-800 drop-shadow sm:text-5xl lg:text-6xl">INNOVACIÓN SIN BARRERAS, INTELIGENCIA COLECTIVA.
+                                </h1>
                             </div>
                             <div className="d-flex justify-content-center text-center">
                                 <p className="text">
-                                    Elige, crea y comparte asistentes de IA que se adapten a tu forma de trabajar. Ahorra tiempo, mejora la eficiencia y colabora de manera más inteligente con tu equipo
+                                La plataforma que democratiza el acceso a la inteligencia artificial para empresas, asociaciones y colectivos. Sin necesidad de conocimientos técnicos ni grandes inversiones.
                                 </p>
                             </div>
                             <br />
-                            <div className="d-flex justify-content-center text-center">
-                                <FreeTrialButton text="PRUEBA GRATIS DURANTE 15 DIAS" className="btn-custom btn-savings" containerClass="container-btn-savings" />
+                            <div className="d-flex flex-column align-items-center justify-content-center gap-3">
+                                <FreeTrialButton text=" Únete al lanzamiento del 15 de octubre y consigue 1 año de OLAWEE gratis." className="btn-olawee-ghost btn-olawee-ghost--xl is-attention"  />
+                                <a href="#products-section" className="ms-1 enlace-secundario">Ver cómo funciona</a>
                             </div>
+                            
                         </div>
                     </div>
 
