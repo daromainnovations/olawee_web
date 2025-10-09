@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./menu.scss";
 import "../../../../src/styles/hiddenProvisional.scss"
-import logo from "../../../media/img/Logo_Okapi_Web.png"
+import logo from "../../../media/img/Logo_Olawee_Web.png"
 
 import { useLocation } from "react-router-dom";
 import BackArrow from "../backArrow/backArrow";

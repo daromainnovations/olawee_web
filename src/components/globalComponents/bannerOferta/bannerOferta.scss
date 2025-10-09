@@ -1,22 +1,22 @@
 
-.banner-oferta {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: #336BB3;
-  color: white;
-  text-align: center;
-  padding: 10px 0;
-  font-size: 18px;
-  font-weight: bold;
-  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-  opacity: 0;
-  transform: translateY(-100%);
-  z-index: 1050;
-}
+// .banner-oferta {
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   background-color: #336BB3;
+//   color: white;
+//   text-align: center;
+//   padding: 10px 0;
+//   font-size: 18px;
+//   font-weight: bold;
+//   transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+//   opacity: 0;
+//   transform: translateY(-100%);
+//   z-index: 1050;
+// }
 
-.banner-oferta.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+// .banner-oferta.visible {
+//   opacity: 1;
+//   transform: translateY(0);
+// }
