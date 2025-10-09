@@ -66,13 +66,20 @@ const Menu = ({ bannerHeight, customClass = "" }) => {
         style={{ top: `${menuTop}px`, width: "100%", transition: "top 0.5s ease-in-out" }}
       >
         <div className="container-fluid d-flex justify-content-between align-items-center w-100">
-          {/* Logo */}{/* Reemplaza el logo solo en la página caseStudyPage */}
-          <div className="logo" >
+
+          {/* Codigo para que el logo redirija a inicio */}
+          <div className="logo">
             {location.pathname.startsWith('/case-study/') || location.pathname === '/faq' ? (
-                <BackArrow/>  // Si estamos en la página 'caseStudyPage', mostramos el nuevo componente
-              ) : (
-                <img src={logo} alt="Logo" style={{ width: "100px", height: "auto" }} />  // Si no, mostramos el logo original
-              )}
+              <BackArrow />  
+            ) : (
+              <a href="/">
+                <img
+                  src={logo}
+                  alt="Logo"
+                  style={{ width: "100px", height: "auto", cursor: "pointer" }}
+                />
+              </a>
+            )}
           </div>
 
           {/* Botón de hamburguesa para pantallas pequeñas */}
