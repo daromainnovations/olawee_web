@@ -1,615 +1,9 @@
 
-// // ✅ ARCHIVO ACTUALIZADO: wooCommerceService.js
-// import axios from "axios";
-
-// // ✅ CORREGIDO: URLs y configuración para Olawee
-// const API_URL = process.env.REACT_APP_WC_API_URL;
-// const CONSUMER_KEY = process.env.REACT_APP_WC_CONSUMER_KEY;
-// const CONSUMER_SECRET = process.env.REACT_APP_WC_CONSUMER_SECRET;
-
-// // URLs base de Olawee
-// const OLAWEE_API_BASE = "https://api.olawee.com/wp-json";
-
-// // Extrae y estructura el usuario desde la respuesta del registro
-// const buildUserFromRegister = (responseUser = {}, extraFields = {}, email, username) => {
-//   return {
-//     id: responseUser.id || null,
-//     username: username,
-//     email: email,
-//     displayName: responseUser.name || `${extraFields.firstName || ""} ${extraFields.lastName || ""}`.trim(),
-//     firstName: responseUser.first_name || extraFields.firstName || "",
-//     lastName: responseUser.last_name || extraFields.lastName || "",
-//     phone: responseUser.phone || extraFields.phone || "",
-//     company: responseUser.empresa || extraFields.company || "", // ✅ CORREGIDO: usar 'empresa'
-//     country: responseUser.country || extraFields.country || "",
-//     state: responseUser.state || extraFields.state || "",
-//     city: responseUser.city || extraFields.city || "",
-//     job: responseUser.job || extraFields.job || "",
-//     roles: responseUser.roles || [],
-//     meta: {},
-//   };
-// };
-
-// export const registerUser = async (email, username, password, extraFields = {}) => {
-//   try {
-//     // ✅ CORREGIDO: URL y endpoint correctos de Olawee
-//     const response = await axios.post(
-//       `${OLAWEE_API_BASE}/custom-api/register`, // ✅ CORREGIDO: custom-api en lugar de custom-api
-//       {
-//         email,
-//         username,
-//         password,
-//         // ✅ CORREGIDO: Parámetros según lo que espera el plugin de Olawee
-//         firstName: extraFields.first_name || extraFields.firstName,
-//         lastName: extraFields.last_name || extraFields.lastName,
-//         phone: extraFields.phone,
-//         company: extraFields.company,
-//         country: extraFields.country,
-//         state: extraFields.state,
-//         city: extraFields.city,
-//         job: extraFields.job,
-//       },
-//       {
-//         timeout: 20000,
-//         headers: {
-//           'Content-Type': 'application/json',
-//           'Accept': 'application/json',
-//         },
-//       }
-//     );
-
-//     console.log("✅ Respuesta de registro:", response.data);
-
-//     // ✅ CORREGIDO: Manejar respuesta del plugin de Olawee
-//     const { success, token, user: userData } = response.data;
-    
-//     if (!success || !userData?.id) {
-//       throw new Error("Error en el registro o datos de usuario incompletos");
-//     }
-
-//     // Enriquecer usuario con campos adicionales
-//     const enrichedUser = buildUserFromRegister(userData, extraFields, email, username);
-    
-//     return { 
-//       success,
-//       token,
-//       user: enrichedUser 
-//     };
-//   } catch (error) {
-//     console.error("🚨 Error registrando usuario:", error.response?.data || error.message);
-    
-//     // Mejorar manejo de errores específicos del plugin
-//     if (error.response?.data) {
-//       const { code, message } = error.response.data;
-      
-//       // Crear un error más descriptivo basado en el código
-//       const errorMessages = {
-//         'email_exists': 'Este email ya está registrado',
-//         'username_exists': 'Este nombre de usuario ya existe',
-//         'weak_password': 'La contraseña no cumple con los requisitos de seguridad',
-//         'missing_fields': 'Faltan campos obligatorios',
-//         'invalid_email': 'El formato del email es inválido'
-//       };
-      
-//       const friendlyMessage = errorMessages[code] || message || 'Error en el registro';
-//       const enhancedError = new Error(friendlyMessage);
-//       enhancedError.code = code;
-//       enhancedError.originalResponse = error.response.data;
-      
-//       throw enhancedError;
-//     }
-    
-//     throw error;
-//   }
-// };
-
-// export const getCurrentUser = async (identifier) => {
-//   try {
-//     // ✅ MANTENER: Esta función sigue usando WooCommerce API si está configurada
-//     if (!API_URL || !CONSUMER_KEY || !CONSUMER_SECRET) {
-//       console.warn("⚠️ Credenciales de WooCommerce no configuradas");
-//       return null;
-//     }
-
-//     const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(identifier);
-
-//     const response = await axios.get(`${API_URL}/customers`, {
-//       auth: {
-//         username: CONSUMER_KEY,
-//         password: CONSUMER_SECRET,
-//       },
-//       params: isEmail ? { email: identifier } : { username: identifier },
-//       timeout: 15000,
-//     });
-
-//     return response.data.length > 0 ? response.data[0] : null;
-//   } catch (error) {
-//     console.error("🚨 Error obteniendo usuario:", error.response?.data || error.message);
-//     return null;
-//   }
-// };
-
-// // ✅ NUEVO: Función para obtener usuario por ID usando el plugin de Olawee
-// export const getUserById = async (userId) => {
-//   try {
-//     const response = await axios.get(`${OLAWEE_API_BASE}/olawee/v1/user/${userId}`, {
-//       timeout: 15000,
-//     });
-
-//     return response.data;
-//   } catch (error) {
-//     console.error("🚨 Error obteniendo usuario por ID:", error.response?.data || error.message);
-//     return null;
-//   }
-// };
-
-// // ✅ NUEVO: Función para buscar usuarios usando el plugin de Olawee
-// export const searchUsers = async (searchTerm, limit = 10) => {
-//   try {
-//     const response = await axios.get(`${OLAWEE_API_BASE}/olawee/v1/search-users`, {
-//       params: {
-//         search: searchTerm,
-//         limit: limit
-//       },
-//       timeout: 15000,
-//     });
-
-//     return response.data;
-//   } catch (error) {
-//     console.error("🚨 Error buscando usuarios:", error.response?.data || error.message);
-//     return { success: false, users: [], total: 0 };
-//   }
-// };
-
-// // ✅ NUEVO: Función para verificar múltiples usuarios por email
-// export const verifyUsersByEmail = async (emails) => {
-//   try {
-//     const response = await axios.post(`${OLAWEE_API_BASE}/olawee/v1/verify-users`, {
-//       emails: emails
-//     }, {
-//       timeout: 15000,
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//     });
-
-//     return response.data;
-//   } catch (error) {
-//     console.error("🚨 Error verificando usuarios por email:", error.response?.data || error.message);
-//     return { success: false, found_users: [], not_found: emails };
-//   }
-// };
-
-// // ✅ COMENTADO: Endpoint de productos que no existe en el plugin actual
-// export const getProducts = async () => {
-//   try {
-//     // ⚠️ NOTA: Este endpoint no existe en el plugin actual de Olawee
-//     // Si necesitas productos, debes implementar este endpoint en el plugin
-//     console.warn("⚠️ Endpoint de productos no disponible en el plugin actual");
-    
-//     // TODO: Cuando implementes el endpoint en el plugin, descomenta:
-//     // const response = await axios.get(`${OLAWEE_API_BASE}/olawee/v1/products`);
-//     // return response.data;
-    
-//     return [];
-//   } catch (error) {
-//     console.error("🚨 Error obteniendo productos:", error.message);
-//     return [];
-//   }
-// };
-
-// // ✅ NUEVO: Función para obtener notificaciones del usuario
-// export const getUserNotifications = async (userEmail) => {
-//   try {
-//     const response = await axios.get(`${OLAWEE_API_BASE}/olawee/v1/notifications/${encodeURIComponent(userEmail)}`, {
-//       timeout: 15000,
-//     });
-
-//     return response.data;
-//   } catch (error) {
-//     console.error("🚨 Error obteniendo notificaciones:", error.response?.data || error.message);
-//     return { notifications: [], count: 0 };
-//   }
-// };
-
-// // ✅ NUEVO: Función para enviar webhook de cambio de estado de prompt
-// export const sendPromptStatusWebhook = async (promptData) => {
-//   try {
-//     const response = await axios.post(`${OLAWEE_API_BASE}/olawee/v1/webhooks/prompt-status-changed`, 
-//       promptData,
-//       {
-//         timeout: 10000,
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//       }
-//     );
-
-//     return response.data;
-//   } catch (error) {
-//     console.error("🚨 Error enviando webhook:", error.response?.data || error.message);
-//     throw error;
-//   }
-// };
-
-// // ✅ NUEVO: Función helper para construir URLs de API
-// export const getApiUrl = (endpoint) => {
-//   return `${OLAWEE_API_BASE}${endpoint}`;
-// };
-
-// // ✅ NUEVO: Función para verificar la salud del API
-// export const checkApiHealth = async () => {
-//   try {
-//     const response = await axios.get(`${OLAWEE_API_BASE}/debug-test/simple`, {
-//       timeout: 5000,
-//     });
-
-//     return {
-//       healthy: true,
-//       data: response.data,
-//       timestamp: Date.now()
-//     };
-//   } catch (error) {
-//     console.error("🚨 API no disponible:", error.message);
-//     return {
-//       healthy: false,
-//       error: error.message,
-//       timestamp: Date.now()
-//     };
-//   }
-// };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import axios from "axios";
-
-// // ✅ Configuración de URLs - Tu servidor WordPress/WooCommerce
-// const OLAWEE_BASE = process.env.REACT_APP_OLAWEE_BASE_URL || "https://api.olawee.com";
-// const OLAWEE_API_BASE = `${OLAWEE_BASE}/wp-json`;
-
-// // ✅ NOTA: Ya NO necesitas credenciales de WooCommerce
-// // El plugin accede directamente a los productos sin autenticación
-
-// // ============================================
-// // FUNCIONES DE AUTENTICACIÓN
-// // ============================================
-
-// const buildUserFromRegister = (responseUser = {}, extraFields = {}, email, username) => {
-//   return {
-//     id: responseUser.id || null,
-//     username: username,
-//     email: email,
-//     displayName: responseUser.name || `${extraFields.firstName || ""} ${extraFields.lastName || ""}`.trim(),
-//     firstName: responseUser.first_name || extraFields.firstName || "",
-//     lastName: responseUser.last_name || extraFields.lastName || "",
-//     phone: responseUser.phone || extraFields.phone || "",
-//     company: responseUser.empresa || extraFields.company || "",
-//     country: responseUser.country || extraFields.country || "",
-//     state: responseUser.state || extraFields.state || "",
-//     city: responseUser.city || extraFields.city || "",
-//     job: responseUser.job || extraFields.job || "",
-//     roles: responseUser.roles || [],
-//     meta: {},
-//   };
-// };
-
-// export const registerUser = async (email, username, password, extraFields = {}) => {
-//   try {
-//     const response = await axios.post(
-//       `${OLAWEE_API_BASE}/custom-api/register`,
-//       {
-//         email,
-//         username,
-//         password,
-//         firstName: extraFields.first_name || extraFields.firstName,
-//         lastName: extraFields.last_name || extraFields.lastName,
-//         phone: extraFields.phone,
-//         company: extraFields.company,
-//         country: extraFields.country,
-//         state: extraFields.state,
-//         city: extraFields.city,
-//         job: extraFields.job,
-//       },
-//       {
-//         timeout: 20000,
-//         headers: {
-//           'Content-Type': 'application/json',
-//           'Accept': 'application/json',
-//         },
-//       }
-//     );
-
-//     console.log("✅ Respuesta de registro:", response.data);
-
-//     const { success, token, user: userData } = response.data;
-    
-//     if (!success || !userData?.id) {
-//       throw new Error("Error en el registro o datos de usuario incompletos");
-//     }
-
-//     const enrichedUser = buildUserFromRegister(userData, extraFields, email, username);
-    
-//     return { 
-//       success,
-//       token,
-//       user: enrichedUser 
-//     };
-//   } catch (error) {
-//     console.error("🚨 Error registrando usuario:", error.response?.data || error.message);
-    
-//     if (error.response?.data) {
-//       const { code, message } = error.response.data;
-      
-//       const errorMessages = {
-//         'email_exists': 'Este email ya está registrado',
-//         'username_exists': 'Este nombre de usuario ya existe',
-//         'weak_password': 'La contraseña no cumple con los requisitos de seguridad',
-//         'missing_fields': 'Faltan campos obligatorios',
-//         'invalid_email': 'El formato del email es inválido'
-//       };
-      
-//       const friendlyMessage = errorMessages[code] || message || 'Error en el registro';
-//       const enhancedError = new Error(friendlyMessage);
-//       enhancedError.code = code;
-//       enhancedError.originalResponse = error.response.data;
-      
-//       throw enhancedError;
-//     }
-    
-//     throw error;
-//   }
-// };
-
-// // ============================================
-// // FUNCIONES DE USUARIOS
-// // ============================================
-
-// // Esta función usa el endpoint de usuarios de Olawee
-// // Ya no necesita credenciales de WooCommerce
-
-// export const getUserById = async (userId) => {
-//   try {
-//     const response = await axios.get(`${OLAWEE_API_BASE}/olawee/v1/user/${userId}`, {
-//       timeout: 15000,
-//     });
-
-//     return response.data;
-//   } catch (error) {
-//     console.error("🚨 Error obteniendo usuario por ID:", error.response?.data || error.message);
-//     return null;
-//   }
-// };
-
-// export const searchUsers = async (searchTerm, limit = 10) => {
-//   try {
-//     const response = await axios.get(`${OLAWEE_API_BASE}/olawee/v1/search-users`, {
-//       params: {
-//         search: searchTerm,
-//         limit: limit
-//       },
-//       timeout: 15000,
-//     });
-
-//     return response.data;
-//   } catch (error) {
-//     console.error("🚨 Error buscando usuarios:", error.response?.data || error.message);
-//     return { success: false, users: [], total: 0 };
-//   }
-// };
-
-// export const verifyUsersByEmail = async (emails) => {
-//   try {
-//     const response = await axios.post(`${OLAWEE_API_BASE}/olawee/v1/verify-users`, {
-//       emails: emails
-//     }, {
-//       timeout: 15000,
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//     });
-
-//     return response.data;
-//   } catch (error) {
-//     console.error("🚨 Error verificando usuarios por email:", error.response?.data || error.message);
-//     return { success: false, found_users: [], not_found: emails };
-//   }
-// };
-
-// // ============================================
-// // FUNCIONES DE PRODUCTOS
-// // ============================================
-
-// export const getProducts = async (params = {}) => {
-//   try {
-//     const { 
-//       page = 1, 
-//       perPage = 20, 
-//       orderby = 'date', 
-//       order = 'desc' 
-//     } = params;
-
-//     const response = await axios.get(`${OLAWEE_API_BASE}/olawee/v1/products`, {
-//       params: {
-//         page,
-//         per_page: perPage,
-//         orderby,
-//         order
-//       },
-//       timeout: 15000,
-//     });
-
-//     return response.data;
-//   } catch (error) {
-//     console.error("🚨 Error obteniendo productos:", error.response?.data || error.message);
-//     return {
-//       success: false,
-//       products: [],
-//       total: 0,
-//       pages: 0,
-//       current_page: 1
-//     };
-//   }
-// };
-
-// export const getProductById = async (productId) => {
-//   try {
-//     const response = await axios.get(`${OLAWEE_API_BASE}/olawee/v1/products/${productId}`, {
-//       timeout: 15000,
-//     });
-
-//     return response.data;
-//   } catch (error) {
-//     console.error("🚨 Error obteniendo producto:", error.response?.data || error.message);
-//     return { success: false, product: null };
-//   }
-// };
-
-// export const getProductsByCategory = async (categorySlug, perPage = 20) => {
-//   try {
-//     const response = await axios.get(`${OLAWEE_API_BASE}/olawee/v1/products/category/${categorySlug}`, {
-//       params: { per_page: perPage },
-//       timeout: 15000,
-//     });
-
-//     return response.data;
-//   } catch (error) {
-//     console.error("🚨 Error obteniendo productos por categoría:", error.response?.data || error.message);
-//     return {
-//       success: false,
-//       products: [],
-//       category: categorySlug,
-//       total: 0
-//     };
-//   }
-// };
-
-// export const searchProducts = async (searchTerm, perPage = 20) => {
-//   try {
-//     if (!searchTerm || searchTerm.trim() === '') {
-//       return {
-//         success: false,
-//         message: 'Término de búsqueda vacío',
-//         products: [],
-//         total: 0
-//       };
-//     }
-
-//     const response = await axios.get(`${OLAWEE_API_BASE}/olawee/v1/products/search`, {
-//       params: {
-//         search: searchTerm,
-//         per_page: perPage
-//       },
-//       timeout: 15000,
-//     });
-
-//     return response.data;
-//   } catch (error) {
-//     console.error("🚨 Error buscando productos:", error.response?.data || error.message);
-//     return {
-//       success: false,
-//       products: [],
-//       search_term: searchTerm,
-//       total: 0
-//     };
-//   }
-// };
-
-// // ============================================
-// // FUNCIONES DE NOTIFICACIONES
-// // ============================================
-
-// export const getUserNotifications = async (userEmail) => {
-//   try {
-//     const response = await axios.get(`${OLAWEE_API_BASE}/olawee/v1/notifications/${encodeURIComponent(userEmail)}`, {
-//       timeout: 15000,
-//     });
-
-//     return response.data;
-//   } catch (error) {
-//     console.error("🚨 Error obteniendo notificaciones:", error.response?.data || error.message);
-//     return { notifications: [], count: 0 };
-//   }
-// };
-
-// // ============================================
-// // WEBHOOKS
-// // ============================================
-
-// export const sendPromptStatusWebhook = async (promptData) => {
-//   try {
-//     const response = await axios.post(`${OLAWEE_API_BASE}/olawee/v1/webhooks/prompt-status-changed`, 
-//       promptData,
-//       {
-//         timeout: 10000,
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//       }
-//     );
-
-//     return response.data;
-//   } catch (error) {
-//     console.error("🚨 Error enviando webhook:", error.response?.data || error.message);
-//     throw error;
-//   }
-// };
-
-// // ============================================
-// // UTILIDADES
-// // ============================================
-
-// export const getApiUrl = (endpoint) => {
-//   return `${OLAWEE_API_BASE}${endpoint}`;
-// };
-
-// export const checkApiHealth = async () => {
-//   try {
-//     const response = await axios.get(`${OLAWEE_API_BASE}/debug-test/simple`, {
-//       timeout: 5000,
-//     });
-
-//     return {
-//       healthy: true,
-//       data: response.data,
-//       timestamp: Date.now()
-//     };
-//   } catch (error) {
-//     console.error("🚨 API no disponible:", error.message);
-//     return {
-//       healthy: false,
-//       error: error.message,
-//       timestamp: Date.now()
-//     };
-//   }
-// };
-
-
-
-
-
-
-
-
-
 import axios from "axios";
 
 // ✅ Configuración de URLs - Tu servidor WordPress/WooCommerce
 const OLAWEE_BASE = process.env.REACT_APP_OLAWEE_BASE_URL || "https://api.olawee.com";
 const OLAWEE_API_BASE = `${OLAWEE_BASE}/wp-json`;
-
-// ✅ NOTA: Ya NO necesitas credenciales de WooCommerce
-// El plugin accede directamente a los productos sin autenticación
 
 // ✅ Detectar origen actual
 const getCurrentOrigin = () => {
@@ -631,11 +25,17 @@ const getCurrentOrigin = () => {
 
 // ✅ Headers comunes con origen
 const getCommonHeaders = () => {
-  return {
+  const origin = getCurrentOrigin();
+  
+  const headers = {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
-    'X-Origin': getCurrentOrigin(),
+    'X-Origin': origin,
   };
+  
+  console.log(`📤 [SERVICE] Sending headers:`, headers);
+  
+  return headers;
 };
 
 // ============================================
@@ -716,16 +116,13 @@ export const forceLoginUser = async (email, password) => {
       { email, password },
       {
         timeout: 30000,
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
+        headers: getCommonHeaders(), // ✅ CORREGIDO: Ahora usa getCommonHeaders()
       }
     );
 
     console.log("✅ Respuesta de force login:", response.data);
 
-    const { success, token, session_token, user: userData } = response.data;
+    const { success, token, session_token, user: userData, origin } = response.data;
 
     if (!success || !token || !userData?.id) {
       throw new Error("Error en el force login o datos de usuario incompletos");
@@ -735,6 +132,7 @@ export const forceLoginUser = async (email, password) => {
       success: true,
       token,
       sessionToken: session_token,
+      origin: origin,
       user: userData,
     };
   } catch (error) {
@@ -771,8 +169,8 @@ export const validateToken = async (token, sessionToken) => {
       {
         params: { session_token: sessionToken || '' },
         headers: {
+          ...getCommonHeaders(), // ✅ CORREGIDO: Incluye getCommonHeaders()
           'Authorization': `Bearer ${token}`,
-          'Accept': 'application/json',
         },
         timeout: 15000,
       }
@@ -780,24 +178,26 @@ export const validateToken = async (token, sessionToken) => {
 
     console.log("✅ Token válido:", response.data);
 
-    const { valid, user } = response.data;
+    const { valid, user, origin } = response.data;
 
     return {
       valid,
       user,
+      origin,
     };
   } catch (error) {
     console.error("🚨 Error validando token:", error.response?.data || error.message);
 
     if (error.response?.data) {
-      const { code, message } = error.response.data;
+      const { code, message, origin } = error.response.data;
 
       // Si la sesión fue invalidada, lanzar error específico
       if (code === 'session_invalidated' || error.response.status === 401) {
         const enhancedError = new Error(
-          message || 'Tu sesión ha sido cerrada porque iniciaste sesión desde otro dispositivo'
+          message || `Tu sesión en ${origin} ha sido cerrada porque iniciaste sesión desde otro dispositivo`
         );
         enhancedError.code = 'session_invalidated';
+        enhancedError.origin = origin;
         enhancedError.originalResponse = error.response.data;
         throw enhancedError;
       }
@@ -822,8 +222,8 @@ export const logoutUser = async (token) => {
       {},
       {
         headers: {
+          ...getCommonHeaders(), // ✅ CORREGIDO: Incluye getCommonHeaders()
           'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
         },
         timeout: 10000,
       }
@@ -834,6 +234,7 @@ export const logoutUser = async (token) => {
     return {
       success: true,
       message: response.data.message || 'Sesión cerrada correctamente',
+      origin: response.data.origin,
     };
   } catch (error) {
     console.error("🚨 Error en logout:", error.response?.data || error.message);
@@ -856,10 +257,7 @@ export const requestPasswordReset = async (email, origin = 'web') => {
       { email, origin },
       {
         timeout: 20000,
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
+        headers: getCommonHeaders(), // ✅ CORREGIDO
       }
     );
 
@@ -902,10 +300,7 @@ export const verifyResetToken = async (token, email) => {
       { token, email },
       {
         timeout: 15000,
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
+        headers: getCommonHeaders(), // ✅ CORREGIDO
       }
     );
 
@@ -950,10 +345,7 @@ export const resetPassword = async (token, email, newPassword) => {
       { token, email, password: newPassword },
       {
         timeout: 20000,
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
+        headers: getCommonHeaders(), // ✅ CORREGIDO
       }
     );
 
@@ -1030,16 +422,13 @@ export const registerUser = async (email, username, password, extraFields = {}) 
       },
       {
         timeout: 20000,
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
+        headers: getCommonHeaders(), // ✅ CORREGIDO
       }
     );
 
     console.log("✅ Respuesta de registro:", response.data);
 
-    const { success, token, session_token, user: userData } = response.data;
+    const { success, token, session_token, user: userData, origin } = response.data;
     
     if (!success || !userData?.id) {
       throw new Error("Error en el registro o datos de usuario incompletos");
@@ -1050,7 +439,8 @@ export const registerUser = async (email, username, password, extraFields = {}) 
     return { 
       success,
       token,
-      sessionToken: session_token, // ✅ Añadido session_token
+      sessionToken: session_token,
+      origin: origin,
       user: enrichedUser 
     };
   } catch (error) {
@@ -1119,9 +509,7 @@ export const verifyUsersByEmail = async (emails) => {
       emails: emails
     }, {
       timeout: 15000,
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: getCommonHeaders(),
     });
 
     return response.data;
@@ -1257,9 +645,7 @@ export const sendPromptStatusWebhook = async (promptData) => {
       promptData,
       {
         timeout: 10000,
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: getCommonHeaders(),
       }
     );
 

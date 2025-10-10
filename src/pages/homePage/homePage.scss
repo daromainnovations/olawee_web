@@ -122,8 +122,7 @@ html, body {
     background: linear-gradient(
         to bottom,
         #0B1418 0%,     /* oscuro */
-        #2e2640 24%,    /* transición lenta al morado */
-        #5530a6dc 50%,    /* morado */
+        #263040 24%,    /* transición lenta al morado */
         #7aabece1 78%,    /* azul, dale aire */
         #eff4ff 92%,   
         #ffffff 100%    /* blanco puro al final (junto al carrusel) */
@@ -147,11 +146,10 @@ html, body {
     background: linear-gradient(
         to bottom,
         #FFFFFF 0%,     /* blanco puro al empezar (junto al carrusel) */
-        #eff4ff 8%,     /* casi blanco para desvanecer suave */
-        #7aabec 22%,    /* azul */
-        #5530a6d8 50%,    /* morado */
-        #2E2640 76%,
-        #150e1e 85%,     /* transición al oscuro */
+        #e4ecfd 8%,     /* casi blanco para desvanecer suave */
+        #a5cbfd 22%,    /* azul */
+        #272c43 76%,
+        #0e101e 85%,     /* transición al oscuro */
         #0B1418 100%  /* oscuro */
       );
     background-color:#FFFFFF; 
