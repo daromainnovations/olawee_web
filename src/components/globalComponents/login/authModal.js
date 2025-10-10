@@ -1,11 +1,11 @@
+
 // import { useEffect, useState } from "react";
+
 // import "../login/styles/authModal.scss";
-// import { registerUser } from "../../../services/wooCommerceService";
 // import { useAuth } from "../../../context/authProviderContext";
 // import { AuthError } from "../../../utils/AuthError";
 // import Loader from "../loader/loader";
 // import { Country, State, City } from "country-state-city";
-// import { getApiUrl } from "../../../config/api"; // Importar configuración
 
 // const prefixOptions = [
 //   { value: '+34', label: '+34 (Spain)' },
@@ -48,24 +48,36 @@
 //   const [showPassword, setShowPassword] = useState(false);
 //   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
 
+//   // ✅ NUEVO: Estado para conflicto de sesión
+//   const [showConflictModal, setShowConflictModal] = useState(false);
+//   const [conflictCredentials, setConflictCredentials] = useState({ email: '', password: '' });
+
 //   const [countriesList, setCountriesList] = useState([]);
 //   const [statesList, setStatesList] = useState([]);
 //   const [citiesList, setCitiesList] = useState([]);
-//   const [selectedCountry, setSelectedCountry] = useState("ES"); // España por defecto
+//   const [selectedCountry, setSelectedCountry] = useState("ES");
 //   const [selectedState, setSelectedState] = useState("");
 //   const [selectedCity, setSelectedCity] = useState("");
 
 //   const [prefix, setPrefix] = useState('+34');
 //   const fullPhoneNumber = `${prefix}${phone}`;
 
-//   // --------- ESTADOS PARA RESET POR LINK (ACTUALIZADO PARA EL PLUGIN) ---------
+//   // --------- ESTADOS PARA RESET POR LINK ---------
 //   const [isResetPasswordMode, setIsResetPasswordMode] = useState(false);
 //   const [resetToken, setResetToken] = useState("");
 //   const [resetEmailFromUrl, setResetEmailFromUrl] = useState("");
 //   const [newPassword, setNewPassword] = useState("");
 //   const [repeatNewPassword, setRepeatNewPassword] = useState("");
 
-//   const { login } = useAuth();
+//   // ✅ ACTUALIZADO: Usar funciones del context actualizado
+//   const { 
+//     login, 
+//     forceLogin, 
+//     register: registerFromContext,
+//     requestPasswordReset, 
+//     verifyResetToken, 
+//     resetPassword 
+//   } = useAuth();
 
 //   // Evitar scroll cuando el modal está abierto
 //   useEffect(() => {
@@ -114,101 +126,119 @@
 //     }
 //   }, [selectedCountry, selectedState]);
 
-//   // --------- DETECTAR SI HAY RESET POR ENLACE (ACTUALIZADO PARA PLUGIN) ---------
+//   // ✅ ACTUALIZADO: Detectar reset por enlace usando funciones del context
 //   useEffect(() => {
 //     const params = new URLSearchParams(window.location.search);
 //     const token = params.get("token");
-//     const email = params.get("email");
+//     const emailParam = params.get("email");
     
-//     if (token && email) {
+//     if (token && emailParam) {
 //       setIsResetPasswordMode(true);
 //       setResetToken(token);
-//       setResetEmailFromUrl(email);
+//       setResetEmailFromUrl(emailParam);
 //       setModalType("reset-password");
       
-//       // Verificar que el token sea válido directamente aquí
-//       const verifyToken = async () => {
+//       // Verificar token usando función del context
+//       const verifyTokenAsync = async () => {
 //         try {
-//           const response = await fetch(getApiUrl('VERIFY_RESET_TOKEN'), {
-//             method: 'POST',
-//             headers: { 'Content-Type': 'application/json' },
-//             body: JSON.stringify({ token, email }),
-//           });
-
-//           const data = await response.json();
-          
-//           if (!response.ok) {
-//             setError(data.message || 'Token inválido o expirado');
-//             setIsResetPasswordMode(false);
-//             setModalType("login");
-//           }
+//           await verifyResetToken(token, emailParam);
 //         } catch (err) {
-//           setError('Error verificando el token');
+//           setError(err.message || 'Token inválido o expirado');
 //           setIsResetPasswordMode(false);
 //           setModalType("login");
 //         }
 //       };
       
-//       verifyToken();
+//       verifyTokenAsync();
 //     }
-//   }, [setModalType]);
+//   }, [setModalType, verifyResetToken]);
 
-//   // --------- FUNCIÓN PRINCIPAL DE LOGIN/REGISTRO ---------
-//   const handleAuth = async () => {
-//     setError(null);
-//     setMessage("");
-//     setSuccess(false);
-//     setUserExists(false);
-//     setLoading(true);
+//   // ✅ ACTUALIZADO: Función de login con manejo de conflictos
+//   const handleLogin = async () => {
+//     const loginErrors = {};
 
-//     setLoadingMessage(
-//       modalType === "signup"
-//         ? "Registrando usuario..."
-//         : modalType === "login"
-//         ? "Verificando usuario..."
-//         : "Procesando..."
-//     );
-
-//     if (modalType === "login") {
-//       const loginErrors = {};
-
-//       if (!email) {
-//         loginErrors.email = "Please complete this required field.";
-//       } else if (!/\S+@\S+\.\S+/.test(email)) {
-//         loginErrors.email = "Invalid email address.";
-//       }
-//       if (!password) {
-//         loginErrors.password = "Please complete this required field.";
-//       }
-//       if (Object.keys(loginErrors).length > 0) {
-//         setFieldErrors(loginErrors);
-//         setError("Please fill all required fields.");
-//         setLoading(false);
-//         return;
-//       }
-//       try {
-//         await login(email.trim(), password.trim());
-
-//         setMessage("✅ Logged in successfully.");
-//         setFieldErrors({});
-//         setError(null);
-//         setTimeout(() => setModalType(null), 2000);
-//       } catch (err) {
-//         console.error("Login error:", err);
-//         if (err instanceof AuthError) {
-//           setError(`${err.getFriendlyMessage()}`);
-//         } else if (typeof err.message === "string") {
-//           setError(`${err.message}`);
-//         } else {
-//           setError("An unexpected error occurred. Please try again.");
-//         }
-//       } finally {
-//         setLoading(false);
-//       }
+//     if (!email) {
+//       loginErrors.email = "Please complete this required field.";
+//     } else if (!/\S+@\S+\.\S+/.test(email)) {
+//       loginErrors.email = "Invalid email address.";
+//     }
+//     if (!password) {
+//       loginErrors.password = "Please complete this required field.";
+//     }
+    
+//     if (Object.keys(loginErrors).length > 0) {
+//       setFieldErrors(loginErrors);
+//       setError("Please fill all required fields.");
 //       return;
 //     }
 
-//     // REGISTRO
+//     try {
+//       const result = await login(email.trim(), password.trim());
+
+//       // ⚠️ NUEVO: Verificar si hay conflicto de sesión
+//       if (result && result.conflict) {
+//         setConflictCredentials({ email: email.trim(), password: password.trim() });
+//         setShowConflictModal(true);
+//         return;
+//       }
+
+//       // Si hay warning de modo offline
+//       if (result && result._warning) {
+//         console.warn('⚠️ Modo offline:', result._warning);
+//       }
+
+//       setMessage("✅ Logged in successfully.");
+//       setFieldErrors({});
+//       setError(null);
+//       setTimeout(() => setModalType(null), 2000);
+//     } catch (err) {
+//       console.error("Login error:", err);
+//       if (err instanceof AuthError) {
+//         setError(`${err.getFriendlyMessage()}`);
+//       } else if (typeof err.message === "string") {
+//         setError(`${err.message}`);
+//       } else {
+//         setError("An unexpected error occurred. Please try again.");
+//       }
+//     }
+//   };
+
+//   // ✅ NUEVO: Función para force login (cerrar otras sesiones)
+//   const handleForceLogin = async () => {
+//     setError(null);
+//     setLoading(true);
+//     setLoadingMessage("Cerrando otras sesiones...");
+
+//     try {
+//       await forceLogin(conflictCredentials.email, conflictCredentials.password);
+
+//       setShowConflictModal(false);
+//       setMessage("✅ Logged in successfully.");
+//       setFieldErrors({});
+//       setError(null);
+//       setTimeout(() => setModalType(null), 2000);
+//     } catch (err) {
+//       console.error("Force login error:", err);
+//       setShowConflictModal(false);
+//       if (err instanceof AuthError) {
+//         setError(`${err.getFriendlyMessage()}`);
+//       } else {
+//         setError(err.message || "Error al forzar inicio de sesión");
+//       }
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   // ✅ NUEVO: Cancelar force login
+//   const handleCancelForceLogin = () => {
+//     setShowConflictModal(false);
+//     setConflictCredentials({ email: '', password: '' });
+//     setPassword('');
+//   };
+
+//   // --------- FUNCIÓN DE REGISTRO ---------
+//   const handleRegister = async () => {
 //     const newErrors = {};
 //     const generalErrors = [];
 
@@ -250,44 +280,34 @@
 //         errorsToShow.push(...generalErrors);
 //       }
 //       setError(errorsToShow.join("\n"));
-//       setLoading(false);
 //       return;
 //     }
 
-//     // REGISTRO y LOGIN AUTOMÁTICO
 //     try {
 //       console.log("🔍 FRONTEND - Datos que se envían:", {
 //         email,
 //         username, 
 //         password: "***",
-//         selectedCountry,    // ✅ Verifica que tenga valor
-//         selectedState,      // ✅ Verifica que tenga valor  
-//         selectedCity,       // ✅ Verifica que tenga valor
-//         job,               // ✅ Verifica que tenga valor
-//         extraFields: {
-//           first_name: firstName,
-//           last_name: lastName,
-//           phone: fullPhoneNumber,
-//           company: company,
-//           country: selectedCountry,
-//           state: selectedState,
-//           city: selectedCity,
-//           job: job,
-//         }
+//         selectedCountry,
+//         selectedState,
+//         selectedCity,
+//         job,
 //       });
 
-//       await registerUser(email, username, password, {
-//         first_name: firstName,
-//         last_name: lastName,
+//       // ✅ ACTUALIZADO: Usar la función del context que maneja todo automáticamente
+//       await registerFromContext({
+//         email,
+//         username,
+//         password,
+//         firstName,
+//         lastName,
 //         phone: fullPhoneNumber,
-//         company: company,
+//         company,
 //         country: selectedCountry,
 //         state: selectedState,
 //         city: selectedCity,
-//         job: job,
+//         job,
 //       });
-
-//       await login(email, password);  // ✅ CORREGIDO: usar email en lugar de username
 
 //       setMessage("✅ Usuario registrado y logueado con éxito.");
 //       setSuccess(true);
@@ -299,27 +319,51 @@
 //         setMessage("");
 //       }, 2000);
 //     } catch (err) {
-//       const code = err.response?.data?.code;
+//       const code = err.code;
 //       if (code === "email_exists" || code === "username_exists") {
 //         setUserExists(true);
 //         setError(null);
 //       } else {
-//         setError("🚨 Error al registrar usuario. Puede que ya exista o haya un problema con WooCommerce.");
+//         setError("🚨 Error al registrar usuario. Puede que ya exista o haya un problema con el servidor.");
 //         setSuccess(false);
+//       }
+//     }
+//   };
+
+//   // --------- FUNCIÓN PRINCIPAL DE AUTH ---------
+//   const handleAuth = async () => {
+//     setError(null);
+//     setMessage("");
+//     setSuccess(false);
+//     setUserExists(false);
+//     setLoading(true);
+
+//     setLoadingMessage(
+//       modalType === "signup"
+//         ? "Registrando usuario..."
+//         : modalType === "login"
+//         ? "Verificando usuario..."
+//         : "Procesando..."
+//     );
+
+//     try {
+//       if (modalType === "login") {
+//         await handleLogin();
+//       } else if (modalType === "signup") {
+//         await handleRegister();
 //       }
 //     } finally {
 //       setLoading(false);
 //     }
 //   };
 
-//   // --------- FUNCIÓN PARA RESET PASSWORD (ACTUALIZADA PARA PLUGIN) ---------
+//   // ✅ ACTUALIZADO: Función para reset password usando context
 //   const handleResetPassword = async (e) => {
 //     e.preventDefault();
 //     setError(null);
 //     setMessage("");
 //     setLoading(true);
 
-//     // Validaciones
 //     if (!newPassword || !repeatNewPassword) {
 //       setError("Please complete all fields.");
 //       setLoading(false);
@@ -337,40 +381,24 @@
 //     }
 
 //     try {
-//       // ✅ USANDO ENDPOINT CORRECTO DEL PLUGIN
-//       const response = await fetch(getApiUrl('RESET_PASSWORD'), {
-//         method: "POST",
-//         headers: { "Content-Type": "application/json" },
-//         body: JSON.stringify({
-//           token: resetToken,
-//           email: resetEmailFromUrl,
-//           password: newPassword,
-//         }),
-//       });
+//       await resetPassword(resetToken, resetEmailFromUrl, newPassword);
       
-//       const data = await response.json();
-      
-//       if (response.ok) {
-//         setMessage("✅ Password updated successfully. You can now log in.");
-//         setTimeout(() => {
-//           setModalType("login");
-//           setIsResetPasswordMode(false);
-//           setNewPassword("");
-//           setRepeatNewPassword("");
-//           // Limpiar URL parameters
-//           window.history.replaceState({}, document.title, window.location.pathname);
-//         }, 2000);
-//       } else {
-//         setError(data.message || "Error resetting password.");
-//       }
+//       setMessage("✅ Password updated successfully. You can now log in.");
+//       setTimeout(() => {
+//         setModalType("login");
+//         setIsResetPasswordMode(false);
+//         setNewPassword("");
+//         setRepeatNewPassword("");
+//         window.history.replaceState({}, document.title, window.location.pathname);
+//       }, 2000);
 //     } catch (err) {
-//       setError("Error connecting to server.");
+//       setError(err.message || "Error resetting password.");
 //     } finally {
 //       setLoading(false);
 //     }
 //   };
 
-//   // --------- FUNCIÓN PARA SOLICITAR RESET (ACTUALIZADA PARA PLUGIN) ---------
+//   // ✅ ACTUALIZADO: Función para solicitar reset usando context
 //   const handleRequestPasswordReset = async (e) => {
 //     e.preventDefault();
 //     setError(null);
@@ -385,23 +413,12 @@
 //     }
 
 //     try {
-//       // ✅ USANDO ENDPOINT CORRECTO DEL PLUGIN
-//       const response = await fetch(getApiUrl('REQUEST_PASSWORD_RESET'), {
-//         method: "POST",
-//         headers: { "Content-Type": "application/json" },
-//         body: JSON.stringify({ email: resetEmail, origin: 'web' }),
-//       });
-
-//       const result = await response.json();
-
-//       if (response.ok) {
-//         setMessage("✅ Si tu email existe, recibirás instrucciones para resetear tu contraseña.");
-//         setResetEmail("");
-//       } else {
-//         setError(result.message || "🚨 Hubo un error.");
-//       }
+//       await requestPasswordReset(resetEmail, 'web');
+      
+//       setMessage("✅ Si tu email existe, recibirás instrucciones para resetear tu contraseña.");
+//       setResetEmail("");
 //     } catch (err) {
-//       setError("🚨 Error al conectar con el servidor.");
+//       setError(err.message || "🚨 Hubo un error.");
 //     } finally {
 //       setLoading(false);
 //     }
@@ -843,6 +860,33 @@
 //             {loading && <Loader message={loadingMessage} />}
 //           </>
 //         )}
+
+//         {/* ✅ NUEVO: Modal de Conflicto de Sesión */}
+//         {showConflictModal && (
+//           <div className="conflict-modal-overlay" onClick={(e) => e.stopPropagation()}>
+//             <div className="conflict-modal">
+//               <h3>⚠️ Sesión Activa Detectada</h3>
+//               <p>Ya existe una sesión activa en otro navegador o dispositivo.</p>
+//               <p>¿Deseas cerrar la sesión anterior e iniciar sesión aquí?</p>
+//               <div className="conflict-modal-actions">
+//                 <button
+//                   onClick={handleCancelForceLogin}
+//                   className="btn-secondary"
+//                   disabled={loading}
+//                 >
+//                   Cancelar
+//                 </button>
+//                 <button
+//                   onClick={handleForceLogin}
+//                   className="btn-danger"
+//                   disabled={loading}
+//                 >
+//                   {loading ? 'Cerrando sesión...' : 'Sí, iniciar sesión aquí'}
+//                 </button>
+//               </div>
+//             </div>
+//           </div>
+//         )}
 //       </div>
 //     </div>
 //   );
@@ -854,7 +898,18 @@
 
 
 
+
+
+
+
+
+
+
+
+
+// src/components/login/AuthModal.jsx
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import "../login/styles/authModal.scss";
 import { useAuth } from "../../../context/authProviderContext";
 import { AuthError } from "../../../utils/AuthError";
@@ -875,7 +930,6 @@ function isStrongPassword(password) {
   const hasLowercase = /[a-z]/.test(password);
   const hasNumber = /\d/.test(password);
   const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-
   return minLength && hasUppercase && hasLowercase && hasNumber && hasSpecial;
 }
 
@@ -902,7 +956,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
 
-  // ✅ NUEVO: Estado para conflicto de sesión
+  // Conflicto de sesión
   const [showConflictModal, setShowConflictModal] = useState(false);
   const [conflictCredentials, setConflictCredentials] = useState({ email: '', password: '' });
 
@@ -923,7 +977,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
   const [newPassword, setNewPassword] = useState("");
   const [repeatNewPassword, setRepeatNewPassword] = useState("");
 
-  // ✅ ACTUALIZADO: Usar funciones del context actualizado
+  // Context de auth
   const { 
     login, 
     forceLogin, 
@@ -933,13 +987,17 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
     resetPassword 
   } = useAuth();
 
-  // Evitar scroll cuando el modal está abierto
+  // Bloquear scroll SOLO cuando el modal está abierto + cerrar con ESC
   useEffect(() => {
+    if (!modalType) return;
     document.body.classList.add("no-scroll");
+    const onKey = (e) => { if (e.key === "Escape") setModalType(null); };
+    document.addEventListener("keydown", onKey);
     return () => {
       document.body.classList.remove("no-scroll");
+      document.removeEventListener("keydown", onKey);
     };
-  }, []);
+  }, [modalType, setModalType]);
 
   // Pre-cargar el email si es login
   useEffect(() => {
@@ -980,19 +1038,16 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
     }
   }, [selectedCountry, selectedState]);
 
-  // ✅ ACTUALIZADO: Detectar reset por enlace usando funciones del context
+  // Detectar reset por enlace usando funciones del context
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const token = params.get("token");
     const emailParam = params.get("email");
-    
     if (token && emailParam) {
       setIsResetPasswordMode(true);
       setResetToken(token);
       setResetEmailFromUrl(emailParam);
       setModalType("reset-password");
-      
-      // Verificar token usando función del context
       const verifyTokenAsync = async () => {
         try {
           await verifyResetToken(token, emailParam);
@@ -1002,15 +1057,13 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
           setModalType("login");
         }
       };
-      
       verifyTokenAsync();
     }
   }, [setModalType, verifyResetToken]);
 
-  // ✅ ACTUALIZADO: Función de login con manejo de conflictos
+  // Login
   const handleLogin = async () => {
     const loginErrors = {};
-
     if (!email) {
       loginErrors.email = "Please complete this required field.";
     } else if (!/\S+@\S+\.\S+/.test(email)) {
@@ -1019,28 +1072,21 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
     if (!password) {
       loginErrors.password = "Please complete this required field.";
     }
-    
     if (Object.keys(loginErrors).length > 0) {
       setFieldErrors(loginErrors);
       setError("Please fill all required fields.");
       return;
     }
-
     try {
       const result = await login(email.trim(), password.trim());
-
-      // ⚠️ NUEVO: Verificar si hay conflicto de sesión
       if (result && result.conflict) {
         setConflictCredentials({ email: email.trim(), password: password.trim() });
         setShowConflictModal(true);
         return;
       }
-
-      // Si hay warning de modo offline
       if (result && result._warning) {
         console.warn('⚠️ Modo offline:', result._warning);
       }
-
       setMessage("✅ Logged in successfully.");
       setFieldErrors({});
       setError(null);
@@ -1057,15 +1103,13 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
     }
   };
 
-  // ✅ NUEVO: Función para force login (cerrar otras sesiones)
+  // Force login
   const handleForceLogin = async () => {
     setError(null);
     setLoading(true);
     setLoadingMessage("Cerrando otras sesiones...");
-
     try {
       await forceLogin(conflictCredentials.email, conflictCredentials.password);
-
       setShowConflictModal(false);
       setMessage("✅ Logged in successfully.");
       setFieldErrors({});
@@ -1083,24 +1127,20 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
       setLoading(false);
     }
   };
-
-  // ✅ NUEVO: Cancelar force login
   const handleCancelForceLogin = () => {
     setShowConflictModal(false);
     setConflictCredentials({ email: '', password: '' });
     setPassword('');
   };
 
-  // --------- FUNCIÓN DE REGISTRO ---------
+  // Registro
   const handleRegister = async () => {
     const newErrors = {};
     const generalErrors = [];
-
     if (!firstName) newErrors.firstName = "Please complete this required field.";
     if (!username) newErrors.username = "Please complete this required field.";
     if (!company) newErrors.company = "Please complete this required field.";
     if (!job) newErrors.job = "Please complete this required field.";
-
     if (!email) {
       newErrors.email = "Please complete this required field.";
     } else if (!/\S+@\S+\.\S+/.test(email)) {
@@ -1113,42 +1153,21 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
         "Password must be at least 8 characters and include at least one uppercase letter, one lowercase letter, one number, and one special character."
       );
     }
-    
-    if (!repeatPassword) {
-      newErrors.repeatPassword = "Please complete this required field.";
-    }
-    
+    if (!repeatPassword) newErrors.repeatPassword = "Please complete this required field.";
     if (password && repeatPassword && password !== repeatPassword) {
       generalErrors.push("Passwords do not match.");
     }
     if (!selectedCountry) newErrors.country = "Please complete this required field.";
     if (!selectedState) newErrors.state = "Please complete this required field.";
-
     if (Object.keys(newErrors).length > 0 || generalErrors.length > 0) {
       setFieldErrors(newErrors);
       const errorsToShow = [];
-      if (Object.keys(newErrors).length > 0) {
-        errorsToShow.push("Please fill all required fields.");
-      }
-      if (generalErrors.length > 0) {
-        errorsToShow.push(...generalErrors);
-      }
+      if (Object.keys(newErrors).length > 0) errorsToShow.push("Please fill all required fields.");
+      if (generalErrors.length > 0) errorsToShow.push(...generalErrors);
       setError(errorsToShow.join("\n"));
       return;
     }
-
     try {
-      console.log("🔍 FRONTEND - Datos que se envían:", {
-        email,
-        username, 
-        password: "***",
-        selectedCountry,
-        selectedState,
-        selectedCity,
-        job,
-      });
-
-      // ✅ ACTUALIZADO: Usar la función del context que maneja todo automáticamente
       await registerFromContext({
         email,
         username,
@@ -1162,7 +1181,6 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
         city: selectedCity,
         job,
       });
-
       setMessage("✅ Usuario registrado y logueado con éxito.");
       setSuccess(true);
       setFieldErrors({});
@@ -1184,14 +1202,13 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
     }
   };
 
-  // --------- FUNCIÓN PRINCIPAL DE AUTH ---------
+  // Auth principal
   const handleAuth = async () => {
     setError(null);
     setMessage("");
     setSuccess(false);
     setUserExists(false);
     setLoading(true);
-
     setLoadingMessage(
       modalType === "signup"
         ? "Registrando usuario..."
@@ -1199,7 +1216,6 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
         ? "Verificando usuario..."
         : "Procesando..."
     );
-
     try {
       if (modalType === "login") {
         await handleLogin();
@@ -1211,13 +1227,12 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
     }
   };
 
-  // ✅ ACTUALIZADO: Función para reset password usando context
+  // Reset password (token)
   const handleResetPassword = async (e) => {
     e.preventDefault();
     setError(null);
     setMessage("");
     setLoading(true);
-
     if (!newPassword || !repeatNewPassword) {
       setError("Please complete all fields.");
       setLoading(false);
@@ -1233,10 +1248,8 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
       setLoading(false);
       return;
     }
-
     try {
       await resetPassword(resetToken, resetEmailFromUrl, newPassword);
-      
       setMessage("✅ Password updated successfully. You can now log in.");
       setTimeout(() => {
         setModalType("login");
@@ -1252,23 +1265,20 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
     }
   };
 
-  // ✅ ACTUALIZADO: Función para solicitar reset usando context
+  // Request reset password
   const handleRequestPasswordReset = async (e) => {
     e.preventDefault();
     setError(null);
     setMessage("");
     setLoading(true);
     setLoadingMessage("Enviando correo...");
-
     if (!resetEmail) {
       setError("Por favor ingresa tu correo.");
       setLoading(false);
       return;
     }
-
     try {
       await requestPasswordReset(resetEmail, 'web');
-      
       setMessage("✅ Si tu email existe, recibirás instrucciones para resetear tu contraseña.");
       setResetEmail("");
     } catch (err) {
@@ -1279,18 +1289,33 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
   };
 
   // --------- RENDER ---------
-  return (
-    <div className="modal-overlay" onClick={() => setModalType(null)}>
-      <div className={`modal-content ${loading ? "blurred" : ""}`} onClick={(e) => e.stopPropagation()}>
+  if (!modalType) return null;
+
+  return createPortal(
+    <div
+      className="modal-overlay"
+      role="dialog"
+      aria-modal="true"
+      onClick={() => setModalType(null)}
+    >
+      <div
+        className={`modal-content ${loading ? "blurred" : ""}`}
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* ----------- FORMULARIO DE RESET-PASSWORD ----------- */}
         {modalType === "reset-password" && isResetPasswordMode && (
           <form className="auth-form p-2">
             <div className="modal-header d-flex justify-content-center">
               <h2>Crear nueva contraseña</h2>
-              <button className="btn-close" onClick={() => {
-                setModalType(null);
-                window.history.replaceState({}, document.title, window.location.pathname);
-              }}>❌</button>
+              <button
+                className="btn-close"
+                onClick={() => {
+                  setModalType(null);
+                  window.history.replaceState({}, document.title, window.location.pathname);
+                }}
+              >
+                ❌
+              </button>
             </div>
             <div className="form-group p-3">
               <label>Nueva contraseña</label>
@@ -1350,8 +1375,6 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
               </h2>
               <button className="btn-close" onClick={() => setModalType(null)}>❌</button>
             </div>
-
-            {message && <p className="success-message">{message}</p>}
 
             {success ? (
               <div className="success-message">
@@ -1715,7 +1738,7 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
           </>
         )}
 
-        {/* ✅ NUEVO: Modal de Conflicto de Sesión */}
+        {/* Modal de Conflicto de Sesión */}
         {showConflictModal && (
           <div className="conflict-modal-overlay" onClick={(e) => e.stopPropagation()}>
             <div className="conflict-modal">
@@ -1742,7 +1765,8 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
           </div>
         )}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 
