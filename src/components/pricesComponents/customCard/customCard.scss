@@ -3,12 +3,12 @@
 .custom-card {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: 20px;
     text-align: center;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     min-height: 400px;
-    max-height: 400px;
+    // max-height: 400px;
     width: 90%;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     transform: scale(1);
@@ -16,6 +16,7 @@
     position: relative;
     --color-background-page: white !important; 
     background-color: var(--color-background-page) !important;
+      
 
     &.scale-up {
     transform: scale(1.1);
@@ -25,6 +26,13 @@
     &:hover {
     transform: scale(1.1);
     z-index: 2;
+    }
+    .card-content{
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1; /* ocupa la altura disponible */
+      text-align: left; /* mejora legibilidad de la lista */
     }
   
     .card-label {
@@ -51,14 +59,12 @@
   
     .card-features {
         list-style: disc;
-        padding: 0;
-        margin: 15px 0;
+        padding-left: 18px;
         text-align: left;
       li {
         color: gray;
         padding: 5px 0px;
         font-size: 14px;
-        margin-bottom: 5px;
         &::marker{
             font-size: 1.3em;
             color: black;
@@ -67,7 +73,7 @@
     }
   
     .container-btn-get-started {
-      margin-top: 150px;
+      margin-top: auto;
       display: flex;
       justify-content: center;
   
