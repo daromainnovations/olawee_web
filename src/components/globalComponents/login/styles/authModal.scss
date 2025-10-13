@@ -55,18 +55,22 @@ $white: #fff;
 // 🔹 Modal de autenticación
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
+  inset: 0; 
   padding: 20px;
   background: $background-modal;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: opacity 0.3s ease-in-out;
+  opacity: 1;
+  z-index: 2147483647;
+  pointer-events: all;       // asegúrate de capturar clicks
+  backdrop-filter: blur(2px);   // opcional
+  -webkit-backdrop-filter: blur(2px);
   
   .modal-content {
+    position: relative;
+    z-index: 1;
     width: 50%;
     max-width: 50%; 
     max-height: 80vh; // Limita la altura máxima del modal
@@ -380,3 +384,170 @@ $white: #fff;
 
 
 
+
+
+
+
+
+// =============================================================================
+// ESTILOS PARA MODAL DE CONFLICTO DE SESIÓN
+// Añadir esto al final de tu archivo authModal.scss
+// =============================================================================
+
+// Overlay del modal de conflicto
+.conflict-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000; // Más alto que el modal principal
+  padding: 20px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+// Modal de conflicto
+.conflict-modal {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  animation: slideUp 0.3s ease-out;
+  *{
+    background-color: transparent;
+  }
+
+  h3 {
+    margin: 0 0 16px 0;
+    color: #336BB3;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  p {
+    color: #666;
+    margin-bottom: 12px;
+    line-height: 1.6;
+    font-size: 15px;
+    text-align: center;
+
+    &:last-of-type {
+      margin-bottom: 24px;
+      font-weight: 600;
+      color: #333;
+    }
+  }
+}
+
+// Acciones del modal de conflicto
+.conflict-modal-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+
+  button {
+    flex: 1;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+  }
+}
+
+// Botón secundario (Cancelar)
+.btn-secondary {
+  background: #e0e0e0;
+  color: #333;
+
+  &:hover:not(:disabled) {
+    background: #d0d0d0;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+}
+
+// Botón peligro (Forzar Login)
+.btn-danger {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+  color: white;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+}
+
+// Animaciones
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive
+@media (max-width: 600px) {
+  .conflict-modal {
+    padding: 24px;
+    margin: 0 16px;
+
+    h3 {
+      font-size: 20px;
+    }
+
+    p {
+      font-size: 14px;
+    }
+  }
+
+  .conflict-modal-actions {
+    flex-direction: column;
+
+    button {
+      width: 100%;
+    }
+  }
+}
+
+// =============================================================================
+// FIN DE ESTILOS PARA MODAL DE CONFLICTO
+// =============================================================================

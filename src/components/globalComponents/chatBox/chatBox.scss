@@ -40,9 +40,9 @@
       .chat-layout {
         background-color: white;
   
-        * {
-          color: white;
-        }
+        // * {
+        //   color: white;
+        // }
   
         .chat-header {
           background-color: black !important;
@@ -59,9 +59,9 @@
             align-items: center;
             gap: 10px;
   
-            * {
-              color: black !important;
-            }
+            // * {
+            //   color: black !important;
+            // }
   
             .okapi-text {
               background-color: transparent;
@@ -98,9 +98,9 @@
               .chat-message-markdown {
                 background-color: #D9D9D9;
   
-                * {
-                  background-color: #D9D9D9;
-                }
+                // * {
+                //   background-color: #D9D9D9;
+                // }
   
                 ol li::marker {
                   color: black;

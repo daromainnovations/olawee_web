@@ -35,14 +35,11 @@ $desktop: 1025px;
    HERO SECTION
    ============================== */
    .hero-section {
-    padding: 8rem 2rem 4rem 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    min-height: 60vh;
-    text-align: center;
+    
+    div, p, img, h1{
+      background-color: transparent;
+    }
+    
   
     @media (max-width: $tablet) {
       padding: 6rem 1.5rem 3rem 1.5rem;

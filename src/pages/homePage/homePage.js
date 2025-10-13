@@ -63,13 +63,8 @@
 
 // export default HomePage;
 
-
-
-import { useState } from "react";
-import BannerOferta from "../../components/globalComponents/bannerOferta/bannerOferta";
 import Menu from "../../components/globalComponents/headerMenu/menu"
 import "./homePage.scss"
-import GoalDescriptionInput from "../../components/homePageComponents/goalDescriptionInput/goalDescriptionInput";
 import TutorialWhitVideo from "../../components/homePageComponents/tutorialWhitVideo/tutorialWhitVideo";
 import SavingsAndBenefits from "../../components/homePageComponents/savingsAndBenefits/savingsAndBenefits";
 import CarouselCards from "../../components/homePageComponents/carouselCards/carouselCards";
@@ -78,38 +73,59 @@ import SocialIcons from "../../components/globalComponents/socialIcons/socialIco
 import GradientLine from "../../components/globalComponents/gradientLine/gradientLine";
 import Footer from "../../components/globalComponents/footer/footer";
 import ProductsSection from "../../components/pricesComponents/productsSection/productsSection";
-import myImgI from "../../../src/media/img/letraImagen.png";
+import myImgI from "../../../src/media/img/Logo_Olawee_Web.png";
+import fondoHero from "../../../src/media/img/Img-oceano.jpg";
 import FreeTrialButton from "../../components/globalComponents/principalButton/principalButton";
 
 const HomePage = () => {
-    const [bannerHeight, setBannerHeight] = useState(0);
+    // const [bannerHeight, setBannerHeight] = useState(0);
     return (
         <div className="homepage-wrapper">
-            <BannerOferta setBannerHeight={setBannerHeight} />
 
             <div className="page-content"
                 style={{
-                    paddingTop: `${bannerHeight + 60}px`,
+                    
                     transition: "padding-top 0.4s ease-in-out"
                 }}
             >
                 {/* Wrapper para el contenido principal */}
                 <main className="main-content">
-                    <Menu bannerHeight={bannerHeight - 20} customClass="custom-navbar-style" />
+                    <Menu customClass="custom-navbar-style" />
 
-                    <div className="d-flex justify-content-center text-center">
-                        <img src={myImgI} alt="logo-okapi"></img>
-                    </div>
-                    <div className="d-flex justify-content-center text-center">
-                        <p className="mt-2 secondary-title">LA IA COLABORATIVA QUE IMPULSA TU PRODUCTIVIDAD</p>
-                    </div>
-                    <div className="d-flex justify-content-center text-center">
-                        <p className="text">Elige, crea y comparte asistentes de IA que se adepten a tu forma de tarbajar. Ahorra tiempo, mejora la eficiencia y colabora de manera más inteligente con tu equipo</p>
-                    </div><br></br>
-                    <GoalDescriptionInput />
-
-                    <div className="d-flex justify-content-center text-center">
-                        <FreeTrialButton text="PRUEBA GRATIS DURANTE 15 DIAS" className="btn-custom btn-savings" containerClass="container-btn-savings" />
+                    <div
+                        className="hero-section d-flex justify-content-center text-center position-relative"
+                        style={{
+                            minHeight: "70vh",
+                            padding: "0rem 1rem",
+                            color: "#fff",
+                            backgroundImage: `linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.45)), url(${fondoHero})`,
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
+                            backgroundRepeat: "no-repeat",
+                        }}
+                        >
+                        
+                        {/* Contenido */}
+                        <div className="hero-content w-100 position-relative" style={{ zIndex: 1 }}>
+                            <div className="container-logo d-flex justify-content-center text-center">
+                                <img src={myImgI} alt="logo-olawee" className="logo" />
+                            </div>
+                            <div className="d-flex justify-content-center text-center">
+                                <h1 className="mb-6 text-balance text-4xl font-bold tracking-tight text-blue-800 drop-shadow sm:text-5xl lg:text-6xl">INNOVACIÓN SIN BARRERAS, INTELIGENCIA COLECTIVA.
+                                </h1>
+                            </div>
+                            <div className="d-flex justify-content-center text-center">
+                                <p className="text">
+                                La plataforma que democratiza el acceso a la inteligencia artificial para empresas, asociaciones y colectivos. Sin necesidad de conocimientos técnicos ni grandes inversiones.
+                                </p>
+                            </div>
+                            <br />
+                            <div className="d-flex flex-column align-items-center justify-content-center gap-3">
+                                <FreeTrialButton text=" Únete al lanzamiento del 15 de octubre y consigue 1 año de OLAWEE gratis." className="btn-olawee-ghost btn-olawee-ghost--xl is-attention"  />
+                                <a href="#products-section" className="ms-1 enlace-secundario">Ver cómo funciona</a>
+                            </div>
+                            
+                        </div>
                     </div>
 
                     <TutorialWhitVideo />
