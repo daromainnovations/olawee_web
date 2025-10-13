@@ -419,10 +419,13 @@ $white: #fff;
   width: 100%;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
   animation: slideUp 0.3s ease-out;
+  *{
+    background-color: transparent;
+  }
 
   h3 {
     margin: 0 0 16px 0;
-    color: #ff9800;
+    color: #336BB3;
     font-size: 24px;
     font-weight: 700;
     text-align: center;
@@ -451,10 +454,10 @@ $white: #fff;
 
   button {
     flex: 1;
-    padding: 14px 24px;
+    padding: 10px 14px;
     border: none;
     border-radius: 8px;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;

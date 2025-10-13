@@ -12,8 +12,8 @@ const USE_ID_FILTER = true; // ← Cambiar a true para filtrar por IDs específi
 const ORDERED_IDS = ["78" , "93", "92" ]; // Solo se usa si USE_ID_FILTER = true
 
 const BADGES = {
-  "78": "14 días gratis",  // ← Añadido según tus productos reales
-  "93": "Individual",
+  "78": "14 días de prueba gratis",  // ← Añadido según tus productos reales
+  "93": "1 licencia",
   "92": "3 licencias incluidas",
 };
 
