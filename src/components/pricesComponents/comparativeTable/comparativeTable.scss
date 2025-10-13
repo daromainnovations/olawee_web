@@ -104,6 +104,11 @@
         background-color: #11192A;
         color: white;
         font-weight: bold;
+        span{
+          font-weight: normal;
+          opacity: .7;
+          font-size: 12px;
+        }
       }
   
       td {

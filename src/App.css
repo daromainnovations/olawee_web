@@ -7,9 +7,13 @@
 
 body{
   background-color: var(--color-background-page);
-  color: var(--color-font-global);
+  color: var(--color-font-global) !important;
 }
 html, body {
   overflow-x: hidden;
   width: 100vw;
+}
+
+#launcher-frame {
+  background-color: transparent;
 }

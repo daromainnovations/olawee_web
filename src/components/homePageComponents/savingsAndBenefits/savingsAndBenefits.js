@@ -7,7 +7,8 @@ const SavingsAndBenefits = () => {
     return (
         <div className="mb-5 container-custom">
             <div className="container-title-savings-benefits d-flex justify-content-center">
-                <h1 className="text-center">DESCUBRE LOS BENEFICIOS</h1>
+                <h1 className="text-center">Haz más, en menos tiempo, con la IA que se adapta a ti.
+                </h1>
             </div>
             
             <div className="row container-benefits-and-savings">
@@ -19,20 +20,22 @@ const SavingsAndBenefits = () => {
                 {/* Columna derecha con los tres divs y el botón */}
                 <div className="col-md-6 container-text-benefits">
                     <div className="info-section savings">
-                        <h4>AHORRO DE TIEMPO</h4>
-                        <p><span className="highlight">Reutiliza conocimiento, automatiza tareas y reduce la carga operativa cada semana</span></p>
+                        <h4>COMPARTE ASISTENTES Y PROMPTS</h4>
+                        <p><span className="highlight">Colabora eficientemente compartiendo recursos personalizados y creando red entre organizaciones.</span></p>
                     </div>
                     <div className="info-section benefits">
-                        <h4>EFICIENCIA</h4>
-                        <p><span className="highlight">Impulsa el rendimiento de tu equipo con agentes de IA personalizados y bibliotecas compartidas</span></p>
+                        <h4>SELECCIONA TUS IAs</h4>
+                        <p><span className="highlight">Elige entre distintos modelos y proveedores según las necesidades concretas de tu entidad.
+                        </span></p>
                     </div>
                     <div className="info-section roi">
-                        <h4>COLABORACIÓN</h4>
-                        <p><span className="highlight">Conecta equipos y departamentos para innovar sin barreras técnicas</span></p>
+                        <h4>AUTOMATIZA TAREAS Y AUMENTA LA PRODUCTIVIDAD</h4>
+                        <p><span className="highlight">Libera horas de trabajo eliminando procesos repetitivos y enfócate en lo estratégico.
+                        </span></p>
                     </div>
                      <div className="info-section impacto">
-                        <h4>IMPACTO COMPARTIDO</h4>
-                        <p><span className="highlight">Multiplica los beneficios cuando compartes IA dentro de tu organización</span></p>
+                        <h4>COMUNIDAD OLAWEE</h4>
+                        <p><span className="highlight">Un espacio vivo donde profesionales y entidades comparten experiencias, casos de uso y buenas prácticas.</span></p>
                     </div>
                     
                     <PrincipalButton text="EMPEZAR YA" className="btn-custom btn-savings" containerClass="container-btn-savings"/>

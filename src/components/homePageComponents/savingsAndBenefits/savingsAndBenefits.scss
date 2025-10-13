@@ -33,16 +33,16 @@
                 }
             }
             .savings h4{
-                color: #FFC310;
+                color: #4374b8;
             }
             .benefits h4{
-                color: #5AD301;
+                color: #4374b8;
             }
             .roi h4{
-                color: #0783FF;
+                color: #4374b8;
             }
             .impacto h4{
-                color: #7569C4;
+                color: #4374b8;
             }
     
             .benefits, .roi, .impacto{
@@ -53,6 +53,7 @@
                 justify-content: center;
                 .btn-savings{
                     margin-top: 30px;
+                    padding: 12px 24px;
                     &:hover{
                         background-color: #0B1418;
                     }
