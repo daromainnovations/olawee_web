@@ -15,7 +15,7 @@ const TutorialWhitVideo = () => {
   };*/
 
     return (
-        <div className="mb-5 container-tutorial">
+        <div className="container-tutorial">
           <div className="row">
             {/* Columna izquierda con el título y el acordeón */}
             <div className="col-md-6 mt-1">
@@ -43,7 +43,7 @@ const TutorialWhitVideo = () => {
                     data-bs-parent="#accordionExample"
                   >
                     <div className="accordion-body">
-                    Describe tu tarea o proyecto y obtén respuestas ajustadas a tus necesidades
+                    Describe tu tarea o proyecto y obtén respuestas ajustadas a tus necesidades.
                     </div>
                   </div>
                 </div>
@@ -68,7 +68,7 @@ const TutorialWhitVideo = () => {
                     data-bs-parent="#accordionExample"
                   >
                     <div className="accordion-body">
-                    Diseña prompts o asistentes personalizados, guárdalos y úsalos siempre que lo necesites
+                    Diseña prompts o asistentes personalizados, guárdalos y úsalos siempre que lo necesites.
                     </div>
                   </div>
                 </div>
@@ -93,7 +93,7 @@ const TutorialWhitVideo = () => {
                     data-bs-parent="#accordionExample"
                   >
                     <div className="accordion-body">
-                    Publica tus mejores creaciones, descubre las de otros y participa en una comunidad que multiplica el conocimiento
+                    Publica tus mejores creaciones, descubre las de otros y participa en una comunidad que multiplica el conocimiento.
                     </div>
                   </div>
                 </div>
@@ -118,7 +118,7 @@ const TutorialWhitVideo = () => {
                     data-bs-parent="#accordionExample"
                   >
                     <div className="accordion-body">
-                    Nuestro agente especializado analiza el uso de la IA de tu empresa, detecta oportunidades de optimización y te ayuda a tomar decisiones estratégicas
+                    Nuestro agente especializado analiza el uso de la IA de tu empresa, detecta oportunidades de optimización y te ayuda a tomar decisiones estratégicas.
                     </div>
                   </div>
                 </div>
