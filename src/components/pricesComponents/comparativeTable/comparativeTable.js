@@ -82,8 +82,8 @@ const PlansTable = () => {
           <tr>
             <th>Funciones</th>
             <th>OLAWEE - explora <br /><span>( Prueba 14 días )</span></th>
-            <th>OLAWEE - individual <br /> <span>( 1 licencia )</span></th>
-            <th>OLAWEE - entidad <br /> <span>( 3 licencias incluidas )</span></th>
+            <th>OLAWEE - impulsa <br /> <span>( 1 licencia )</span></th>
+            <th>OLAWEE - equipo <br /> <span>( 3 licencias incluidas )</span></th>
             {/* <th>OLAWEE - COLECTIVOS</th> */}
           </tr>
         </thead>

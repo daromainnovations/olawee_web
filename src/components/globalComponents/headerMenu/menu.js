@@ -24,7 +24,7 @@ const Menu = ({ bannerHeight, customClass = "" }) => {
   const [modalType, setModalType] = useState(null);
 
   const ocultarPersonalizarRoi=false; //ocultar provisional 
-  const ocultarFAQ=false; //ocultar provisional
+  // const ocultarFAQ=false; //ocultar provisional
 
   // Actualizar la posición del menú cuando cambia el bannerHeight
   useEffect(() => {
@@ -151,9 +151,8 @@ const Menu = ({ bannerHeight, customClass = "" }) => {
                       </li>
                     </ul>
                   </li>
-                  {ocultarFAQ && ( //ocultación provisional
                     <a className={`nav-link ${location.pathname === "/faq" ? "active" : ""}`} href="/faq">FAQ</a>
-                  )}
+                  
                 </div>
 
                 <div className="container-buttons d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3 mt-3 mt-lg-0">

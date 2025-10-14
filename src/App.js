@@ -27,6 +27,10 @@ import AuthModal from './components/globalComponents/login/authModal';
 import CustomizeRoiPage from './pages/customizeRoiPage/customizeRoiPage';
 import OkapiSocialPage from './pages/okapiSocialPage/okapiSocialPage';
 import FreshchatLoader from './components/globalComponents/FreshchatLoader';
+import CheckoutPage from './pages/checkout/checkoutPage';
+import OrderConfirmationPage from './pages/orderConfirmationPage/orderConfirmationPage';
+import MyAccountPage from './pages/myAccountPage/myAccountPage';
+import AuthModalListener from './components/authModalListener';
 
 const App = () => {
   const location = useLocation();
@@ -65,43 +69,47 @@ const App = () => {
   
   return (
     <AuthProvider>
-      {/* ✅ NUEVO: SessionListenerProvider para detectar sesiones en múltiples ventanas */}
-      <SessionListenerProvider>
-        <ChatProvider>
-        <FreshchatLoader />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/Prices" element={<PricePage />} />
-            <Route path="/User-Cases" element={<SucessPage />} />
-            <Route path="/case-study/:id" element={<CaseStudyPage />} />
-            <Route path="/customize" element={<CustomizeRoiPage />} />
-            <Route path="/customize/social" element={<OkapiSocialPage />} />
-            <Route path="/FAQ" element={<FaqPages />} />
-            <Route path="/login" element={<LoginButton />} />
-            <Route path="/signup" element={<SignUpButton />} />
-            <Route path="/reset-password" element={<ResetPasswordForm />} />
-            <Route path="/dashboard" element={
-              <PrivateRoute>
-                <NewsProvider>
-                  <ProjectsProvider>
-                    <LicensesProvider>
-                      <UserPanel />
-                    </LicensesProvider>
-                  </ProjectsProvider>
-                </NewsProvider>
-              </PrivateRoute>
-            }
-            />
-          </Routes>
-          {modalType && (
-            <AuthModal
-              modalType={modalType}
-              setModalType={setModalType}
-              preloadedEmail={preloadedEmail}
-            />
-          )}
-        </ChatProvider>
-      </SessionListenerProvider>
+        <SessionListenerProvider>
+        <AuthModalListener setModalType={setModalType} />
+          <ChatProvider>
+          <FreshchatLoader />
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/Prices" element={<PricePage />} />
+              <Route path="/User-Cases" element={<SucessPage />} />
+              <Route path="/case-study/:id" element={<CaseStudyPage />} />
+              <Route path="/customize" element={<CustomizeRoiPage />} />
+              <Route path="/customize/social" element={<OkapiSocialPage />} />
+              <Route path="/FAQ" element={<FaqPages />} />
+              <Route path="/checkout" element={<CheckoutPage />} />
+              <Route path="/order-confirmation/:orderId" element={<OrderConfirmationPage />} />
+              <Route path="/my-account" element={<MyAccountPage />} />
+              <Route path="/login" element={<LoginButton />} />
+              <Route path="/signup" element={<SignUpButton />} />
+              <Route path="/reset-password" element={<ResetPasswordForm />} />
+              <Route path="/dashboard" element={
+                <PrivateRoute>
+                  <NewsProvider>
+                    <ProjectsProvider>
+                      <LicensesProvider>
+                        <UserPanel />
+                      </LicensesProvider>
+                    </ProjectsProvider>
+                  </NewsProvider>
+                </PrivateRoute>
+              }
+              />
+            </Routes>
+            {modalType && (
+              <AuthModal
+                modalType={modalType}
+                setModalType={setModalType}
+                preloadedEmail={preloadedEmail}
+              />
+            )}
+          </ChatProvider>
+          <AuthModalListener />
+        </SessionListenerProvider>
     </AuthProvider>
   );
 };
