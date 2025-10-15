@@ -27,14 +27,14 @@ $color-font-global: #fff; // Color de texto global
 
 // Estilos generales para el nav
 nav {
-  background-color: #0b14182f;
+  background-color: #0b1418;
   font-family: "Inter", serif;
   font-weight: 400;
   height: 65px;
   width: 100%;
   transition: top 0.3s ease-in-out;
-  z-index: 1040;
-  opacity: 0.85;
+  z-index: 10000;
+  opacity: 1;
   
   .container-fluid{
     padding: 0px;
@@ -45,9 +45,13 @@ nav {
         img{
           width: 145px !important;
           height: auto;
-          margin-bottom: 10px;
+          padding-top: 10px;
           background-color: transparent;
         } 
+      
+    }
+    .offcanvas{
+      padding-top: 10px !important;
     }
   }
   .navbar-nav {
@@ -212,13 +216,12 @@ nav {
     margin-top: 10px;
     .container-fluid{
       height: 70px;
-      margin-top: -5px;
+      margin-top: -20px;
       .logo{
-        a{
           img{
+            margin-top: -15px;
             height: auto !important;
           }
-        }
       }
     }
   }
@@ -276,7 +279,24 @@ nav {
 @media (max-width: 589px){
   nav{
     .container-fluid{
-      margin-top: 0px;
+      margin-top: -19px;
+    }
+  }
+  .offcanvas.offcanvas-top{
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 560px){
+  nav{
+    .container-fluid{
+      padding-top: 0px;
+      .logo{
+        img{
+          margin-top: 0px;
+          height: auto !important;
+        }
+    }
     }
   }
   .offcanvas.offcanvas-top{
@@ -289,7 +309,7 @@ nav {
     margin-top: 160px;
     .container-fluid{
       height: 70px;
-      margin-top: 20px;
+      margin-top: -10px;
       .logo{
         a{
           img{

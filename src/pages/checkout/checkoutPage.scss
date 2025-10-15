@@ -1,0 +1,537 @@
+/* src/pages/CheckoutPage/CheckoutPage.scss */
+
+/* ---- THEME TOKENS (Olawee Azul–Morado) ---- */
+:root {
+    --ol-bg: #071115;
+    --ol-surface: rgba(255, 255, 255, 0.06);
+    --ol-card: rgba(255, 255, 255, 0.08);
+    --ol-border: rgba(255, 255, 255, 0.12);
+    --ol-text: #e6f1f4;
+    --ol-text-dim: #b6c5cb;
+    --ol-text-dim-nuevo: #9f9f9f;
+  
+    /* Gradiente azul-morado */
+    --ol-2: #396bb3ff;  /* azul */
+    --ol-1: #6c52a7;    /* morado */
+    --ol-grad: #396bb3ff;
+  
+    --radius-lg: 18px;
+    --radius-md: 12px;
+    --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.35);
+    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.25);
+  
+    /* halo de foco con el nuevo esquema */
+    --focus: 0 0 0 3px color-mix(in oklab, var(--ol-2) 60%, transparent),
+             0 0 0 6px color-mix(in oklab, var(--ol-1) 35%, transparent);
+  }
+  
+  
+  /* Reduce motion for users que lo prefieren */
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+  
+  /* ---------------------------
+     PAGE
+  ---------------------------- */
+  .checkout-page {
+    min-height: 100vh;
+    padding: 72px 20px;
+    color: var(--ol-text);
+    background:
+      radial-gradient(1200px 600px at 10% -10%, rgba(41, 121, 255, 0.18), transparent 60%),
+      radial-gradient(1500px 500px at 110% 10%, rgba(14, 82, 207, 0.16), transparent 60%),
+      var(--ol-bg);
+    position: relative;
+    isolation: isolate;
+  
+    /* sutil patrón */
+    &::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(1px 1px at 20px 20px, rgba(255,255,255,0.06), transparent) 0 0/26px 26px;
+      opacity: .25;
+      pointer-events: none;
+      z-index: -1;
+    }
+  
+    * { background-color: transparent; }
+  }
+  
+  .checkout-container {
+    max-width: 1160px;
+    margin: 0 auto;
+  }
+  
+  /* ---------------------------
+     TITLES
+  ---------------------------- */
+  .checkout-page{
+    .checkout-container{
+        .checkout-title {
+            font-size: clamp(2rem, 1.4rem + 2vw, 3rem);
+            font-weight: 800;
+            text-align: center;
+            margin: 0 0 38px;
+            letter-spacing: 0.2px;
+            background: #396bb3ff;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            filter: drop-shadow(0 6px 24px rgba(41, 121, 255, 0.25));
+          }
+    }
+  }
+  
+  /* ---------------------------
+     GRID
+  ---------------------------- */
+  .checkout-grid {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 28px;
+  
+    @media (max-width: 992px) {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .checkout-main {
+    order: 1;
+    @media (max-width: 992px) { order: 2; }
+  }
+  
+  .checkout-sidebar {
+    order: 2;
+    @media (max-width: 992px) { order: 1; }
+  }
+  
+  /* ---------------------------
+     CARD / SECTION
+  ---------------------------- */
+  .checkout-section {
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.06));
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--ol-border);
+    box-shadow: var(--shadow-md);
+  
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin: 4px 0 22px;
+      color: var(--ol-text);
+    }
+  
+    h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 0 0 14px;
+      color: var(--ol-text);
+      opacity: .9;
+    }
+  }
+  
+  /* ---------------------------
+     FORM
+  ---------------------------- */
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 18px;
+    margin-bottom: 24px;
+  
+    @media (max-width: 768px) { grid-template-columns: 1fr; }
+  }
+  
+  .form-field {
+    display: flex;
+    flex-direction: column;
+  
+    &.full-width { grid-column: 1 / -1; }
+  
+    label {
+      font-size: .92rem;
+      font-weight: 700;
+      color: var(--ol-text-dim);
+      margin: 0 0 8px;
+    }
+  
+    input {
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--ol-border);
+      color: var(--ol-text);
+      font-size: 1rem;
+      outline: none;
+      transition: border-color .25s, box-shadow .25s, transform .06s ease;
+  
+      &:hover {
+        border-color: rgba(255,255,255,0.22);
+      }
+  
+      &:focus {
+        border-color: rgba(41,121,255,0.65);
+        box-shadow: var(--focus);
+      }
+  
+      &:active { transform: scale(.998); }
+  
+      &::placeholder { color: #93a4aa; }
+    }
+  }
+  
+  /* ---------------------------
+     MÉTODOS DE PAGO
+  ---------------------------- */
+  .payment-method-section {
+    margin-top: 20px;
+    padding-top: 22px;
+    border-top: 1px dashed rgba(255,255,255,0.12);
+  }
+  
+  .payment-methods {
+    display: grid;
+    gap: 12px;
+  }
+  
+  .payment-option {
+    display: grid;
+    grid-template-columns: 22px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--ol-border);
+    background: var(--ol-card);
+    cursor: pointer;
+    transition: transform .08s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+  
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(41,121,255,0.45);
+      background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+    }
+  
+    input[type="radio"] {
+      width: 20px; height: 20px;
+      accent-color: #2979ff;
+      cursor: pointer;
+      margin: 0;
+    }
+  
+    span {
+      font-weight: 600;
+      color: var(--ol-text);
+      letter-spacing: .1px;
+    }
+  
+    /* Estilo cuando está seleccionada (navegadores modernos) */
+    &:has(input:checked) {
+      border-color: rgba(14,207,187,0.7);
+      background:
+        linear-gradient(180deg, rgba(14,207,187,0.10), rgba(41,121,255,0.10)),
+        var(--ol-card);
+      box-shadow: 0 0 0 1px rgba(14,207,187,0.4) inset, var(--shadow-md);
+    }
+  }
+  /* Radio/accent y hover borders a juego */
+.payment-option input[type="radio"] { accent-color: var(--ol-2); }
+
+.payment-option:hover {
+  border-color: color-mix(in oklab, var(--ol-2) 55%, white);
+}
+
+.payment-option:has(input:checked) {
+  border-color: color-mix(in oklab, var(--ol-1) 70%, transparent);
+  background:
+    linear-gradient(180deg,
+      color-mix(in oklab, var(--ol-1) 14%, transparent),
+      color-mix(in oklab, var(--ol-2) 12%, transparent)
+    ),
+    var(--ol-card);
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--ol-1) 45%, transparent) inset,
+    var(--shadow-md);
+}
+  
+  /* ---------------------------
+     BOTONES
+  ---------------------------- */
+  .btn-continue,
+  .btn-pay {
+    width: 100%;
+    padding: 15px 18px;
+    background: var(--ol-grad);
+    color: white;
+    border: 0;
+    border-radius: 14px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: .2px;
+    cursor: pointer;
+    transition: transform .08s ease, box-shadow .25s ease, filter .25s ease;
+    margin-top: 18px;
+    box-shadow: 0 12px 30px rgba(41,121,255,0.35);
+  
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 36px rgba(41,121,255,0.45);
+      filter: saturate(1.05);
+    }
+    &:active:not(:disabled) { transform: translateY(0); }
+    &:disabled { opacity: .55; cursor: not-allowed; box-shadow: none; }
+  }
+  .btn-continue,
+.btn-pay {
+  box-shadow: 0 12px 30px color-mix(in oklab, var(--ol-1) 45%, transparent);
+}
+  
+  /* ---------------------------
+     MENSAJES DE ERROR
+  ---------------------------- */
+  .error-message {
+    background: rgba(255, 85, 85, 0.1);
+    border: 1px solid rgba(255, 85, 85, 0.35);
+    color: #ffb3b3;
+    padding: 12px 14px;
+    border-radius: 12px;
+    margin: 14px 0 0;
+    font-weight: 600;
+  }
+  
+  /* ---------------------------
+     SIDEBAR (Resumen)
+  ---------------------------- */
+  .order-summary {
+    position: sticky;
+    top: 24px;
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06)),
+      var(--ol-surface);
+    border: 1px solid var(--ol-border);
+    box-shadow: var(--shadow-xl);
+  
+    h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin: 0 0 14px;
+      color: var(--ol-text);
+      padding-bottom: 14px;
+      border-bottom: 1px dashed rgba(255,255,255,0.12);
+    }
+  }
+  
+  .product-summary {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 0;
+    border-bottom: 1px dashed rgba(255,255,255,0.12);
+    margin-bottom: 12px;
+  
+    .product-name {
+      font-weight: 700;
+      color: var(--ol-text);
+    }
+    .product-price {
+      font-weight: 800;
+      background: var(--ol-grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-size: 1.05rem;
+    }
+  }
+  
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    color: var(--ol-text-dim-nuevo);
+    font-size: .98rem;
+  }
+  
+  .summary-total {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 0 4px;
+    margin-top: 8px;
+    border-top: 1px dashed rgba(255,255,255,0.12);
+    font-size: 1.18rem;
+    font-weight: 900;
+    color: var(--ol-text);
+  
+    span:last-child {
+      background: #396bb3ff;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+  }
+  
+  .summary-benefits {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed rgba(255,255,255,0.12);
+    display: grid;
+    gap: 6px;
+  
+    div {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 0;
+      color: #709df0;
+      font-weight: 700;
+      font-size: .95rem;
+  
+      &::before {
+        content: "✓";
+        font-weight: 900;
+        opacity: .9;
+      }
+    }
+  }
+  
+  /* ---------------------------
+     STRIPE / PAYPAL CONTAINERS
+  ---------------------------- */
+  .payment-form { margin-top: 16px; }
+  .paypal-buttons { margin-top: 16px; }
+  
+  /* Ajuste de elementos embebidos con bordes agradables */
+  .StripeElement, .StripeElement * {
+    color: var(--ol-text) !important;
+  }
+  
+
+
+
+
+/* Banner informativo de prueba gratuita */
+.trial-info {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 24px;
+    border-radius: 12px;
+    color: white;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    
+    h3 {
+      margin: 0 0 12px 0;
+      font-size: 20px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    p {
+      margin: 8px 0;
+      opacity: 0.95;
+      font-size: 15px;
+      line-height: 1.5;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    
+    strong {
+      font-weight: 600;
+      color: rgba(255, 255, 255, 1);
+    }
+  }
+  
+  /* Aviso de prueba gratuita en el formulario de pago */
+  .trial-notice {
+    background: #f0f7ff;
+    border-left: 4px solid #667eea;
+    padding: 12px 16px;
+    margin-top: 16px;
+    border-radius: 4px;
+    color: #334155;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  /* Badge de prueba gratuita en el resumen */
+  .product-price {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    
+    .trial-badge {
+      background: linear-gradient(135deg, #667eea, #396bb3ff);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .future-price {
+      font-size: 13px;
+      color: #64748b;
+      font-weight: 500;
+    }
+  }
+  
+  /* Ajustes para summary-benefits cuando es prueba gratuita */
+  .summary-benefits {
+    div {
+      &:first-child {
+        font-weight: 600;
+      }
+    }
+  }
+  
+  /* Animación sutil para el trial-info */
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .trial-info {
+    animation: fadeInDown 0.3s ease-out;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .trial-info {
+      padding: 20px;
+      
+      h3 {
+        font-size: 18px;
+      }
+      
+      p {
+        font-size: 14px;
+      }
+    }
+    
+    .trial-notice {
+      font-size: 13px;
+      padding: 10px 14px;
+    }
+  }
+
+  
