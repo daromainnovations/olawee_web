@@ -809,6 +809,7 @@
 
 // src/context/authProviderContext.js
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import {
   loginUser,
   forceLoginUser,
@@ -828,6 +829,8 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true); // 🔥 CRÍTICO: Empieza en true
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isInitialized, setIsInitialized] = useState(false); // 🔥 NUEVO: Para tracking
+
+  const navigate = useNavigate();
 
   // ============================================
   // FUNCIONES DE PERSISTENCIA DE TOKEN (MEMOIZADAS)
@@ -1430,11 +1433,11 @@ export const AuthProvider = ({ children }) => {
   const logout = useCallback(async () => {
     try {
       const { token } = getAuthToken();
-
+  
       if (token) {
         await logoutUser(token);
       }
-
+  
       clearAuthTokens();
       sessionStorage.removeItem("user_data");
       sessionStorage.removeItem("user_email");
@@ -1448,22 +1451,49 @@ export const AuthProvider = ({ children }) => {
       localStorage.removeItem("user_data_timestamp");
       localStorage.removeItem("site_config_timestamp");
       localStorage.removeItem("user_preferences_timestamp");
-
+  
       setUser(null);
-
+  
       console.log("✅ Logout exitoso");
+  
+      // 🔥 NUEVO: Redirección automática desde páginas sensibles
+      const currentPath = window.location.pathname;
+      const sensitiveRoutes = ['/checkout', '/order-confirmation', '/my-account'];
+      
+      const isInSensitiveRoute = sensitiveRoutes.some(route => 
+        currentPath.includes(route)
+      );
+      
+      if (isInSensitiveRoute) {
+        console.log("🔄 Redirigiendo desde página protegida a home");
+        navigate('/');
+      }
+  
     } catch (err) {
       console.error("⚠️ Error en logout, limpiando localmente:", err.message);
-
+  
       clearAuthTokens();
       sessionStorage.removeItem("user_data");
       sessionStorage.removeItem("user_email");
       localStorage.removeItem("user_data");
       localStorage.removeItem("user_email");
-
+  
       setUser(null);
+  
+      // 🔥 NUEVO: Redirección también en caso de error
+      const currentPath = window.location.pathname;
+      const sensitiveRoutes = ['/checkout', '/order-confirmation', '/my-account'];
+      
+      const isInSensitiveRoute = sensitiveRoutes.some(route => 
+        currentPath.includes(route)
+      );
+      
+      if (isInSensitiveRoute) {
+        console.log("🔄 Redirigiendo desde página protegida a home (tras error)");
+        navigate('/');
+      }
     }
-  }, [getAuthToken, clearAuthTokens]);
+  }, [getAuthToken, clearAuthTokens, navigate]); // 🔥 Añadir navigate a dependencias
 
   // ============================================
   // PASSWORD RESET

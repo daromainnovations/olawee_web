@@ -40,7 +40,7 @@
     color: var(--ol-text);
     background:
       radial-gradient(1200px 600px at 10% -10%, rgba(41, 121, 255, 0.18), transparent 60%),
-      radial-gradient(900px 500px at 110% 10%, rgba(14, 207, 187, 0.16), transparent 60%),
+      radial-gradient(1500px 500px at 110% 10%, rgba(14, 82, 207, 0.16), transparent 60%),
       var(--ol-bg);
     position: relative;
     isolation: isolate;
@@ -390,7 +390,7 @@
       align-items: center;
       gap: 8px;
       padding: 6px 0;
-      color: #70bff0;
+      color: #709df0;
       font-weight: 700;
       font-size: .95rem;
   

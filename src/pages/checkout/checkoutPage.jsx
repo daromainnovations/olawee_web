@@ -809,13 +809,13 @@ function StripePaymentForm({ orderId, amount, onSuccess, onError, isSetupIntent 
         {isProcessing 
           ? 'Procesando...' 
           : amount === 0 
-            ? 'Guardar método de pago' 
+            ? 'Confirmar' 
             : `Pagar ${amount.toFixed(2)}€`
         }
       </button>
       {amount === 0 && (
         <p className="trial-notice">
-          ✨ Periodo de prueba gratuito de 14 días. Se te cobrará 50€ después del periodo de prueba.
+          Periodo de prueba gratuito de 14 días. Se te cobrará 50€ después del periodo de prueba.
         </p>
       )}
     </div>
@@ -1023,235 +1023,238 @@ const CheckoutPage = () => {
   };
 
   return (
-    <div className="checkout-page">
-        <Menu />
-      <div className="checkout-container">
-        <h1 className="checkout-title">Finalizar compra</h1>
+    <>
+    <Menu />
+        <div className="checkout-page mt-4">
+            
+        <div className="checkout-container">
+            <h1 className="checkout-title">Finalizar compra</h1>
 
-        <div className="checkout-grid">
-          <div className="checkout-main">
-            {step === 'billing' && (
-              <div className="checkout-section">
-                <h2>Datos de facturación</h2>
-                
-                <div className="form-grid">
-                  <div className="form-field">
-                    <label>Nombre *</label>
-                    <input
-                      type="text"
-                      value={billingData.first_name}
-                      onChange={(e) => updateField('first_name', e.target.value)}
-                      placeholder="Tu nombre"
-                    />
-                  </div>
-                  
-                  <div className="form-field">
-                    <label>Apellidos *</label>
-                    <input
-                      type="text"
-                      value={billingData.last_name}
-                      onChange={(e) => updateField('last_name', e.target.value)}
-                      placeholder="Tus apellidos"
-                    />
-                  </div>
-                  
-                  <div className="form-field full-width">
-                    <label>Email *</label>
-                    <input
-                      type="email"
-                      value={billingData.email}
-                      onChange={(e) => updateField('email', e.target.value)}
-                      placeholder="tu@email.com"
-                    />
-                  </div>
-                  
-                  <div className="form-field full-width">
-                    <label>Teléfono</label>
-                    <input
-                      type="tel"
-                      value={billingData.phone}
-                      onChange={(e) => updateField('phone', e.target.value)}
-                      placeholder="+34 600 000 000"
-                    />
-                  </div>
-                  
-                  <div className="form-field full-width">
-                    <label>Dirección *</label>
-                    <input
-                      type="text"
-                      value={billingData.address_1}
-                      onChange={(e) => updateField('address_1', e.target.value)}
-                      placeholder="Calle, número, piso..."
-                    />
-                  </div>
-                  
-                  <div className="form-field">
-                    <label>Ciudad *</label>
-                    <input
-                      type="text"
-                      value={billingData.city}
-                      onChange={(e) => updateField('city', e.target.value)}
-                      placeholder="Tu ciudad"
-                    />
-                  </div>
-                  
-                  <div className="form-field">
-                    <label>Código postal *</label>
-                    <input
-                      type="text"
-                      value={billingData.postcode}
-                      onChange={(e) => updateField('postcode', e.target.value)}
-                      placeholder="28000"
-                    />
-                  </div>
-                </div>
-
-                <div className="payment-method-section">
-                  <h3>Método de pago</h3>
-                  <div className="payment-methods">
-                    <label className="payment-option">
-                      <input
-                        type="radio"
-                        name="payment"
-                        value="stripe"
-                        checked={paymentMethod === 'stripe'}
-                        onChange={(e) => setPaymentMethod(e.target.value)}
-                      />
-                      <span>Tarjeta de crédito / Klarna</span>
-                    </label>
+            <div className="checkout-grid">
+            <div className="checkout-main">
+                {step === 'billing' && (
+                <div className="checkout-section">
+                    <h2>Datos de facturación</h2>
                     
-                    <label className="payment-option">
-                      <input
-                        type="radio"
-                        name="payment"
-                        value="paypal"
-                        checked={paymentMethod === 'paypal'}
-                        onChange={(e) => setPaymentMethod(e.target.value)}
-                      />
-                      <span>PayPal</span>
-                    </label>
-                  </div>
+                    <div className="form-grid">
+                    <div className="form-field">
+                        <label>Nombre *</label>
+                        <input
+                        type="text"
+                        value={billingData.first_name}
+                        onChange={(e) => updateField('first_name', e.target.value)}
+                        placeholder="Tu nombre"
+                        />
+                    </div>
+                    
+                    <div className="form-field">
+                        <label>Apellidos *</label>
+                        <input
+                        type="text"
+                        value={billingData.last_name}
+                        onChange={(e) => updateField('last_name', e.target.value)}
+                        placeholder="Tus apellidos"
+                        />
+                    </div>
+                    
+                    <div className="form-field full-width">
+                        <label>Email *</label>
+                        <input
+                        type="email"
+                        value={billingData.email}
+                        onChange={(e) => updateField('email', e.target.value)}
+                        placeholder="tu@email.com"
+                        />
+                    </div>
+                    
+                    <div className="form-field full-width">
+                        <label>Teléfono</label>
+                        <input
+                        type="tel"
+                        value={billingData.phone}
+                        onChange={(e) => updateField('phone', e.target.value)}
+                        placeholder="+34 600 000 000"
+                        />
+                    </div>
+                    
+                    <div className="form-field full-width">
+                        <label>Dirección *</label>
+                        <input
+                        type="text"
+                        value={billingData.address_1}
+                        onChange={(e) => updateField('address_1', e.target.value)}
+                        placeholder="Calle, número, piso..."
+                        />
+                    </div>
+                    
+                    <div className="form-field">
+                        <label>Ciudad *</label>
+                        <input
+                        type="text"
+                        value={billingData.city}
+                        onChange={(e) => updateField('city', e.target.value)}
+                        placeholder="Tu ciudad"
+                        />
+                    </div>
+                    
+                    <div className="form-field">
+                        <label>Código postal *</label>
+                        <input
+                        type="text"
+                        value={billingData.postcode}
+                        onChange={(e) => updateField('postcode', e.target.value)}
+                        placeholder="28000"
+                        />
+                    </div>
+                    </div>
+
+                    <div className="payment-method-section">
+                    <h3>Método de pago</h3>
+                    <div className="payment-methods">
+                        <label className="payment-option">
+                        <input
+                            type="radio"
+                            name="payment"
+                            value="stripe"
+                            checked={paymentMethod === 'stripe'}
+                            onChange={(e) => setPaymentMethod(e.target.value)}
+                        />
+                        <span>Tarjeta de crédito / Klarna</span>
+                        </label>
+                        
+                        <label className="payment-option">
+                        <input
+                            type="radio"
+                            name="payment"
+                            value="paypal"
+                            checked={paymentMethod === 'paypal'}
+                            onChange={(e) => setPaymentMethod(e.target.value)}
+                        />
+                        <span>PayPal</span>
+                        </label>
+                    </div>
+                    </div>
+
+                    {error && <div className="error-message">{error}</div>}
+
+                    <button
+                    onClick={createOrder}
+                    disabled={!isFormValid() || isLoading}
+                    className="btn-continue"
+                    >
+                    {isLoading ? 'Creando orden...' : 'Continuar al pago'}
+                    </button>
+                </div>
+                )}
+
+                {step === 'payment' && paymentMethod === 'stripe' && clientSecret && (
+                <div className="checkout-section">
+                    <h2>{total === 0 ? 'Guardar método de pago' : 'Completar pago'}</h2>
+                    
+                    {/* {total === 0 && (
+                    <div className="trial-info">
+                        <h3>🎉 Periodo de prueba gratuito de 14 días</h3>
+                        <p>No se te cobrará ahora. Guarda tu método de pago para después del periodo de prueba.</p>
+                        {futureCharge && (
+                        <p><strong>Después de 14 días:</strong> Se cobrará automáticamente {futureCharge.toFixed(2)}€</p>
+                        )}
+                    </div>
+                    )} */}
+                    
+                    {error && <div className="error-message">{error}</div>}
+                    
+                    <Elements stripe={stripePromise} options={{ clientSecret }}>
+                    <StripePaymentForm
+                        orderId={orderId}
+                        amount={total}
+                        onSuccess={handlePaymentSuccess}
+                        onError={handlePaymentError}
+                        isSetupIntent={total === 0}
+                    />
+                    </Elements>
+                </div>
+                )}
+
+                {step === 'payment' && paymentMethod === 'paypal' && (
+                <div className="checkout-section">
+                    <h2>Pagar con PayPal</h2>
+                    {error && <div className="error-message">{error}</div>}
+                    <PayPalScriptProvider options={{ 
+                    'client-id': PAYPAL_CLIENT_ID, 
+                    currency: 'EUR' 
+                    }}>
+                    <PayPalButtons
+                        createOrder={(data, actions) => {
+                        return actions.order.create({
+                            purchase_units: [{
+                            reference_id: orderId.toString(),
+                            amount: {
+                                value: total.toFixed(2),
+                                currency_code: 'EUR'
+                            }
+                            }]
+                        });
+                        }}
+                        onApprove={async (data, actions) => {
+                        const details = await actions.order.capture();
+                        handlePaymentSuccess(details);
+                        }}
+                        onError={() => handlePaymentError('Error con PayPal')}
+                    />
+                    </PayPalScriptProvider>
+                </div>
+                )}
+            </div>
+
+            <div className="checkout-sidebar">
+                <div className="order-summary">
+                <h3>Resumen del pedido</h3>
+                
+                <div className="product-summary">
+                    <div className="product-name">{selectedProduct.name}</div>
+                    <div className="product-price">
+                    {total === 0 ? (
+                        <>
+                        <span className="trial-badge">Prueba gratuita</span>
+                        {futureCharge && (
+                            <span className="future-price">{futureCharge.toFixed(2)}€ después de 14 días</span>
+                        )}
+                        </>
+                    ) : (
+                        `${selectedProduct.price}€`
+                    )}
+                    </div>
                 </div>
 
-                {error && <div className="error-message">{error}</div>}
-
-                <button
-                  onClick={createOrder}
-                  disabled={!isFormValid() || isLoading}
-                  className="btn-continue"
-                >
-                  {isLoading ? 'Creando orden...' : 'Continuar al pago'}
-                </button>
-              </div>
-            )}
-
-            {step === 'payment' && paymentMethod === 'stripe' && clientSecret && (
-              <div className="checkout-section">
-                <h2>{total === 0 ? 'Guardar método de pago' : 'Completar pago'}</h2>
+                <div className="summary-row">
+                    <span>Subtotal:</span>
+                    <span>{total.toFixed(2)}€</span>
+                </div>
                 
-                {total === 0 && (
-                  <div className="trial-info">
-                    <h3>🎉 Periodo de prueba gratuito de 14 días</h3>
-                    <p>No se te cobrará ahora. Guarda tu método de pago para después del periodo de prueba.</p>
-                    {futureCharge && (
-                      <p><strong>Después de 14 días:</strong> Se cobrará automáticamente {futureCharge.toFixed(2)}€</p>
-                    )}
-                  </div>
+                {total > 0 && (
+                    <div className="summary-row">
+                    <span>IVA (21%):</span>
+                    <span>{(total * 0.21).toFixed(2)}€</span>
+                    </div>
                 )}
                 
-                {error && <div className="error-message">{error}</div>}
-                
-                <Elements stripe={stripePromise} options={{ clientSecret }}>
-                  <StripePaymentForm
-                    orderId={orderId}
-                    amount={total}
-                    onSuccess={handlePaymentSuccess}
-                    onError={handlePaymentError}
-                    isSetupIntent={total === 0}
-                  />
-                </Elements>
-              </div>
-            )}
-
-            {step === 'payment' && paymentMethod === 'paypal' && (
-              <div className="checkout-section">
-                <h2>Pagar con PayPal</h2>
-                {error && <div className="error-message">{error}</div>}
-                <PayPalScriptProvider options={{ 
-                  'client-id': PAYPAL_CLIENT_ID, 
-                  currency: 'EUR' 
-                }}>
-                  <PayPalButtons
-                    createOrder={(data, actions) => {
-                      return actions.order.create({
-                        purchase_units: [{
-                          reference_id: orderId.toString(),
-                          amount: {
-                            value: total.toFixed(2),
-                            currency_code: 'EUR'
-                          }
-                        }]
-                      });
-                    }}
-                    onApprove={async (data, actions) => {
-                      const details = await actions.order.capture();
-                      handlePaymentSuccess(details);
-                    }}
-                    onError={() => handlePaymentError('Error con PayPal')}
-                  />
-                </PayPalScriptProvider>
-              </div>
-            )}
-          </div>
-
-          <div className="checkout-sidebar">
-            <div className="order-summary">
-              <h3>Resumen del pedido</h3>
-              
-              <div className="product-summary">
-                <div className="product-name">{selectedProduct.name}</div>
-                <div className="product-price">
-                  {total === 0 ? (
-                    <>
-                      <span className="trial-badge">Prueba gratuita</span>
-                      {futureCharge && (
-                        <span className="future-price">{futureCharge.toFixed(2)}€ después de 14 días</span>
-                      )}
-                    </>
-                  ) : (
-                    `${selectedProduct.price}€`
-                  )}
+                <div className="summary-total">
+                    <span>Total {total === 0 ? 'hoy' : ''}:</span>
+                    <span>{total === 0 ? '0€' : `${(total * 1.21).toFixed(2)}€`}</span>
                 </div>
-              </div>
 
-              <div className="summary-row">
-                <span>Subtotal:</span>
-                <span>{total.toFixed(2)}€</span>
-              </div>
-              
-              {total > 0 && (
-                <div className="summary-row">
-                  <span>IVA (21%):</span>
-                  <span>{(total * 0.21).toFixed(2)}€</span>
+                <div className="summary-benefits">
+                    <div>{total === 0 ? '14 días de prueba gratuita' : 'Entrega inmediata'}</div>
+                    <div>Pago 100% seguro</div>
+                    <div>Soporte incluido</div>
+                    {total === 0 && <div>Cancela cuando quieras</div>}
                 </div>
-              )}
-              
-              <div className="summary-total">
-                <span>Total {total === 0 ? 'hoy' : ''}:</span>
-                <span>{total === 0 ? '0€' : `${(total * 1.21).toFixed(2)}€`}</span>
-              </div>
-
-              <div className="summary-benefits">
-                <div>{total === 0 ? '14 días de prueba gratuita' : 'Entrega inmediata'}</div>
-                <div>Pago 100% seguro</div>
-                <div>Soporte incluido</div>
-                {total === 0 && <div>Cancela cuando quieras</div>}
-              </div>
+                </div>
             </div>
-          </div>
+            </div>
         </div>
-      </div>
-    </div>
+        </div>
+    </>
   );
 };
 
