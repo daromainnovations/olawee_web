@@ -2,20 +2,26 @@
 
 .container-tutorial {
     padding: 0 50px;
-    margin-top: 100px;
-    background-color: var(--color-background-page);
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    // background-color: var(--color-background-page);
+    background-color: white;
     font-family: "Lato", serif;
+    *{
+        color: rgba(11, 20, 24, 1);
+        background-color: transparent;
+    }
     h4{
-        color: white;
-        font-weight: 300;
+        color: rgba(11, 20, 24, 1);
+        font-weight: 700;
     }
 
     .accordion-item {
         border: none;
 
         .accordion-button {
-            background-color: var(--color-background-page);
-            color: var(--color-font-global);
+            background-color:transparent;
+            color: rgba(11, 20, 24, 1);
             box-shadow: none;
             font-size: 18px;
             display: flex;
@@ -43,6 +49,7 @@
             font-size: 14px;
             font-family: "Lato", serif;
             opacity: 0.7;
+            color: rgba(11, 20, 24, 1);
         }
     }
 
