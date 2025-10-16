@@ -1,61 +1,11 @@
-
-// Variables
-$primary-color: #FFC310;
-$primary-light: #4299e1;
-$primary-dark:  #ffb000;
-$success-color: #38a169;
-$success-light: #9ae6b4;
-$error-color: #e53e3e;
-$error-light: #feb2b2;
-$gray-100: #f2f2f2;
-$gray-200: #edf2f7;
-$gray-300: #e2e8f0;
-$gray-400: #cbd5e0;
-$gray-500: #a0aec0;
-$gray-600: #718096;
-$gray-700: #4a5568;
-$gray-800: #2d3748;
-$gray: #333;
-$box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1), 0 1px 13px rgba(0, 0, 0, 0.122);
-$box-shadow-input: 0 0px 6px #ffc310;
-$border-radius: 8px;
-$transition-speed: 0.3s;
-
-// Mixins
-@mixin card {
-  background-color: white;
-  border-radius: $border-radius;
-  box-shadow: $box-shadow;
-  overflow: hidden;
-}
-
-@mixin button {
-  display: inline-block;
-  font-weight: 800;
-  padding: 0.75rem 1.5rem;
-  border-radius: $border-radius;
-  transition: all $transition-speed ease;
-  border: none;
-  cursor: pointer;
-  text-align: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba($primary-color, 0.4);
-  }
-  
-  &:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-}
+// src/pages/user/sections/styles/profile.scss
+@import '../../../../styles/variables';
 
 // Animaciones
 @keyframes fadeIn {
   from { 
     opacity: 0; 
-    transform: translateY(-10px); 
+    transform: translateY(20px); 
   }
   to { 
     opacity: 1; 
@@ -76,67 +26,83 @@ $transition-speed: 0.3s;
 
 // Estilos principales
 .profile-section {
-  width: 90%;
-  margin: 2rem auto;
-  animation: fadeIn 0.5s ease;
+  max-width: 900px;
+  margin: 0 auto;
+  animation: fadeIn 0.6s ease;
+
   h2 {
     font-size: 2rem;
-    font-weight: 700;
-    color: $gray;
-    margin-bottom: 0.5rem;
+    font-weight: 800;
+    color: $text-dark;
+    margin-bottom: 12px;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, $primary, $primary-dark);
+      margin-top: 12px;
+      border-radius: 2px;
+    }
   }
   
-  p {
-    color: $gray;
-    margin-bottom: 2rem;
+  > p {
+    color: $gray-600;
+    margin-bottom: 32px;
     font-size: 1.1rem;
+    font-weight: 500;
   }
   
   .profile-form, .password-form {
-    @include card;
-    padding: 2rem;
-    margin-bottom: 2rem ;
+    background: white;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-md;
+    padding: 32px;
+    margin-bottom: 32px;
     
     .form-row {
-      margin-bottom: 1.5rem;
+      margin-bottom: 24px;
       
       label {
         display: block;
-        margin-bottom: 0.5rem;
-        font-weight: 600;
-        color: $gray;
+        margin-bottom: 8px;
+        font-weight: 700;
+        color: $text-dark;
         font-size: 0.95rem;
         
         .required {
           color: $error-color;
-          margin-left: 0.25rem;
+          margin-left: 4px;
         }
       }
       
       input {
         width: 100%;
-        padding: 0.85rem 1rem;
-        border: 1px solid $gray-300;
-        border-radius: $border-radius;
-        box-shadow: 0 0 0 3px transparent;
+        padding: 14px 16px;
+        border: 2px solid $border-light;
+        border-radius: $radius-sm;
         font-size: 1rem;
-        transition: border-color $transition-speed, box-shadow $transition-speed;
-        color: $gray;
+        transition: all $transition-fast;
+        color: $text-dark;
+        font-weight: 500;
+        
         &:focus,
         &:focus-visible,
         &:focus-within {
-            border: 1px solid transparent;
-            box-shadow: $box-shadow-input;
-            outline: none !important;
+          border-color: $primary;
+          box-shadow: 0 0 0 3px rgba($primary, 0.1);
+          outline: none;
         }
         
         &.readonly-field {
           background-color: $gray-100;
           color: $gray-600;
           cursor: not-allowed;
+          
           &:focus {
-            border: 1px solid $gray-300;
-            box-shadow: 0 0 0 3px transparent;
+            border-color: $border-light;
+            box-shadow: none;
           }
         }
         
@@ -147,9 +113,10 @@ $transition-speed: 0.3s;
       
       small {
         display: block;
-        margin-top: 0.5rem;
+        margin-top: 8px;
         color: $gray-600;
         font-size: 0.85rem;
+        font-weight: 500;
       }
     }
     
@@ -174,10 +141,11 @@ $transition-speed: 0.3s;
         align-items: center;
         justify-content: center;
         color: $gray-500;
-        transition: color $transition-speed;
+        transition: color $transition-fast;
+        cursor: pointer;
         
         &:hover {
-          color: $primary-color;
+          color: $primary;
         }
         
         &:focus {
@@ -189,73 +157,100 @@ $transition-speed: 0.3s;
         }
         
         .bi-eye-slash {
-          color: $primary-color;
+          color: $primary;
         }
       }
     }
     
     // Botones y acciones
     .form-actions {
-      margin-top: 2rem;
+      margin-top: 32px;
       display: flex;
       flex-direction: column;
+      gap: 16px;
       
       .save-button {
-        @include button;
-        background-color: $primary-color;
-        color: white;
+        background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+        color: $text-light;
         width: 100%;
+        padding: 14px 24px;
+        border: none;
+        border-radius: $radius-sm;
+        font-weight: 800;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all $transition-base;
+        box-shadow: 0 4px 15px rgba($primary, 0.3);
         
         &:hover:not(:disabled) {
-          background-color: $primary-dark;
-          transform: translateY(-1px);
+          transform: translateY(-3px);
+          box-shadow: 0 8px 25px rgba($primary, 0.5);
         }
         
         &:active:not(:disabled) {
-          transform: translateY(1px);
+          transform: translateY(-1px);
+        }
+
+        &:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+
+        &.disabled {
+          opacity: 0.4;
+          cursor: not-allowed;
+          background: $gray-300;
+          color: $gray-600;
+          box-shadow: none;
+
+          &:hover {
+            transform: none;
+            box-shadow: none;
+          }
         }
       }
       
       // Mensajes de estado
       .save-message {
-        margin-top: 1rem;
-        padding: 1rem;
-        border-radius: $border-radius;
+        padding: 16px;
+        border-radius: $radius-sm;
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         animation: slideIn 0.3s ease;
+        font-weight: 600;
         
         &.success {
-          background-color: rgba($success-light, 0.3);
+          background: rgba($success-light, 0.2);
           color: $success-color;
-          border-left: 4px solid $success-color;
+          border: 2px solid $success-color;
         }
         
         &.error {
-          background-color: rgba($error-light, 0.3);
+          background: rgba($error-light, 0.2);
           color: $error-color;
-          border-left: 4px solid $error-color;
+          border: 2px solid $error-color;
         }
-        
-        i {
-          margin-right: 0.75rem;
-          font-size: 1.1rem;
-          margin-top: 0.1rem;
+
+        &.warning {
+          background: rgba($warning-light, 0.5);
+          color: $warning-color;
+          border: 2px solid lighten($warning-light, 10%);
         }
       }
     }
   }
+
   // Sección de contraseña
-  .password-section{
+  .password-section {
     animation: fadeIn 0.5s ease 0.2s;
     animation-fill-mode: both;
-    margin-top: 4rem !important;
-    padding-bottom: 2rem !important;
+    margin-top: 60px;
+
     h3 {
       font-size: 1.5rem;
-      font-weight: 600;
-      color: $gray;
-      margin-bottom: 1.25rem;
+      font-weight: 800;
+      color: $text-dark;
+      margin-bottom: 20px;
       display: flex;
       align-items: center;
       
@@ -263,44 +258,53 @@ $transition-speed: 0.3s;
         content: "";
         display: inline-block;
         width: 4px;
-        height: 22px;
-        background-color: $primary-color;
-        margin-right: 0.75rem;
+        height: 26px;
+        background: linear-gradient(180deg, $primary, $primary-dark);
+        margin-right: 12px;
         border-radius: 2px;
       }
+    }
+
+    .warning-text {
+      background: rgba($warning-light, 0.5);
+      color: $warning-color;
+      padding: 16px;
+      border-radius: $radius-sm;
+      margin-bottom: 24px;
+      font-weight: 600;
+      border-left: 4px solid lighten($warning-light, 10%);
     }
   }
 }
 
-// Estilos de carga y error
-.profile-loading, .profile-error {
-  padding: 3rem 2rem;
+// Estilos de carga
+.profile-loading {
+  padding: 80px 40px;
   text-align: center;
-  margin: 2rem auto;
   
   .loading-spinner {
-    border: 4px solid $gray-300;
-    border-top: 4px solid $primary-color;
+    border: 5px solid $gray-300;
+    border-top-color: $primary;
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    margin: 0 auto 1.5rem;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 24px;
     animation: spin 1s linear infinite;
   }
   
   p {
     color: $gray-700;
     font-size: 1.1rem;
+    font-weight: 600;
     margin: 0;
   }
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  to { transform: rotate(360deg); }
 }
 
-// Media queries para responsividad
+// Responsive
 @media (min-width: 768px) {
   .profile-section {
     .form-actions {
@@ -309,11 +313,10 @@ $transition-speed: 0.3s;
       
       .save-button {
         width: auto;
+        min-width: 200px;
       }
       
       .save-message {
-        margin-top: 0;
-        margin-left: 1rem;
         flex: 1;
       }
     }
@@ -322,34 +325,8 @@ $transition-speed: 0.3s;
 
 @media (max-width: 767px) {
   .profile-section {
-    margin: 2.5rem;
-    
     .profile-form, .password-form {
-      padding: 1.5rem;
-    }
-  }
-}
-
-@media (max-width: 480px) {
-  .profile-section {
-    h2 {
-      font-size: 1.5rem;
-    }
-    
-    p {
-      font-size: 0.95rem;
-    }
-    
-    .profile-form, .password-form {
-      padding: 1.25rem;
-      
-      .form-row {
-        margin-bottom: 1.25rem;
-        
-        input {
-          padding: 0.75rem;
-        }
-      }
+      padding: 24px;
     }
   }
 }

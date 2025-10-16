@@ -1,164 +1,353 @@
+// src/components/userComponents/sidebarMenu/sidebarMenu.scss
+@import '../../../styles/variables';
 
 .hamburger-btn {
   display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  padding: 10px 20px;
-  background-color: #0B1418;
+  padding: 15px 20px;
+  background: $bg-dark;
   border: none;
-  font-size: 2rem;
-  color: white;
+  font-size: 1.8rem;
+  color: $text-light;
   z-index: 1100;
   cursor: pointer;
   text-align: right;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  transition: background $transition-base;
+
+  &:hover {
+    background: lighten($bg-dark, 5%);
+  }
 
   @media (max-width: 768px) {
     display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
   }
 
   svg {
     margin-right: 10px;
+    transition: transform $transition-base;
+  }
+
+  &:active svg {
+    transform: rotate(90deg);
   }
 }
-
 
 .sidebar-menu {
   position: fixed;
   top: 0;
   left: 0;
-  width: 240px;
+  width: 260px;
   height: 100vh;
-  background-color: #0B1418;
-  color: white;
-  border-right: 1px solid #e0e0e0;
-  padding: 1rem;
+  background: $bg-dark;
+  color: $text-light;
+  padding: 0;
   z-index: 1000;
   overflow-y: auto;
-
-  // Estado oculto en mobile
-  &.mobile-hidden {
-    transform: translateY(-100%);
-  }
-
-  @media (min-width: 769px) {
-    transform: translateY(0) !important;
-  }
-
-  .sidebar-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-    color: white;
-  }
-
-  .menu-list {
-    list-style: none;
-    padding: 0;
-
-    li {
-      margin-bottom: 1rem;
-      display: block;
-      text-decoration: none;
-      color: rgba(255, 255, 255, 0.691);
-      font-size: 1rem;
-      font-weight: 500;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      padding: 10px 20px 10px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-
-      .icon-magic-sidebar {
-        background-color: transparent;
-        margin-right: 5px;
-        margin-bottom: 5px;
-        fill: white;
-      }
-
-      &.active {
-        color: #FFC310;
-        font-weight: 600;
-        background-color: #2a2d2f;
-      }
-
-      &:hover {
-        background-color: #2a2d2f;
-      }
-    }
-    .logout-btn {
-      margin-top: 5rem;
-      padding: 0.6rem 1rem;
+  overflow-x: hidden;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.2);
+  transition: transform $transition-slow;
+  .logo-container-sidebar {
+    position: relative;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba($primary, 0.3);
+  
+    .back-arrow-btn {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      width: 36px;
+      height: 36px;
       border-radius: 8px;
-      font-size: 1rem;
-      background: linear-gradient(90deg, #ffc310, #aa3034);
-      background-size: 0% 100%; /* oculto al inicio */
-      background-repeat: no-repeat;
-      background-position: left center;
-      border: 1px solid transparent;
-      text-align: center;
-      cursor: pointer;
-      transition: 
-        background-size 0.4s ease,
-        color 0.4s ease,
-        transform 0.3s ease;
-    
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
-    
+      cursor: pointer;
+      color: $text-light;
+      font-size: 1.3rem;
+      transition: all $transition-base;
+      backdrop-filter: blur(10px);
+      outline: none;
+  
       &:hover {
-        background-size: 100% 100%; /* animación desde la izquierda */
-        color: white;
-        transform: scale(1.04);
-        span{
-          color: white;
-        }
-        svg {
-          fill: white;
-        }
+        background: rgba(255, 255, 255, 0.25);
+        transform: translateY(-50%) translateX(-3px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
       }
-    
+  
+      &:active {
+        transform: translateY(-50%) translateX(-1px);
+      }
+  
       svg {
-        margin-right: 10px;
-        font-size: 1.5rem;
-        z-index: 1;
+        background: transparent !important;
+        fill: currentColor;
+        color: $text-light;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
       }
-    
-      // * {
-      //   color: #aa3034 ;
-      //   background-color: transparent;
-      //   position: relative;
-      //   z-index: 1;
-      // }
     }
-    
-    
+  
+    .sidebar-logo {
+      max-width: 140px;
+      height: auto;
+      filter: brightness(1.1) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
+      transition: transform $transition-base;
+  
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
   }
 
-  // Mobile layout
+  // Scrollbar personalizado
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba($primary, 0.5);
+    border-radius: 10px;
+
+    &:hover {
+      background: $primary;
+    }
+  }
+
+  &.mobile-hidden {
+    transform: translateX(-100%);
+  }
+
+  @media (min-width: 769px) {
+    transform: translateX(0) !important;
+  }
+
   @media (max-width: 768px) {
+    width: 280px;
+  }
+
+  // Logo/Título
+  .sidebar-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin: 0;
+    padding: 30px 20px;
+    background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+    color: $text-light;
+    text-align: center;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 10px rgba($primary, 0.3);
+  }
+
+  // Lista de menú
+  .menu-list {
+    list-style: none;
+    padding: 20px 12px;
+    margin: 0;
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      margin-bottom: 8px;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 0.95rem;
+      font-weight: 500;
+      border-radius: 10px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all $transition-base;
+      *{
+        background-color: transparent;
+      }
+
+      // Efecto hover background
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba($primary, 0.15), transparent);
+        transition: left $transition-slow;
+      }
+
+      &:hover::before {
+        left: 100%;
+      }
+
+      .menu-icon {
+        font-size: 1.25rem;
+        flex-shrink: 0;
+        transition: all $transition-base;
+      }
+
+      .menu-text {
+        flex: 1;
+        font-weight: 600;
+      }
+
+      // Badge para notificaciones
+      .badge-dot {
+        width: 8px;
+        height: 8px;
+        background: #ff4757;
+        border-radius: 50%;
+        box-shadow: 0 0 10px #ff4757;
+        animation: pulse 2s infinite;
+      }
+
+      // Estado hover
+      &:hover {
+        background: $card-dark;
+        color: $primary-light;
+        padding-left: 20px;
+
+        .menu-icon {
+          transform: scale(1.15) rotate(5deg);
+          color: $primary-light;
+        }
+      }
+
+      // Estado activo
+      &.active {
+        background: linear-gradient(90deg, rgba($primary, 0.2), rgba($primary, 0.05));
+        color: $primary-light;
+        font-weight: 700;
+        border-left: 4px solid $primary;
+        padding-left: 12px;
+
+        .menu-icon {
+          color: $primary-light;
+          transform: scale(1.1);
+        }
+
+        &::after {
+          content: '';
+          position: absolute;
+          right: 16px;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 6px;
+          height: 6px;
+          background: $primary;
+          border-radius: 50%;
+          box-shadow: 0 0 10px $primary;
+        }
+      }
+
+      // Icono especial de Magic Okapi
+      .icon-magic-sidebar {
+        filter: drop-shadow(0 0 5px $primary);
+      }
+
+      // Botón de logout
+      &.logout-btn {
+        margin-top: auto;
+        margin-bottom: 0;
+        border-top: 1px solid $border-dark;
+        padding-top: 20px;
+        background: linear-gradient(90deg, rgba(220, 38, 38, 0.1), transparent);
+        color: #ff6b6b;
+        transition: all $transition-base;
+
+        &:hover {
+          background: linear-gradient(90deg, #aa3034, #c41e3a);
+          color: white;
+          padding-left: 20px;
+          box-shadow: 0 4px 15px rgba(170, 48, 52, 0.4);
+
+          .menu-icon {
+            color: white;
+            transform: translateX(-5px) scale(1.15);
+          }
+        }
+
+        .menu-icon {
+          color: #ff6b6b;
+          font-size: 1.3rem;
+        }
+      }
+    }
+  }
+}
+
+// Animación de pulso para badge
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
+}
+
+// Mobile adaptations
+@media (max-width: 768px) {
+  .sidebar-menu {
     width: 100%;
     height: auto;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #0B1418;
-    z-index: 1099;
-    padding-top: 70px; // Deja espacio para el botón hamburguesa
+    max-height: 100vh;
+    padding-bottom: 20px;
+
+    &.mobile-hidden {
+      transform: translateX(-100%);
+    }
+
+    .sidebar-title {
+      padding: 20px;
+      font-size: 1.5rem;
+    }
 
     .menu-list {
-      flex-direction: column;
-      display: flex;
-      align-items: flex-start;
-      padding-left: 1rem;
+      padding: 15px 10px;
 
-      li {
-        margin-bottom: 1rem;
-        width: 100%;
+      .menu-item {
+        padding: 12px 14px;
+
+        &:hover {
+          padding-left: 18px;
+        }
+
+        &.active {
+          padding-left: 10px;
+        }
       }
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .logo-container-sidebar {
+    padding: 16px;
+
+    .back-arrow-btn {
+      width: 32px;
+      height: 32px;
+      font-size: 1.1rem;
+      left: 12px;
+    }
+
+    .sidebar-logo {
+      max-width: 120px;
     }
   }
 }
