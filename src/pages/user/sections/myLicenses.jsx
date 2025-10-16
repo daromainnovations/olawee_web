@@ -11,32 +11,31 @@ const MyLicenses = () => {
   const { licenses, orders, loading, getTrialInfo, refetch } = useUserData();
 
   const handleCancelTrial = async (orderId) => {
-    if (!window.confirm('¿Estás seguro de que quieres cancelar tu periodo de prueba?')) {
-      return;
-    }
-
+    if (!window.confirm('¿Estás seguro de que quieres cancelar tu periodo de prueba?')) return;
+  
     try {
       const { token } = getToken();
-      const response = await fetch(`https://api.olawee.com/wp-json/wc/v3/orders/${orderId}`, {
-        method: 'PUT',
+      const res = await fetch(`https://api.olawee.com/wp-json/olawee/v1/orders/${orderId}/update`, {
+        method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'X-Origin': 'web', // si tu backend lo requiere
         },
-        body: JSON.stringify({ status: 'cancelled' })
+        body: JSON.stringify({ status: 'cancelled', add_note: 'Trial cancelado por el usuario' })
       });
-
-      if (response.ok) {
-        alert('Periodo de prueba cancelado exitosamente');
-        refetch();
-      } else {
-        alert('Error al cancelar. Contacta con soporte.');
-      }
+  
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.message || 'No se pudo cancelar');
+  
+      alert('Periodo de prueba cancelado exitosamente');
+      refetch();
     } catch (err) {
       console.error('Error:', err);
       alert('Error al cancelar. Contacta con soporte.');
     }
   };
+  
 
   if (loading) {
     return (

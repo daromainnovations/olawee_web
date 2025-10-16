@@ -15,36 +15,69 @@ const MyAccountPage = () => {
   const [activeTab, setActiveTab] = useState('licenses'); // licenses, orders, settings
   const [loading, setLoading] = useState(true);
 
+  const api = {
+    async getOrders(userId, token) {
+      const res = await fetch(`${API_URL}/olawee/v1/orders?customer_id=${userId}`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.message || 'No se pudieron cargar los pedidos');
+      return Array.isArray(data) ? data : (data.orders || []);
+    },
+  
+    async updateOrder(orderId, payload, token) {
+      const res = await fetch(`${API_URL}/olawee/v1/orders/${orderId}/update`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          // si tu backend usa orígenes por cabecera:
+          // 'X-Origin': 'app',
+        },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.message || 'No se pudo actualizar el pedido');
+      return data;
+    },
+  
+    // Mantén LMFWC como estaba; si no existe, devolvemos []
+    async getLicenses(userId, token) {
+      try {
+        const res = await fetch(`${API_URL}/lmfwc/v2/licenses?user_id=${userId}`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const data = await res.json();
+        return Array.isArray(data?.data) ? data.data : [];
+      } catch {
+        return [];
+      }
+    }
+  };
+  
+
   const fetchUserData = async () => {
     try {
       const { token } = getToken();
       if (!token) throw new Error('No token');
-
-      // Fetch orders
-      const ordersResponse = await fetch(`${API_URL}/wc/v3/orders?customer=${user.id}`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      const ordersData = await ordersResponse.json();
-      setOrders(Array.isArray(ordersData) ? ordersData : []);
-
-      // Fetch licenses (asumiendo que usas License Manager for WooCommerce)
-      try {
-        const licensesResponse = await fetch(`${API_URL}/lmfwc/v2/licenses?user_id=${user.id}`, {
-          headers: { 'Authorization': `Bearer ${token}` }
-        });
-        const licensesData = await licensesResponse.json();
-        setLicenses(Array.isArray(licensesData.data) ? licensesData.data : []);
-      } catch (err) {
-        console.log('No hay licenses endpoint o no hay licencias');
-        setLicenses([]);
-      }
-
+  
+      // Pedidos por endpoint JWT propio
+      const ordersData = await api.getOrders(user.id, token);
+      setOrders(ordersData);
+  
+      // Licencias (si hay LMFWC)
+      const licensesData = await api.getLicenses(user.id, token);
+      setLicenses(licensesData);
+  
     } catch (err) {
       console.error('Error al cargar datos del usuario:', err);
+      setOrders([]);
+      setLicenses([]);
     } finally {
       setLoading(false);
     }
   };
+  
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -72,34 +105,20 @@ const MyAccountPage = () => {
   };
 
   const handleCancelTrial = async (orderId) => {
-    if (!window.confirm('¿Estás seguro de que quieres cancelar tu periodo de prueba?')) {
-      return;
-    }
-
+    if (!window.confirm('¿Estás seguro de que quieres cancelar tu periodo de prueba?')) return;
+  
     try {
       const { token } = getToken();
-      const response = await fetch(`${API_URL}/wc/v3/orders/${orderId}`, {
-        method: 'PUT',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          status: 'cancelled'
-        })
-      });
-
-      if (response.ok) {
-        alert('Periodo de prueba cancelado exitosamente');
-        fetchUserData(); // Recargar datos
-      } else {
-        alert('Error al cancelar. Contacta con soporte.');
-      }
+      await api.updateOrder(orderId, { status: 'cancelled', add_note: 'Trial cancelado por el usuario' }, token);
+  
+      alert('Periodo de prueba cancelado exitosamente');
+      fetchUserData();
     } catch (err) {
       console.error('Error:', err);
       alert('Error al cancelar. Contacta con soporte.');
     }
   };
+  
 
   // Helper para detectar órdenes en periodo de prueba
   const getTrialInfo = (order) => {

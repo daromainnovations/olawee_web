@@ -696,16 +696,22 @@ const api = {
   },
 
   async updateOrder(orderId, updateData, token) {
-    const response = await fetch(`${API_URL}/wc/v3/orders/${orderId}`, {
-      method: 'PUT',
+    const response = await fetch(`${API_URL}/olawee/v1/orders/${orderId}/update`, {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify(updateData)
     });
-    return response.json();
+  
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data?.message || 'No se pudo actualizar el pedido');
+    }
+    return data;
   },
+  
 
   async confirmPayment(orderId, paymentIntentId, token) {
     const response = await fetch(`${API_URL}/olawee-stripe/v1/confirm-payment`, {
@@ -988,35 +994,54 @@ const CheckoutPage = () => {
   const handlePaymentSuccess = async (paymentDetails) => {
     try {
       const { token } = getToken();
-      
       console.log('Pago exitoso:', paymentDetails);
-      
-      // Confirmar el pago en el backend
-      if (paymentDetails.type !== 'setup_intent') {
+  
+      // ¿Es setup intent (prueba gratis)?
+      const isSetup =
+        paymentDetails?.type === 'setup_intent' || isFreeTrial || total === 0;
+  
+      // ¿Es un PaymentIntent de Stripe?
+      const isStripePI =
+        (paymentDetails?.id && paymentDetails.id.startsWith('pi_')) ||
+        paymentDetails?.object === 'payment_intent';
+  
+      // STRIPE: confirmar en backend SOLO si no es setup intent
+      if (!isSetup && isStripePI) {
         await api.confirmPayment(orderId, paymentDetails.id, token);
       }
-
-      // Actualizar orden
-      await api.updateOrder(orderId, {
-        status: 'processing',
-        transaction_id: paymentDetails.id
-      }, token);
-
-      clearSelectedProduct();
-      
-      // Redirigir
-      if (isFreeTrial || total === 0) {
-        navigate(`/order-confirmation/${orderId}?trial=true`);
-      } else {
-        navigate(`/order-confirmation/${orderId}`);
+  
+      // PayPal u otras pasarelas: actualizar pedido vía tu endpoint seguro
+      if (!isStripePI) {
+        const txId =
+          paymentDetails?.id ||
+          paymentDetails?.purchase_units?.[0]?.payments?.captures?.[0]?.id ||
+          paymentDetails?.purchase_units?.[0]?.payments?.authorizations?.[0]?.id ||
+          'external';
+        await api.updateOrder(
+          orderId,
+          {
+            status: 'processing',
+            transaction_id: txId,
+            add_note: 'Pago aprobado por pasarela externa',
+          },
+          token
+        );
       }
+  
+      clearSelectedProduct();
+  
+      // Redirigir
+      navigate(
+        isSetup ? `/order-confirmation/${orderId}?trial=true`
+                : `/order-confirmation/${orderId}`
+      );
     } catch (err) {
       console.error('Error actualizando orden:', err);
-      // Aunque haya error, el pago se procesó, así que redirigimos
       clearSelectedProduct();
       navigate(`/order-confirmation/${orderId}`);
     }
   };
+  
 
   const handlePaymentError = (errorMessage) => {
     setError(errorMessage);
