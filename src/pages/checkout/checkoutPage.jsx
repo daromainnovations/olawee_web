@@ -645,7 +645,7 @@ const stripePromise = loadStripe(STRIPE_PUBLIC_KEY);
 
 const api = {
   async createOrder(orderData, token) {
-    const response = await fetch(`${API_URL}/wc/v3/orders`, {
+    const response = await fetch(`${API_URL}/olawee/v1/orders`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
