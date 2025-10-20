@@ -57,7 +57,10 @@ const HomePage = () => {
                             </div>
                             <br />
                             <div className="d-flex flex-column align-items-center justify-content-center gap-3">
-                                <FreeTrialButton text=" Únete al lanzamiento del 15 de octubre y consigue 1 año de OLAWEE gratis." className="btn-olawee-ghost btn-olawee-ghost--xl is-attention" openNewTab  />
+                                <FreeTrialButton 
+                                    text=" Únete al lanzamiento del 15 de octubre y consigue 1 año de OLAWEE gratis." 
+                                    className="btn-olawee-ghost btn-olawee-ghost--xl is-attention"
+                                    onClick={() => window.open('https://landing-page-tau-six-50.vercel.app/', '_blank', 'noopener,noreferrer')}  />
                                 <a href="#products-section" className="ms-1 enlace-secundario">Ver cómo funciona</a>
                             </div>
                             
