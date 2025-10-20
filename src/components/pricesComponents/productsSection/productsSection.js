@@ -210,7 +210,7 @@ import "./productsSection.scss";
 
 const CACHE_KEY = "products_cache_v1";
 const USE_ID_FILTER = true;
-const ORDERED_IDS = ["78", "93", "92"];
+const ORDERED_IDS = ["78", "93", "92", "81"];
 
 // ✅ Productos que deben mostrar SIEMPRE "0 €"
 const TRIAL_CONFIG = {
@@ -219,6 +219,7 @@ const TRIAL_CONFIG = {
 
 const BADGES = {
   "78": "14 días de prueba gratis",
+  "81": "1 euro prueba",
   "93": "1 licencia",
   "92": "3 licencias incluidas",
 };

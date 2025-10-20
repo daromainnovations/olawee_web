@@ -51,6 +51,24 @@ const plansData = {
           "Formación personalizada (opcional)",
           "Asistentes personalizados (opcional)"
         ]
+      },
+      {
+        id: "prueba",
+        label: "OLAWEE prueba",
+        price: "1€ / mes",
+        headline: "Convierte la IA en tu mejor equipo de trabajo.",
+        licenses: 1,
+        tier: "business",
+        popular: true,   // mostrará “Más popular” si lo usas en el UI
+        badge: "Más popular",
+        features: [
+          "Todo en IMPULSA",
+          "Gestión de usuarios (3 licencias)",
+          "Integración con apps externas (*)",
+          "Soporte avanzado",
+          "Formación personalizada (opcional)",
+          "Asistentes personalizados (opcional)"
+        ]
       }
     ]
   };

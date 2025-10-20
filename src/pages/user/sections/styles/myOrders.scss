@@ -7,14 +7,16 @@
   h2 {
     font-size: 2rem;
     font-weight: 800;
-    color: $text-dark;
+    color: white;
     margin-bottom: 32px;
   }
 
   .orders-list {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
   }
 
   .order-card {
@@ -25,6 +27,9 @@
     transition: all $transition-base;
     position: relative;
     overflow: hidden;
+    *{
+      background-color: transparent;
+    }
 
     &::before {
       content: '';

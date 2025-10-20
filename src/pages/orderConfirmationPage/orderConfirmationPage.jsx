@@ -221,7 +221,7 @@ const OrderConfirmationPage = () => {
         </div>
 
         <div className="action-buttons">
-          <Link to="/my-account" className="btn-primary">
+          <Link to="/dashboard" className="btn-primary">
             {isFreeTrial ? 'Ir a mi cuenta' : 'Ver mis licencias'}
           </Link>
           <Link to="/" className="btn-secondary">

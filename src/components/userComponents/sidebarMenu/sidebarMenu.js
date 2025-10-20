@@ -65,12 +65,11 @@
 // src/components/sidebarMenu/sidebarMenu.jsx (ACTUALIZADO)
 import React, { useState } from "react";
 import "./sidebarMenu.scss";
-import { BsStars } from "react-icons/bs";
 import { FiMenu } from "react-icons/fi";
 import { IoArrowBack, IoClose } from "react-icons/io5";
 import { BiLogOut } from "react-icons/bi";
 import { MdDashboard, MdShoppingCart } from "react-icons/md";
-import { FaKey, FaBoxOpen, FaFolderOpen, FaUser, FaCog } from "react-icons/fa";
+import { FaKey, FaBoxOpen, FaUser, FaCog } from "react-icons/fa";
 import { useAuth } from "../../../context/authProviderContext";
 import { useNavigate } from "react-router-dom";
 import logo from "../../../media/img/Logo_Olawee_Web.png";
@@ -119,19 +118,9 @@ const SidebarMenu = ({ onSelect, activeSection }) => {
       icon: <MdShoppingCart className="menu-icon" />
     },
     { 
-      id: "projects", 
-      label: "My Projects", 
-      icon: <FaFolderOpen className="menu-icon" />
-    },
-    { 
       id: "profile", 
       label: "Profile", 
       icon: <FaUser className="menu-icon" />
-    },
-    { 
-      id: "magicOkapi", 
-      label: "Magic OKAPI", 
-      icon: <BsStars className="menu-icon icon-magic-sidebar" />
     },
     { 
       id: "settings", 
