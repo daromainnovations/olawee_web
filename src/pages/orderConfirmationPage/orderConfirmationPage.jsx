@@ -5,7 +5,7 @@ import { useParams, useNavigate, Link, useSearchParams } from 'react-router-dom'
 import { useAuth } from '../../context/authProviderContext';
 import './orderConfirmationPage.scss';
 
-const API_URL = 'https://api.olawee.com/wp-json';
+const API_URL = process.env.REACT_APP_WC_API_URL || 'https://api.olawee.com/wp-json';
 
 const api = {
   async getOrder(orderId, token, { sessionToken } = {}) {
@@ -133,7 +133,7 @@ const OrderConfirmationPage = () => {
                 <li>✓ Acceso completo durante 14 días</li>
                 <li>✓ Sin compromiso - cancela cuando quieras</li>
                 <li>✓ Tu método de pago está guardado de forma segura</li>
-                <li>⏰ Después de 14 días se cobrará automáticamente 50€</li>
+                <li>⏰ Después de 14 días se cobrará automáticamente 30€</li>
               </ul>
               <p className="trial-reminder">
                 <strong>Recordatorio:</strong> Te enviaremos un email 3 días antes de que termine tu prueba.
@@ -178,7 +178,7 @@ const OrderConfirmationPage = () => {
             {isFreeTrial && (
               <div className="future-charge">
                 <span>Cargo tras prueba (14 días):</span>
-                <span>50€</span>
+                <span>30€</span>
               </div>
             )}
           </div>

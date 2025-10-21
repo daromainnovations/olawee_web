@@ -228,7 +228,7 @@ const MyAccountPage = () => {
                         Termina el: <strong>{trialInfo.endDate.toLocaleDateString()}</strong>
                       </p>
                       <p className="trial-charge">
-                        Después del periodo de prueba se cobrará: <strong>50€</strong>
+                        Después del periodo de prueba se cobrará: <strong>30€</strong>
                       </p>
                     </div>
 
