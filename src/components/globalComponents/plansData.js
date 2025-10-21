@@ -23,7 +23,7 @@ const plansData = {
       {
         id: "impulsa",
         label: "OLAWEE IMPULSA",
-        price: "50€ / mes",
+        price: "30€ / mes",
         headline: "Tu asistente personal para ahorrar horas y trabajar mejor.",
         licenses: 1,
         tier: "pro",
