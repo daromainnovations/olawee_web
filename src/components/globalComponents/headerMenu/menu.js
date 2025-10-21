@@ -23,6 +23,19 @@ const Menu = ({ bannerHeight, customClass = "" }) => {
 
   const [modalType, setModalType] = useState(null);
 
+  // Detectar si se pidió abrir el modal de registro desde otra app (ej: login externo)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const openRegister = params.get("openRegister");
+  
+    if (openRegister === "true") {
+      setModalType("signup");
+      window.scrollTo(0, 0); // asegura que el modal se vea bien
+      // Limpia el parámetro de la URL (opcional)
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, []);
+
   const ocultarPersonalizarRoi=false; //ocultar provisional 
   // const ocultarFAQ=false; //ocultar provisional
 
