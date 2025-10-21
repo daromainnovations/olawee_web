@@ -153,6 +153,23 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
     }
   }, [setModalType, verifyResetToken]);
 
+
+  // Detectar si se pidió abrir el modal de registro desde otra app (ej: login externo)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const openRegister = params.get("openRegister");
+
+    if (openRegister === "true") {
+      setModalType("signup");
+      window.scrollTo(0, 0); // opcional: asegura que el modal se vea visible
+      
+      // 🔹 (Opcional) limpia el parámetro de la URL para no dejar ?openRegister=true
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, [setModalType]);
+
+
+
   // Login
   const handleLogin = async () => {
     const loginErrors = {};

@@ -161,7 +161,9 @@ const Menu = ({ bannerHeight, customClass = "" }) => {
                       <button className="btn-login" onClick={() => setModalType("login")}>
                         Iniciar Sesión
                       </button>
-                      <button className="btn-signUp" onClick={() => setModalType("signup")}>
+                      <button 
+                        className="btn-signUp" 
+                        onClick={() => setModalType("signup")}>
                         Registrarse
                       </button>
                     </>
