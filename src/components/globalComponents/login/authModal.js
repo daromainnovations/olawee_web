@@ -6,7 +6,9 @@ import "../login/styles/authModal.scss";
 import { useAuth } from "../../../context/authProviderContext";
 import { AuthError } from "../../../utils/AuthError";
 import Loader from "../loader/loader";
-import { Country, State, City } from "country-state-city";
+// import { Country, State, City } from "country-state-city";
+import axios from "axios";
+
 
 const prefixOptions = [
   { value: '+34', label: '+34 (Spain)' },
@@ -52,12 +54,17 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
   const [showConflictModal, setShowConflictModal] = useState(false);
   const [conflictCredentials, setConflictCredentials] = useState({ email: '', password: '' });
 
-  const [countriesList, setCountriesList] = useState([]);
-  const [statesList, setStatesList] = useState([]);
-  const [citiesList, setCitiesList] = useState([]);
-  const [selectedCountry, setSelectedCountry] = useState("ES");
-  const [selectedState, setSelectedState] = useState("");
-  const [selectedCity, setSelectedCity] = useState("");
+  /* 🌍 GEOAPI España */
+const API_KEY = "b2b24fd8e7d18cb09987812887284c21fb6269aa4c11c6acb3ec1537e90f4380";  // <-- pon tu clave aquí
+const BASE_URL = "https://apiv1.geoapi.es";
+
+const [comunidades, setComunidades] = useState([]);
+const [provincias, setProvincias] = useState([]);
+const [municipios, setMunicipios] = useState([]);
+
+const [selectedComunidad, setSelectedComunidad] = useState("");
+const [selectedProvincia, setSelectedProvincia] = useState("");
+const [selectedMunicipio, setSelectedMunicipio] = useState("");
 
   const [prefix, setPrefix] = useState('+34');
   const fullPhoneNumber = `${prefix}${phone}`;
@@ -98,37 +105,31 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
     }
   }, [modalType, preloadedEmail]);
 
-  // Cargar países al iniciar
-  useEffect(() => {
-    const allCountries = Country.getAllCountries();
-    setCountriesList(allCountries);
-  }, []);
+  /* Obtener Comunidades Autónomas */
+useEffect(() => {
+  axios
+    .get(`${BASE_URL}/comunidades?type=JSON&key=${API_KEY}`)
+    .then((res) => setComunidades(res.data.data))
+    .catch((err) => console.error("Error al cargar comunidades:", err));
+}, []);
 
-  // Cargar estados y limpiar ciudad cuando cambia país
-  useEffect(() => {
-    if (selectedCountry) {
-      const states = State.getStatesOfCountry(selectedCountry);
-      setStatesList(states);
-      setSelectedState(states[0]?.isoCode || "");
-    } else {
-      setStatesList([]);
-      setSelectedState("");
-    }
-    setCitiesList([]);
-    setSelectedCity("");
-  }, [selectedCountry]);
+/* Obtener Provincias según comunidad */
+useEffect(() => {
+  if (!selectedComunidad) return;
+  axios
+    .get(`${BASE_URL}/provincias?CCOM=${selectedComunidad}&type=JSON&key=${API_KEY}`)
+    .then((res) => setProvincias(res.data.data))
+    .catch((err) => console.error("Error al cargar provincias:", err));
+}, [selectedComunidad]);
 
-  // Cargar ciudades cuando cambia estado
-  useEffect(() => {
-    if (selectedCountry && selectedState) {
-      const cities = City.getCitiesOfState(selectedCountry, selectedState);
-      setCitiesList(cities);
-      setSelectedCity(cities[0]?.name || "");
-    } else {
-      setCitiesList([]);
-      setSelectedCity("");
-    }
-  }, [selectedCountry, selectedState]);
+/* Obtener Municipios según provincia */
+useEffect(() => {
+  if (!selectedProvincia) return;
+  axios
+    .get(`${BASE_URL}/municipios?CPRO=${selectedProvincia}&type=JSON&key=${API_KEY}`)
+    .then((res) => setMunicipios(res.data.data))
+    .catch((err) => console.error("Error al cargar municipios:", err));
+}, [selectedProvincia]);
 
   // Detectar reset por enlace usando funciones del context
   useEffect(() => {
@@ -249,8 +250,9 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
     if (password && repeatPassword && password !== repeatPassword) {
       generalErrors.push("Passwords do not match.");
     }
-    if (!selectedCountry) newErrors.country = "Please complete this required field.";
-    if (!selectedState) newErrors.state = "Please complete this required field.";
+    if (!selectedComunidad) newErrors.country = "Please complete this required field.";
+    if (!selectedMunicipio) newErrors.state = "Please complete this required field.";
+    if (!selectedProvincia) newErrors.state = "Please complete this required field.";
     if (Object.keys(newErrors).length > 0 || generalErrors.length > 0) {
       setFieldErrors(newErrors);
       const errorsToShow = [];
@@ -268,9 +270,9 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
         lastName,
         phone: fullPhoneNumber,
         company,
-        country: selectedCountry,
-        state: selectedState,
-        city: selectedCity,
+        country: selectedComunidad,
+        state: selectedProvincia,
+        city: selectedMunicipio,
         job,
       });
       setMessage("✅ Usuario registrado y logueado con éxito.");
@@ -618,61 +620,63 @@ const AuthModal = ({ modalType, setModalType, preloadedEmail }) => {
                   </div>
                 </div>
 
-                <div className="form-row row">
-                  <div className="form-group col-md-4 mb-4">
-                    <label>País <span>*</span></label>
-                    <select
-                      className={`form-control ${fieldErrors.country ? "input-error" : ""}`}
-                      value={selectedCountry}
-                      onChange={(e) => {
-                        setSelectedCountry(e.target.value);
-                        if (fieldErrors.country && e.target.value) {
-                          setFieldErrors((prev) => ({ ...prev, country: undefined }));
-                        }
-                      }}
-                    >
-                      <option value="">Selecciona país</option>
-                      {countriesList.map((c) => (
-                        <option key={c.isoCode} value={c.isoCode}>{c.name}</option>
-                      ))}
-                    </select>
-                    {fieldErrors.country && <div className="form-error">{fieldErrors.country}</div>}
-                  </div>
-                  <div className="form-group col-md-4 mb-4">
-                    <label>Provincia<span>*</span></label>
-                    <select
-                      className={`form-control ${fieldErrors.state ? "input-error" : ""}`}
-                      value={selectedState}
-                      onChange={(e) => {
-                        setSelectedState(e.target.value);
-                        if (fieldErrors.state && e.target.value) {
-                          setFieldErrors((prev) => ({ ...prev, state: undefined }));
-                        }
-                      }}
-                      disabled={!statesList.length}
-                    >
-                      <option value="">Selecciona estado</option>
-                      {statesList.map((s) => (
-                        <option key={s.isoCode} value={s.isoCode}>{s.name}</option>
-                      ))}
-                    </select>
-                    {fieldErrors.state && <div className="form-error">{fieldErrors.state}</div>}
-                  </div>
-                  <div className="form-group col-md-4 mb-4">
-                    <label>Ciudad <span>*</span></label>
+                <div className="container-provincias">
+                  {/* Comunidad Autónoma */}
+                  <div className="form-group">
+                    <label>Comunidad Autónoma <span>*</span></label>
                     <select
                       className="form-control"
-                      value={selectedCity}
-                      onChange={(e) => setSelectedCity(e.target.value)}
-                      disabled={!citiesList.length}
+                      value={selectedComunidad}
+                      onChange={(e) => {
+                        setSelectedComunidad(e.target.value);
+                        setSelectedProvincia("");
+                        setSelectedMunicipio("");
+                      }}
                     >
-                      <option value="">Select City</option>
-                      {citiesList.map((c) => (
-                        <option key={c.name} value={c.name}>{c.name}</option>
+                      <option value="">Selecciona comunidad</option>
+                      {comunidades.map((c) => (
+                        <option key={c.CCOM} value={c.CCOM}>{c.COM}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Provincia */}
+                  <div className="form-group">
+                    <label>Provincia <span>*</span></label>
+                    <select
+                      className="form-control"
+                      value={selectedProvincia}
+                      onChange={(e) => {
+                        setSelectedProvincia(e.target.value);
+                        setSelectedMunicipio("");
+                      }}
+                      disabled={!selectedComunidad}
+                    >
+                      <option value="">Selecciona provincia</option>
+                      {provincias.map((p) => (
+                        <option key={p.CPRO} value={p.CPRO}>{p.PRO}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Ciudad / Municipio */}
+                  <div className="form-group">
+                    <label>Ciudad / Municipio <span>*</span></label>
+                    <select
+                      className="form-control"
+                      value={selectedMunicipio}
+                      onChange={(e) => setSelectedMunicipio(e.target.value)}
+                      disabled={!selectedProvincia}
+                    >
+                      <option value="">Selecciona municipio</option>
+                      {municipios.map((m) => (
+                        <option key={m.CMUN} value={m.DMUN50}>{m.DMUN50}</option>
                       ))}
                     </select>
                   </div>
                 </div>
+
+                
 
                 <div className="form-group mb-4">
                   <label>Email <span>*</span></label>

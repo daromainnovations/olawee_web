@@ -551,3 +551,89 @@ $white: #fff;
 // =============================================================================
 // FIN DE ESTILOS PARA MODAL DE CONFLICTO
 // =============================================================================
+
+
+
+
+
+
+
+
+
+// =============================================================================
+// FIX para selects en modo oscuro (Safari, Chrome, Edge, etc.)
+// =============================================================================
+.container-provincias {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem; // espacio entre columnas
+  justify-content: space-between;
+  background-color: transparent;
+  margin-bottom: 20px;
+
+  .form-group {
+    flex: 1;
+    min-width: 250px; // evita que se rompan
+    display: flex;
+    flex-direction: column;
+
+    label {
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      font-size: 0.9rem;
+    }
+
+    select {
+      padding: 0.6rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      color: #222;
+      font-size: 0.95rem;
+      transition: border-color 0.2s ease;
+
+      &:focus {
+        border-color: #5f48ff; // color principal OLAWEE
+        outline: none;
+      }
+
+      &:disabled {
+        background-color: #f5f5f5;
+        color: #888;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  /* 📱 Móviles */
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1.2rem;
+
+    .form-group {
+      width: 100%;
+      min-width: unset;
+    }
+  }
+}
+
+
+select,
+select option {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+select:disabled {
+  background-color: #f1f1f1 !important;
+  color: #888 !important;
+}
+
+/* Si usas dark mode global, puedes protegerlo: */
+@media (prefers-color-scheme: dark) {
+  select,
+  select option {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+}
