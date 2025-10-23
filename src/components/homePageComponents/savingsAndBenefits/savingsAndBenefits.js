@@ -37,8 +37,8 @@ const SavingsAndBenefits = () => {
                         <h4>COMUNIDAD OLAWEE</h4>
                         <p><span className="highlight">Un espacio vivo donde profesionales y entidades comparten experiencias, casos de uso y buenas prácticas.</span></p>
                     </div>
-                    
-                    <PrincipalButton text="EMPEZAR YA" className="btn-custom btn-savings" containerClass="container-btn-savings"/>
+                     
+                    <PrincipalButton text="TIENES UNA LICENCIA ACTIVA, COMIENZA YA" className="btn-custom btn-savings" containerClass="container-btn-savings" onClick={() => window.location.href = "https://app.olawee.com/"}/>
                 </div>
             </div>
         </div>

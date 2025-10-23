@@ -224,8 +224,8 @@ const OrderConfirmationPage = () => {
           <Link to="/dashboard" className="btn-primary">
             {isFreeTrial ? 'Ir a mi cuenta' : 'Ver mis licencias'}
           </Link>
-          <Link to="/" className="btn-secondary">
-            Volver al inicio
+          <Link to="https://app.olawee.com/" target='_blank' className="btn-secondary">
+            Ir a la aplicación
           </Link>
         </div>
 

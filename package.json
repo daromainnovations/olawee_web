@@ -12,7 +12,7 @@
     "@stripe/stripe-js": "^8.0.0",
     "@supabase/supabase-js": "^2.49.4",
     "auth0-lock": "^13.0.0",
-    "axios": "^1.8.4",
+    "axios": "^1.12.2",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "country-state-city": "^3.2.1",
