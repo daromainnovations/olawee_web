@@ -19,7 +19,7 @@ const PricePage = () => {
             <Menu />
             <div className="prices">
                 <div className="container-title d-flex justify-content-center">
-                    <h1 className="title-prices">Save, grow, and succeed with every decision</h1>
+                    <h1 className="title-prices">Ten acceso a TODAS las IA por el precio de UNA</h1>
                 </div>
                 {/* <SwitchButton selected={selectedPlan} onChange={setSelectedPlan} /> */}
                 {/* <PricingCards planType={selectedPlan} /> Cambia dinámicamente */}
