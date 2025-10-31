@@ -786,16 +786,43 @@ useEffect(() => {
                     </div>
                   </div>
                 </form>
-                <button
-                  className="btn-link mt-2"
-                  onClick={() => {
-                    setForgotPassword(true);
-                    setMessage("");
-                    setError(null);
-                  }}
-                >
-                  ¿Has olvidado tú contraseña?
-                </button>
+                <div className="auth-links">
+                  <button
+                    className="btn-link mt-2"
+                    onClick={() => {
+                      setForgotPassword(true);
+                      setMessage("");
+                      setError(null);
+                    }}
+                  >
+                    ¿Has olvidado tu contraseña?
+                  </button>
+                  
+                  <button
+                    className="btn-link mt-2 register-link"
+                    onClick={() => {
+                      setModalType("signup");
+                      setError(null);
+                      setMessage("");
+                      setFieldErrors({});
+                      setForgotPassword(false);
+                      setEmail("");
+                      setPassword("");
+                      setRepeatPassword("");
+                      setFirstName("");
+                      setLastName("");
+                      setUsername("");
+                      setPhone("");
+                      setCompany("");
+                      setJob("");
+                      setSelectedComunidad("");
+                      setSelectedProvincia("");
+                      setSelectedMunicipio("");
+                    }}
+                  >
+                    ¿No tienes cuenta? <strong>Regístrate aquí</strong>
+                  </button>
+                </div>
               </>
             ) : null}
 
