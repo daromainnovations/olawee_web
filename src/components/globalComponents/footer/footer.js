@@ -1,8 +1,22 @@
+import { useState } from "react";
 import "./footer.scss"
 import logo from "../../../media/img/Imagotipo_Okapi_cabeza.png"
+import ContactForm from "../../contacto/contactForm"
 
 const Footer = () => {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleOpenModal = (e) => {
+    e.preventDefault();
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
   return (
+    <>
     <footer className="footer">
       <div className="footer-columns">
         {/* Columna 1: Logo e enlaces */}
@@ -25,7 +39,7 @@ const Footer = () => {
         <div className="footer-column">
           <h4 className="footer-title">GENERAL</h4>
           <ul className="footer-links">
-            <li><a href="#contact">Contacto</a></li>
+            <li><a href="#contact" onClick={handleOpenModal}>Contacto</a></li>
             <li><a href="#terms">Términos de servicio</a></li>
             <li><a href="#agreement">Acuerdo para equipos</a></li>
             <li><a href="#privacy">Privacidad</a></li>
@@ -48,6 +62,9 @@ const Footer = () => {
         <p>© 2025 All rights reserved</p>
       </div>
     </footer>
+
+    {showModal && <ContactForm onClose={handleCloseModal} />}
+  </>
   );
 };
 
